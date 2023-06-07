@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
+
+  resources :questions
+  resources :projects
+  resources :myfiles
+
   resources :warn_settings
+
   resources :warns do
     collection do
       get :download_csv

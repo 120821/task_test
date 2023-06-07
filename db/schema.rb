@@ -81,6 +81,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_06_032232) do
     t.index ["region", "daily_goods_date", "sales_inventory_situation", "manager_id"], name: "daily_goods_statistics_unique_index", unique: true
   end
 
+  create_table "delayed_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "priority", default: 0, null: false
+    t.integer "attempts", default: 0, null: false
+    t.text "handler", null: false
+    t.text "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string "locked_by"
+    t.string "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
   create_table "enterprise_approvals", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "approval_name"
     t.string "tel"
@@ -234,6 +249,37 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_06_032232) do
     t.binary "image_nine"
     t.binary "image_ten"
     t.string "sorting_and_distribution_type"
+  end
+
+  create_table "myfiles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.text "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "projects", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "mark"
+    t.string "home"
+    t.boolean "is_public"
+    t.integer "parent_project"
+    t.boolean "isInherit_Parent_Project_Members"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "questions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.string "status"
+    t.string "level"
+    t.string "assigned_to"
+    t.datetime "start_day"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "project_id"
   end
 
   create_table "regions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
