@@ -1,0 +1,7 @@
+<% if current_manager.category == '企业' %>
+  <%= render 'home/enterprise_material_reserves' %>
+<% elsif current_manager.category == '管理员' %>
+  <%= render 'material_reserves/manager_material_reserves' %>
+<% elsif current_manager.category == '地州商务局' %>
+  <%= render 'material_reserves/manager_material_reserves' %>
+<% end %>

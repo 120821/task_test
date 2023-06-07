@@ -1,0 +1,330 @@
+<div style="position: absolute;background: #fff; width: 1192px;">
+
+  <div class="new_enterprise_title">编辑企业</div>
+  <div style="height: 80px;"></div>
+
+  <div>
+    <%= form_with(model: @enterprise) do |form| %>
+      <div class= "table_div">
+        <table class='table_new_material' style="">
+          <tr>
+            <th class="table_name">
+              <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+                <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+              </svg>&nbsp;&nbsp;
+              所属地州</th>
+            <td>
+              <%= form.select :region, options_for_select(REGIONS), {}, class: 'form-control', style: 'width: 775px;margin-left: 10px;' %>
+            </td>
+          </tr>
+
+          <tr>
+            <th class="table_name">
+              <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+                <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+              </svg>&nbsp;&nbsp;
+              企业名称</th>
+            <td><%= form.text_field :name, class: 'form-control', placeholder: '例如 新疆广宏食品集团有限公司', style: 'width: 775px;margin-left: 10px;' %></td>
+          </tr>
+
+          <tr>
+            <th class="table_name">
+              <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+                <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+              </svg>&nbsp;&nbsp;
+              企业分类</th>
+            <td><%= form.text_field :enterprise_category, class: 'form-control', placeholder: '例如 批发市场', style: 'width: 775px;margin-left: 10px;' %></td>
+          </tr>
+
+          <tr>
+            <th class="table_name">
+              <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+                <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+              </svg>&nbsp;&nbsp;
+              物资分类</th>
+            <td><%= form.text_field :goods_category, class: 'form-control', placeholder: '例如 冻猪肉', style: 'width: 775px;margin-left: 10px;' %></td>
+          </tr>
+
+          <tr>
+            <th class="table_name">
+              <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+                <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+              </svg>&nbsp;&nbsp;
+              负责人</th>
+            <td><%= form.text_field :person_in_charge, class: 'form-control', placeholder: '例如 李华', style: 'width: 775px;margin-left: 10px;' %></td>
+          </tr>
+
+          <tr>
+            <th class="table_name">
+              <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+                <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+              </svg>&nbsp;&nbsp;
+              联系电话</th>
+            <td><%= form.text_field :person_in_charge_tel, class: 'form-control', placeholder: '例如 13566668888', style: 'width: 775px;margin-left: 10px;' %></td>
+          </tr>
+          <tr>
+            <th class="table_name">
+              <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+                <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+              </svg>&nbsp;&nbsp;
+              邮箱</th>
+            <td><%= form.text_field :email, class: 'form-control', placeholder: '例如 guanghong@email.com', style: 'width: 775px;margin-left: 10px;' %></td>
+          </tr>
+
+          <!--
+          <tr>
+            <th class="table_name">
+              <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+                <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+              </svg>&nbsp;&nbsp;
+              负责数据录入人员姓名</th>
+            <td><%= form.text_field :person_in_charge_of_data_entry, class: 'form-control', placeholder: '例如 李华', style: 'width: 775px;margin-left: 10px;' %></td>
+          </tr>
+
+          <tr>
+            <th class="table_name">
+              <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+                <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+              </svg>&nbsp;&nbsp;
+              联系电话</th>
+            <td><%= form.text_field :person_in_charge_of_data_entry_tel, class: 'form-control', placeholder: '例如 13588888888', style: 'width: 775px;margin-left: 10px;' %></td>
+          </tr>
+          -->
+          <tr>
+            <th class="table_name">
+              <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+                <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+              </svg>&nbsp;&nbsp;
+              相关证照</th>
+          </tr>
+        </table>
+
+        <div class="enterprise_edit_images">
+          <div class="box">
+            <div class="column">
+              <div>
+                <div class="upload-box">
+                  <label for="post_image">
+                    <span>+</span>
+                    <%= form.file_field :business_license, class: 'form-control', accept: ".jpg,.jpeg,.png,.gif" %>
+                    <% if @enterprise.business_license? %>
+                      <%= link_to (image_tag @enterprise.business_license.url, style: 'width: 200px; height: 200px;'), @enterprise.business_license.url %>
+                    <% else %>
+                      <%= image_tag 'business_license.jpg', style: 'width: 200px; height: 160px;' %>
+                    <% end %>
+                  </label>
+                </div>
+                <p style="margin-top: 20px; text-align: center;">营业执照</p>
+              </div>
+
+              <div>
+                <div class="upload-box">
+                  <label for="post_image">
+                    <span>+</span>
+                    <%= form.file_field :business_processing_license, multiple: true, class: 'form-control', accept: ".jpg,.jpeg,.png,.gif", id: "business_processing_license", onchange: "previewImageTwo(2);" %>
+                    <% if @enterprise.business_processing_license? %>
+                      <%= link_to (image_tag @enterprise.business_processing_license.url, style: 'width: 200px; height: 200px;'), @enterprise.business_processing_license.url %>
+                    <% else %>
+                      <%= image_tag 'business_processing_license.jpg', style: 'width: 200px; height: 160px;' %>
+                    <% end %>
+                  </label>
+                </div>
+                <p style="margin-top: 20px; text-align: center;">经营加工许可证</p>
+              </div>
+
+              <div>
+                <div class="upload-box">
+                  <label for="post_image">
+                    <span>+</span>
+                    <%= form.file_field :food_distribution_license, class: 'form-control', accept: ".jpg,.jpeg,.png,.gif", id: "food_distribution_license", onchange: "previewImageTwo(3);"%>
+                    <% if @enterprise.food_distribution_license? %>
+                      <%= link_to (image_tag @enterprise.food_distribution_license.url, style: 'width: 200px; height: 200px;'), @enterprise.food_distribution_license.url %>
+                    <% else %>
+                      <%= image_tag 'food.jpg', style: 'width: 200px; height: 160px;' %>
+                    <% end %>
+                  </label>
+                </div>
+                <p style="margin-top: 20px; text-align: center;">食品流通许可证</p>
+              </div>
+              <div>
+                <div class="upload-box">
+                  <label for="post_image">
+                    <span>+</span>
+                    <%= form.file_field :legal_person_image, class: 'form-control', accept: ".jpg,.jpeg,.png,.gif", id: "legal_person_image", onchange: "previewImageTwo(3);"%>
+                    <% if @enterprise.legal_person_image? %>
+                      <%= link_to (image_tag @enterprise.legal_person_image.url, style: 'width: 200px; height: 200px;'), @enterprise.legal_person_image.url %>
+                    <% else %>
+                      <%= image_tag 'zhangwei1.png', style: 'width: 200px; height: 160px;' %>
+                    <% end %>
+                  </label>
+                </div>
+                <p style="margin-top: 20px; text-align: center;">法人身份证</p>
+              </div>
+
+            </div>
+            <div id="preview-container" style="display: flex; margin-top: -223px;justify-content: flex-start; width: 1122px; margin-left: 75px; margin-top: -269px;">
+            </div>
+          </div>
+        </div>
+        <div style="margin-bottom: 200px; margion: 0 auto; margin-top: 60px;">
+          <% if params[:number].present? %>
+            <%= form.submit "保存", class: 'btn btn-primary', style: 'background: gray; width: 150px; border: gray; color: balck; margin-right: 50px;margin-left: 150px;' %>
+            <%= form.submit "下一步", class: 'btn btn-primary', style: 'width: 150px; margin-right: 50px; margin-left: 200px;'%>
+          <% else %>
+            <%= link_to '返回', enterprises_path, class: 'btn btn-light', style: 'border: 1px solid #0d6efd; width: 200px; margin-left: 200px; ' %>
+            <%= form.submit "确定", class: 'btn btn-primary', style: 'width: 200px;; margin-right: 50px;margin-left: 150px;' %>
+          <% end %>
+        </div>
+        <br/>
+      </div>
+    <% end %>
+  </div>
+</div>
+<style>
+.upload-box {
+  width: 200px;
+  height: 250px;
+  position: relative;
+  border: 1px dashed #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  text-align: center;
+}
+.upload-box:hover {
+  background-color: #f9f9f9;
+}
+.upload-box span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: #ccc;
+}
+.table_div{
+  margin-right: 182px;
+  margin-left: 100px;
+}
+.table_name {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.9);
+  line-height: 22px;
+  margin-right: 10px;
+}
+.table_new_material{
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  margin-left: 100px;
+  text-align: right;
+
+}
+.form_new_control{
+  width: 200px;
+  margin-left: 10px;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: var(--bs-border-radius);
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.new_enterprise_title {
+  font-size: 22px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #1D2129;
+  margin-left: 38px;
+  margin-top: 40px;
+  line-height: 30px;
+  position: absolute;
+}
+#preview-images img {
+  max-width: 200px;
+  max-height: 200px;
+  margin-right: 5px;
+}
+#preview-business-license {
+  width: 200px;
+  margin-left: -58px;
+  z-index: 1;
+  height: 200px;
+  position: absolute;
+}
+
+#preview-business-processing-license {
+  width: 200px;
+  margin-left: 186px;
+  height: 200px;
+  z-index: 1;
+  position: absolute;
+}
+
+#preview-food-distribution-license {
+  width: 200px;
+  height: 200px;
+  margin-left: 376px;
+  z-index: 1;
+  position: absolute;
+}
+
+#preview-legal-person-image {
+  width: 200px;
+  height: 200px;
+  margin-left: 596px;
+  z-index: 1;
+  position: absolute;
+}
+
+.enterprise_edit_images {
+  margin-top: -40px;
+  margin-right: 200px;
+  margin-right: 180px;
+  margin-left: 90px;
+
+}
+</style>
+<script>
+  $(document).ready(function() {
+  // code to load images
+  function readURL(input, id) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#preview-container').append('<img id="' + id +'" src="' + e.target.result + '" />');
+      }
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  // 预览食品经营许可证
+  $('#food_distribution_license').change(function() {
+    readURL(this, 'preview-food-distribution-license');
+  });
+
+  // 预览法人身份证
+  $('#legal_person_image').change(function() {
+    readURL(this, 'preview-legal-person-image');
+  });
+
+  // 预览食品加工许可证
+  $('#business_processing_license').change(function() {
+    readURL(this, 'preview-business-processing-license');
+  });
+
+  // 预览营业执照
+  $('#business_license').change(function() {
+    readURL(this, 'preview-business-license');
+  });
+});
+</script>

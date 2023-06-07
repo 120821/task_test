@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  region_id: 1
+  material_reserf_id: 1
+  enterprise_id: 1
+  enterprise_category: MyString
+  goods_category: MyString
+  unit: MyString
+  max_warn: MyString
+  min_warn: MyString
+  warn_result: MyString
+
+two:
+  region_id: 1
+  material_reserf_id: 1
+  enterprise_id: 1
+  enterprise_category: MyString
+  goods_category: MyString
+  unit: MyString
+  max_warn: MyString
+  min_warn: MyString
+  warn_result: MyString

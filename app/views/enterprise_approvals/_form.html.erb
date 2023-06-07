@@ -1,0 +1,142 @@
+<%= form_with(model: enterprise_approval) do |form| %>
+  <div class="from">
+    <table class='table table-hover table-bordered'>
+      <tr>
+        <th style="width: 200px;">申请人姓名</th>
+        <td><%= form.text_field :approval_name, class: 'form-control', placeholder: '例如 张三' %></td>
+      </tr>
+
+      <tr>
+        <th>企业名称</th>
+        <td><%= form.text_field :enterprise_name, class: 'form-control', placeholder: '例如 新疆广宏食品集团有限公司' %></td>
+      </tr>
+
+      <tr>
+        <th>手机号码</th>
+        <td><%= form.text_field :tel, class: 'form-control', placeholder: '例如 15588888888' %></td>
+      </tr>
+
+      <tr>
+        <th>状态</th>
+        <td><%= form.select :status, options_for_select(["已通过", "已拒绝", "待处理"]), {}, class: 'form-control' %></td>
+      </tr>
+
+    </table>
+    <h3>
+      <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" color="#0d6efd" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+        <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+        <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+      </svg>
+      营业执照
+    </h3>
+
+    <div style="margin-top: 20px;">
+      <div class="box">
+        <div class="column">
+
+          <div>
+            <h5>营业执照</h5>
+            <div class="upload-box">
+              <label for="post_image">
+                <span>+</span>
+                <%= form.file_field :business_license, class: 'form-control', accept: ".jpg,.jpeg,.png,.gif" %>
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <h5>经营加工许可证</h5>
+            <div class="upload-box">
+              <label for="post_image">
+                <span>+</span>
+                <%= form.file_field :business_processing_license, class: 'form-control', accept: ".jpg,.jpeg,.png,.gif" %>
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <h5>食品流通许可证</h5>
+            <div class="upload-box">
+              <label for="post_image">
+                <span>+</span>
+                <%= form.file_field :food_distribution_license, class: 'form-control', accept: ".jpg,.jpeg,.png,.gif" %>
+              </label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <h3 style="margin-top: 20px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" color="#0d6efd" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+          <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+          <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+        </svg>
+        仓库照片
+      </h3>
+      <div style="margin-top: 20px;">
+        <div class="box">
+          <div class="column">
+            <div>
+              <h5>仓库照片1</h5>
+              <div class="upload-box">
+                <label for="post_image">
+                  <span>+</span>
+                  <%= form.file_field :warehouse_photos_one, class: 'form-control', accept: ".jpg,.jpeg,.png,.gif" %>
+                </label>
+              </div>
+            </div>
+
+            <div>
+              <h5>仓库照片2</h5>
+              <div class="upload-box">
+                <label for="post_image">
+                  <span>+</span>
+                  <%= form.file_field :warehouse_photos_two, class: 'form-control', accept: ".jpg,.jpeg,.png,.gif" %>
+                </label>
+              </div>
+            </div>
+
+            <div>
+              <h5>仓库照片3</h5>
+              <div class="upload-box">
+                <label for="post_image">
+                  <span>+</span>
+                  <%= form.file_field :warehouse_photos_three, class: 'form-control', accept: ".jpg,.jpeg,.png,.gif" %>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-bottom: 100px; margion: 0 auto; margin-top: 100px; text-align: center;">
+    <%= link_to '返回', enterprise_approvals_path, class: 'btn btn-primary', style: 'width: 200px;' %>
+    <%= form.submit "确定", class: 'btn btn-primary', style: 'width: 200px; margin-left: 200px;' %>
+  </div>
+<% end %>
+<style>
+.upload-box {
+  width: 200px;
+  height: 100px;
+  position: relative;
+  border: 1px dashed #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  text-align: center;
+}
+.upload-box:hover {
+  background-color: #f9f9f9;
+}
+.upload-box span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: #ccc;
+}
+.from{
+  margin:0 180px;
+}
+</style>

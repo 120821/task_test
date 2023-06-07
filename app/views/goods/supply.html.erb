@@ -1,0 +1,141 @@
+<div class="cards_supply">
+  <div class="card_supply">
+    <p class="card_supply_title">保供企业</p>
+    <p><span class="card_integer">268</span>&nbsp;家</p>
+    <p class="data_time">较昨日<span class="data_up" style="margin-left: 6px; color: #d84644;">12家</span>
+      <%= image_tag 'rate_up.png', style: 'margin-top: -10px;' %>
+      <span style="margin-left: 47px;">较上周</span><span class="data_down" style="margin-left: 6px; color: #5fb136;">8家</span>
+      <%= image_tag 'rate_down.png', style:"margin-top: -10px;" %>
+    <p>
+  </div>
+  <div class="card_supply" style="margin-left: 20px;">
+    <p class="card_supply_title">总进货量</p>
+    <p><span class="card_integer">300</span>&nbsp;吨</p>
+    <p class="data_time">
+      较昨日<span class="data_up" style="color: #d84644;margin-left: 6px; ">12吨</span>
+      <%= image_tag 'rate_up.png', style: 'margin-top: -10px;' %>
+      <span style="margin-left: 47px;">较上周</span><span class="data_down" style="color: #5fb136;">20吨</span>
+      <%= image_tag 'rate_down.png', style:"margin-top: -10px;" %>
+    <p>
+  </div>
+  <div class="card_supply" style="margin-left: 20px;">
+    <p class="card_supply_title">总销售量</p>
+    <p><span class="card_integer">300</span>&nbsp;吨</p>
+    <p class="data_time">
+      较昨日<span class="data_up" style="color: #d84644;margin-left: 6px; ">12吨</span>
+      <%= image_tag 'rate_up.png', style: 'margin-top: -10px;' %>
+      <span style="margin-left: 47px;">较上周</span><span class="data_down" style="color: #5fb136;">20吨</span>
+      <%= image_tag 'rate_down.png', style:"margin-top: -10px;" %>
+    <p>
+  </div>
+  <div class="card_supply" style="margin-left: 20px;">
+    <p class="card_supply_title">总库存量</p>
+    <p><span class="card_integer">300</span>&nbsp;吨</p>
+    <p class="data_time">
+      较昨日<span class="data_up" style="color: #d84644;margin-left: 6px; ">12吨</span>
+      <%= image_tag 'rate_up.png', style: 'margin-top: -10px;' %>
+      <span style="margin-left: 47px;">较上周</span><span class="data_down" style="color: #5fb136;">20吨</span>
+      <%= image_tag 'rate_down.png', style:"margin-top: -10px;" %>
+    <p>
+  </div>
+</div>
+
+<%= render 'rate' %>
+
+<div class="" style="padding: 20px 0px 20px; width: 1188px; height: 542px; background: #FFFFFF; opacity: 1; margin-top: 16px;
+  margin: 16px 0px 24px 0px">
+  <p class="" style="margin-left: 20px; height: 24px; font-size: 16px; font-weight: 500; color: #1D2129; line-height: 24px;"> 物资分布图 </p>
+  <div style="margin-left: 24px; margin-bottom: 22px;">
+    <div id="allmap"></div>
+  </div>
+</div>
+<style>
+  #allmap {width: 1140;;height: 503px;;overflow: hidden;margin:0;font-family:"微软雅黑";}
+  .BMap_bubble_pop {
+    padding: 0px 8px;
+    position: absolute;
+    cursor: default;
+    left: 484px;
+    top: 9px;
+    width: 248px;
+    height: 264px;
+    color: #fff !important;
+    background: rgba(41,34,34,0.94);
+    box-shadow: 0px 3px 6px -4px rgba(0,0,0,0.12), 0px 6px 16px 0px rgba(0,0,0,0.08), 0px 9px 28px 8px rgba(0,0,0,0.05);
+    border-radius: 2px 2px 2px 2px !important;
+    opacity: 1;
+    background: rgba(41,34,34,0.94) !important;
+    border-radius: 2px 2px 2px 2px !important;
+    opacity: 1;
+  }
+  .BMap_bubble_title {
+    line-height: 21px !important;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 248px;
+    color: #fff !important;
+    margin-top: 22px;
+    height: 46px !important;
+    font-size: 16px;
+    height: 46px;
+    font-size: 16px;
+    margin-left: 10px !important;
+}
+
+  .BMap_bubble_content {
+    font-size: 14px;
+    line-height: 24px;
+    position: absolute;
+    top: 2px;
+    width: 236px;
+    height: 264px;
+    overflow: auto;
+    margin-top: 40px;
+    margin-left: 10px;
+    color: #fff !important;
+    margin-top: 18px !important;
+  }
+
+
+</style>
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMapGL.Map("allmap");
+	var point = new BMapGL.Point(87.525184,43.921869);
+	map.centerAndZoom(point, 15);
+
+	var marker = new BMapGL.Marker(point);  // 创建标注
+	map.addOverlay(marker);              // 将标注添加到地图中
+	var opts = {
+	    width : 248,     // 信息窗口宽度
+	    height: 264,     // 信息窗口高度
+      title : "新疆新联农产品有限公司<br/>001号储备仓<br/>" , // 信息窗口标题
+	}
+  var infoWindow = new BMapGL.InfoWindow("物资名称：面粉</br>储备数量：3000吨</br>联系人：周利民<br/>联系电话：13682509276<br/> 企业类型：生产加工企业<br/><hr style='color: #fff;'> <a href='/material_reserves/24' style='text-decoration: none; color: #fff; text-align: center; margin-left: 40px;'>点击查看物资报表 <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-caret-right-fill' viewBox='0 0 16 16'><path d='m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z'/> </svg></a>", opts);
+      // 创建信息窗口对象
+	marker.addEventListener("click", function(){
+		map.openInfoWindow(infoWindow, point); //开启信息窗口
+	});
+</script>
+
+<style>
+.links-container a {
+  width: 68px;
+  height: 32px;
+  background: #FFFFFF;
+  border-radius: 2px 0px 0px 2px;
+  opacity: 1;
+  border: 1px solid #D9D9D9;
+  color: #D9D9D9;
+  text-decoration: none;
+  line-height: 32px;
+  text-align: center;
+}
+
+/*.links-container a.active,*/
+.links-container a:hover {
+  color: #006DF1;
+  opacity: 1;
+  border: 1px solid #006DF1;
+}
+</style>

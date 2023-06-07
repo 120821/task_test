@@ -1,0 +1,2 @@
+class WarnSetting < ApplicationRecord
+end

@@ -1,0 +1,744 @@
+<div style="display: flex;">
+  <div>
+    <div class="daily_card_div">
+      <div class="daily_card_index">
+        <p class="every_card">企业数量</p>
+        <span class="data_index">268<span class="data_unit" style="margin-left: 6px;">家</span></span>
+        <p class="daily_data_time">较昨日
+          <span class="data_up">12家
+          <%= image_tag 'rate_up.png', style: 'margin-top: -10px;' %>
+          </span>
+          <span style="margin-left: 47px;">较上周</span>
+          <span class="data_down">2家
+            <%= image_tag 'rate_down.png', style:"margin-top: -10px;" %>
+          </span>
+        </p>
+      </div>
+      <div class="daily_card_index">
+        <p class="every_card">人员总数量</p>
+        <p class="data_index">2<span class="data_unit" style="margin-left: 6px;">人</span></p>
+        <p class="daily_data_time" style="margin-top: -18px;">较昨日
+          <span class="data_up">12家
+          <%= image_tag 'rate_up.png', style: 'margin-top: -10px;' %>
+          </span>
+          <span style="margin-left: 47px;">较上周</span>
+          <span class="data_down">2家
+            <%= image_tag 'rate_down.png', style:"margin-top: -10px;" %>
+          </span>
+        </p>
+      </div>
+      <div class="daily_card_index">
+        <p class="every_card">车辆总数量</p>
+        <p class="data_index">28<span class="data_unit" style="margin-left: 6px;">辆</span></p>
+        <p class="daily_data_time" style="margin-top: -18px;">较昨日
+          <span class="data_up">12家
+          <%= image_tag 'rate_up.png', style: 'margin-top: -10px;' %>
+          </span>
+          <span style="margin-left: 47px;">较上周</span>
+          <span class="data_down">2家
+            <%= image_tag 'rate_down.png', style:"margin-top: -10px;" %>
+          </span>
+        </p>
+      </div>
+    </div>
+    <div class="daily_table">
+      <p class="links_status" style="margin: 20px 0;">
+        &nbsp;&nbsp;&nbsp;&nbsp;<%= link_to '数据报送', daily_goods_statistics_path %>
+        <%= link_to '仓储信息', material_reserves_path, style: 'margin-left: 26px;'  %>
+        <%= link_to '车辆信息', cars_path, style: 'margin-left: 26px;', class: 'active-link'  %>
+        <%= link_to '人员信息', enterprise_personnels_path, style: 'margin-left: 26px;' %>
+      </p>
+      <%= form_tag '', method: :get do %>
+        <p class="form_row">
+          <span class="query_submissions" style="margin-left: 6px;">司机名称: &nbsp;&nbsp;&nbsp;&nbsp;<%= text_field_tag :driver_name, params[:driver_name], placeholder: '请输入人员名称', class: 'select_region', style: 'width: 200px;' %></span>&nbsp;&nbsp;&nbsp;&nbsp;
+          <%= submit_tag "查询", class: "form_submit", class: 'btn btn-primary', style: 'line-height: 14px; width: 65px; font-size: 14px; height: 32px; background: #006DF1; opacity: 1' %>
+        </p>
+      <% end %>
+      <% if current_manager.category == '企业' %>
+        <span style="float: left;"><%= link_to '新建', new_car_path, class: 'btn btn-primary', style: 'width: 81px; height: 32px; background: #006DF1;
+                    font-size: 14px; font-family: PingFangSC-Regular, PingFang SC; font-weight: 400; color: #FFFFFF;
+                    margin-left: 20px;
+                    margin-bottom: 20px;
+                    line-height: 14px;' %></span>
+      <% end %>
+      <table class='table' style='border-left: 1px solid #dcdcdc;
+              border: 1px solid #dcdcdc;
+              border-right: 1px solid #dcdcdc;
+              background: snow;'>
+        <tr class="table_title" class="table_dashed">
+          <!--
+          <td class="table_td_title" style="color: snow;">
+            <span class="table_td_title" style="color: snow;">序号</span>
+          </td>
+          -->
+          <td class="table_td_title"  style="margin-top: 16px; display: ;color: snow;">企业名称</td>
+          <td class="table_td_title"  style="color: snow;">车牌号</td>
+          <td class="table_td_title"  style="color: snow;">所属门店</td>
+          <td class="table_td_title"  style="color: snow;">车辆载货重量</td>
+          <td class="table_td_title"  style="color: snow;">司机姓名</td>
+          <td class="table_td_title"  style="color: snow;">司机手机号码</td>
+          <td class="table_td_title"  style="color: snow;">司机身份证号码</td>
+          <td class="table_td_title"  style="color: snow;">家庭住址</td>
+          <td class="table_td_title"  style="color: snow;">操作</td>
+        </tr>
+        <% @cars.each do |car| %>
+          <tr class="" class="border-bottom" style="border: 1px solid #dcdcdc;background: #ffffff87;">
+            <!--
+            <td class="table_text_submission"><%= car.id %></td>
+            -->
+            <td class="table_text_submission"><%= car.enterprise.try(:name)%></td>
+            <td class="table_text_submission"><%= car.car_number %></td>
+            <td class="table_text_submission"><%= car.material_reserf.try(:warehouse_location) %></td>
+            <td class="table_text_submission">
+              <%= car.weight %>
+            </td>
+            <td class="table_text_submission"><%= car.driver_name %></td>
+            <td class="table_text_submission"><%= car.driver_tel %></td>
+            <td class="table_text_submission"><%= car.driver_id_card_number %></td>
+            <td class="table_text_submission"><%= car.driver_address %></td>
+            <td class="table_text_submission" style="width: 110px; display: flex;">
+              <%= link_to '详情', car, style: 'text-decoration: none;margin-left: 3px;' %>
+              <%= link_to '修改', edit_car_path(car), style: 'text-decoration: none; color: #68c0fb;margin-right: 3px;margin-left: 3px;' %>
+              <%= button_to '删除', car, method: :delete, form: { data: { turbo_confirm: '删除高危企业将一并删除该企业联系人，危化品信息，应急方案信息!' } }, class: "btn btn-danger btn-sm" %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+      <div style="height: 30px;"></div>
+      <div style="display: flex; float: right;">
+
+        <% start_index = @cars.offset_value + 1 %>
+        <% end_index = start_index + @cars.length - 1 %>
+
+        <p class="page_text">
+          <span> 第 <%= start_index %> - <%= end_index %> 条/总共 <%= @cars.total_count %> 条
+
+            <% if @cars.total_pages > 1 %>
+
+              <% first_page = [1, @cars.current_page - 3].max %>
+              <% last_page = [first_page + 6, @cars.total_pages].min %>
+              <% page_links = (first_page..last_page).map do |page|
+                if page == @cars.current_page
+                  content_tag :span, page, class: 'current'
+                else
+                  link_to page, { page: page }, class: 'page_link'
+                end
+              end %>
+              <%= content_tag :div, page_links.join.html_safe, class: 'paging_links', style: 'display: flex;' %>
+              <span class="page_text"><%#= @cars.current_page %> 每页 <%= select_tag :per_page, options_for_select([10, 20, 50], params[:per_page]), onchange: "$('#filter_form').submit()" %> 条</span>
+
+              <span class="page_text">
+                跳至<%= text_field_tag :page, params[:page], class: 'page_skip' %>页
+                <%= button_tag '跳转', onclick: "$('#filter_form').submit()" , class: 'page_skip' %>
+              </span>
+            <% end %>
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <%= render 'home/list_bottom' %>
+
+</div>
+
+
+<style>
+.code {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.list {
+  background: #f8f9fa;
+  padding: 10px;
+}
+.each-row {
+  border-radius: 5px;
+  margin: 50px 180px;
+  background: white;
+  padding: 10px;
+}
+.input_enterprise {
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: var(--bs-border-radius);
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  border: 1px solid blue;
+  width: 300px;
+}
+.input_tel {
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: var(--bs-border-radius);
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  border: 1px solid blue;
+  width: 200px;
+}
+.current {
+  background: #2381f3;
+  color: white;
+  border: 1px solid blue;
+  border: 1px solid #1890FF;
+  width: 32px;
+  height: 32px;
+  border-radius: 2px 2px 2px 2px;
+  opacity: 1;
+  display: block;
+  text-align: center;
+  line-height: 32px;
+  font-weight: 400;
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+.page_link {
+  margin: 0 8px;
+  width: 32px;
+  height: 32px;
+  background: #FFFFFF;
+  border-radius: 2px 2px 2px 2px;
+  opacity: 1;
+  border: 1px solid rgba(0,0,0,0.15);
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  line-height: 32px;
+  font-size: 14px;
+  color: #000000;
+  font-weight: 400;
+}
+
+
+.page_text{
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  line-height: 32px;
+}
+
+.page_skip{
+  width: 48px;
+  height: 32px;
+  line-height: 28px;
+  background: #FFFFFF;
+  border-radius: 2px 2px 2px 2px;
+  opacity: 1;
+  border: 1px solid rgba(0,0,0,0.15);
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  line-height: 22px;
+}
+.links_status{
+  margin-left: 19px;
+}
+.links_status a {
+  letter-spacing: 1px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 400;
+  color: #666666;
+  line-height: 24px;
+}
+
+/* 激活链接样式 */
+.links_status a.active-link {
+  font-size: 16px;
+  font-weight: 500;
+  color: #3F73F6;
+  line-height: 24px;
+  font-weight: bold; /* 加粗 */
+  text-decoration: underline; /* 下划线 */
+  text-underline-position: under; /* 下划线位置 */
+  text-decoration-color: #006DF1;
+}
+.select_region {
+  height: 32px;
+  background: #FFFFFF;
+  border-radius: 3px 3px 3px 3px;
+  opacity: 1;
+  margin-left: 12px;
+  border: 1px solid #DCDCDC;
+}
+.select_store {
+  height: 32px;
+  background: #FFFFFF;
+  border-radius: 3px 3px 3px 3px;
+  opacity: 1;
+  margin-left: 12px;
+  border: 1px solid #DCDCDC;
+}
+.daily_status_border {
+  height: 54px;
+  border-radius: 1px;
+  width: 144px;
+  border-left: 2px solid #DDD;
+  margin-left: 37px;
+  margin-top: 3px;
+
+}
+.daily_status_date_success {
+  font-size: 14px;
+  margin-left: 45px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.45);
+  line-height: 22px;
+}
+
+.daily_status_date_error {
+  font-size: 14px;
+  margin-left: 78px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.45);
+  line-height: 22px;
+}
+
+.daily_status_date {
+  font-size: 14px;
+  margin-left: 80px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.45);
+  line-height: 22px;
+}
+.daily_status {
+  margin-left: 10px;
+  font-size: 16px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: rgba(0,0,0,0.9);
+  line-height: 24px;
+}
+.daily_status_text {
+  margin-left: 20px;
+}
+.daily_card_enterprise_status_title {
+  font-size: 16px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #1D2129;
+  line-height: 22px;
+
+  margin-left: 20px;
+}
+.daily_card_enterprise_status {
+  margin-left: 11px;
+  height: 1200px;
+  background: #FFFFFF;
+  width: 269px;
+  margin-top: 33px;
+  padding-top: 33px;
+
+}
+.daily_card_enterprise_content {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  margin-left: 15px;
+  margin-top: 30px;
+  color: #FFFFFF;
+  line-height: 28px;
+}
+.daily_card_enterprise_title {
+  font-size: 14px;
+  margin-top: 30px;
+  margin-left: 15px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #FFFFFF;
+  line-height: 28px;
+}
+.daily_card_enterprise {
+  width: 280px;
+  margin-left: 20px;
+  height: 170px;
+  background: url('<%= asset_path "enterprise_background.png" %>');
+}
+.daily_table {
+  padding: 10px;
+  height: 1200px;
+  width: 900px;
+  background: #FFFFFF;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+.daily_card_index {
+  width: 274px;
+  height: 134px;
+  background: #F7F8FA;
+  margin-top: 20px;
+  margin-left: 20px;
+  border-radius: 6px;
+
+}
+.daily_card_div {
+  width: 900px;
+  height: 170px;
+  background: #FFFFFF;
+  display: flex;
+
+}
+.daily_enterprise_name {
+  font-size: 15px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #FFFFFF;
+  line-height: 24px;
+  margin-left: 15px;
+}
+.daily_data_time {
+  font-size: 12px;
+  font-weight: 400;
+  color: #4E5969;
+  line-height: 20px;
+  margin-left: 19px;
+  margin-bottom: 18px;
+}
+</style>
+<style>
+.table {
+  max-width: 900px;
+  margin-bottom: 8px;
+  text-align:center;
+}
+table {
+  background-color: transparent;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.table thead tr{
+  background-color: #0d6efd;
+  color: white;
+}
+*, :after, :before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.table-bordered,
+.table-bordered>tbody>tr>td,
+.table-bordered>tbody>tr>th,
+.table-bordered>tfoot>tr>td,
+.table-bordered>tfoot>tr>th,
+.table-bordered>thead>tr>td,
+.table-bordered>thead>tr>th {
+    border: 1px solid #ddd;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+  padding: 3px;
+  vertical-align: middle;
+  border-top: 1px solid #ddd;
+}
+.table-hover>tbody>tr:hover>td {
+  background-color: #ecf3f8;
+}
+/* .table-striped>tbody>tr:nth-child(odd)>td {
+   background-color: #f9f9f9;
+}*/
+.table-striped tr:nth-child(even)>td {
+  background-color: #f9f9f9;
+}
+</style>
+
+<style>
+.list {
+  width: 1192px;
+  background: #FFFFFF;
+  opacity: 1;
+
+}
+.links{
+  margin-left: 19px;
+}
+.links a {
+  letter-spacing: 1px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #666666;
+  line-height: 24px;
+}
+
+/* 激活链接样式 */
+.links a.active-link {
+  font-size: 16px;
+  font-weight: 500;
+  color: #3F73F6;
+  line-height: 24px;
+  font-weight: bold; /* 加粗 */
+  text-decoration: underline; /* 下划线 */
+  text-underline-position: under; /* 下划线位置 */
+  text-decoration-color: #006DF1;
+}
+.button_all_submission{
+  width: 102px;
+  height: 32px;
+  background: #FFFFFF;
+  border-radius: 3px 3px 3px 3px;
+  opacity: 1;
+  border: 1px solid #0052D9;
+  float: right;
+  font-size: 14px;
+  font-weight: 400;
+  color: #0052D9;
+  line-height: 22px;
+  margin-top: 20px;
+  margin-bottom: 24px;
+  margin-right: -56px;
+}
+.table_div{
+  width: 1152px;
+  margin: 0 20px;
+}
+.table_title{
+  width: 1152px;
+  height: 53px;
+  background: #1478f2;
+  border-radius: 0px 0px 0px 0px;
+  border-bottom: dashed;
+  border-bottom-color: #1478f2;
+  border-bottom-style: solid;
+}
+.table_td_title{
+  font-size: 12px;
+  font-family: PingFang SC-Medium, PingFang SC;
+  font-weight: 500;
+  color: snow;
+  line-height: 22px;
+  opacity: 1;
+}
+.border-bottom-dashed::after {
+  content: "";
+  display: block;
+  border-bottom: 1px dashed #ccc;
+  margin-top: -1px; /* 留出一点空隙 */
+}
+.button_urge_submission{
+  border: 1px solid transparent;
+  background: transparent;
+  color: font-size: 14px;
+  font-family: PingFang SC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #F53F3F;
+  line-height: 22px;
+  font-size: 14px;
+}
+.status_warn{
+  width: 40px;
+  height: 22px;
+  background: rgba(245,63,63,0.12);
+  opacity: 1;
+  border: 1px solid #FF8787;
+  font-size: 12px;
+  font-family: PingFang SC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #F53F3F;
+  line-height: 20px;
+  display: block;
+  text-align: center;
+  margin-left: 6px;
+}
+.status_success {
+  display: block;
+  text-align: center;
+  width: 52px;
+  height: 22px;
+  font-size: 12px;
+  font-family: PingFang SC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #52C41A;
+  line-height: 20px;
+  width: 52px;
+  height: 22px;
+  background: #F6FFED;
+  opacity: 1;
+  border: 1px solid #B7EB8F;
+
+}
+.link_to_show{
+  font-size: 14px;
+  font-family: PingFang SC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #006DF1;
+  line-height: 22px;
+  margin-left: 5px;
+}
+.table_text_submission {
+  font-size: 12px;
+  font-family: PingFang SC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #000000;
+  line-height: 22px;
+}
+tr.border-bottom-dashed::after {
+  /* 边框样式 */
+  content: "";
+  display: block;
+  border-bottom: 1px dashed #ccc;
+  margin-top: -1px; /* 留出一点空隙 */
+}
+.table .border-bottom-dashed {
+  border-style: dashed;
+  border-color: #ccc;
+}
+.table_dashed {
+  border-bottom: dashed;
+  border-bottom-color: #9b9b9b;
+  border-bottom-style: dotted;
+}
+.query_submissions{
+  font-size: 14px;
+  font-family: PingFang SC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.85);
+  line-height: 22px;
+}
+</style>
+<style>
+.code {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.list {
+  background: #f8f9fa;
+  padding: 10px;
+}
+.each-row {
+  border-radius: 5px;
+  margin: 50px 180px;
+  background: white;
+  padding: 10px;
+}
+.input_enterprise {
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: var(--bs-border-radius);
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  border: 1px solid blue;
+  width: 300px;
+}
+.input_tel {
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: var(--bs-border-radius);
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  border: 1px solid blue;
+  width: 200px;
+}
+.current {
+  background: #2381f3;
+  color: white;
+  border: 1px solid blue;
+  border: 1px solid #1890FF;
+  width: 32px;
+  height: 32px;
+  border-radius: 2px 2px 2px 2px;
+  opacity: 1;
+  display: block;
+  text-align: center;
+  line-height: 32px;
+  font-weight: 400;
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+.page_link {
+  margin: 0 8px;
+  width: 32px;
+  height: 32px;
+  background: #FFFFFF;
+  border-radius: 2px 2px 2px 2px;
+  opacity: 1;
+  border: 1px solid rgba(0,0,0,0.15);
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  line-height: 32px;
+  font-size: 14px;
+  color: #000000;
+  font-weight: 400;
+}
+
+
+.page_text{
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  line-height: 32px;
+}
+
+.page_skip{
+  width: 48px;
+  height: 32px;
+  line-height: 28px;
+  background: #FFFFFF;
+  border-radius: 2px 2px 2px 2px;
+  opacity: 1;
+  border: 1px solid rgba(0,0,0,0.15);
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  line-height: 22px;
+}
+.links_status{
+  margin-left: 19px;
+}
+.links_status a {
+  letter-spacing: 1px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 400;
+  color: #666666;
+  line-height: 24px;
+}
+
+/* 激活链接样式 */
+.links_status a.active-link {
+  font-size: 16px;
+  font-weight: 500;
+  color: #3F73F6;
+  line-height: 24px;
+  font-weight: bold; /* 加粗 */
+  text-decoration: underline; /* 下划线 */
+  text-underline-position: under; /* 下划线位置 */
+  text-decoration-color: #006DF1;
+}
+</style>

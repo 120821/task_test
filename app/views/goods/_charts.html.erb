@@ -1,0 +1,163 @@
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var chartData = [
+      { name: '大米', y: 10 },
+      { name: '面粉', y: 8 },
+      { name: '食用', y: 6 },
+      { name: '蔬菜', y: 12 },
+      { name: '猪肉', y: 5 },
+      { name: '羊肉', y: 3 },
+      { name: '鸡肉', y: 7 },
+      { name: '鸡蛋', y: 9 },
+      { name: '鲜奶', y: 4 },
+      { name: '方便面', y: 15 },
+      { name: '牛肉', y: 2 },
+      { name: '水果', y: 11 }
+    ];
+
+    Highcharts.chart('chart-container', {
+      chart: {
+        type: 'pie'
+      },
+      title: {
+        text: null //'食品消费饼状图'
+      },
+      plotOptions: {
+        pie: {
+          innerSize: '20%'
+        }
+      },
+      tooltip: {
+        pointFormat: '{point.name}: {point.y:.2f} 吨' // 将提示框内容设置为 chartData 的名称和值，并添加单位
+      },
+      series: [{
+        name: '食品',
+        data: chartData,
+        showInLegend: false // 不显示 series 的名称
+      }]
+        /*
+      series: [{
+        name: chartData['name'],
+        data: chartData
+      }]
+        */
+    });
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var chartData = [
+      { name: '大米', y: 30 },
+      { name: '面粉', y: 58 },
+      { name: '食用', y: 36 },
+      { name: '蔬菜', y: 33 },
+      { name: '猪肉', y: 15 },
+      { name: '羊肉', y: 23 },
+      { name: '鸡肉', y: 17 },
+      { name: '鸡蛋', y: 59 },
+      { name: '鲜奶', y: 14 },
+      { name: '方便面', y: 35 },
+      { name: '牛肉', y: 23 },
+      { name: '水果', y: 31 }
+    ];
+
+    Highcharts.chart('chart-container2', {
+      chart: {
+        type: 'pie'
+      },
+      title: {
+        text: null //'食品消费饼状图'
+      },
+      plotOptions: {
+        pie: {
+          innerSize: '20%'
+        }
+      },
+      tooltip: {
+        pointFormat: '{point.name}: {point.y:.2f} 吨' // 将提示框内容设置为 chartData 的名称和值，并添加单位
+      },
+      series: [{
+        name: '食品',
+        data: chartData,
+        showInLegend: false // 不显示 series 的名称
+      }]
+        /*
+      series: [{
+        name: chartData['name'],
+        data: chartData
+      }]
+        */
+    });
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var chartData = [
+      { name: '大米', y: 60 },
+      { name: '面粉', y: 18 },
+      { name: '食用', y: 16 },
+      { name: '蔬菜', y: 63 },
+      { name: '猪肉', y: 38 },
+      { name: '羊肉', y: 26 },
+      { name: '鸡肉', y: 27 },
+      { name: '鸡蛋', y: 39 },
+      { name: '鲜奶', y: 34 },
+      { name: '方便面', y: 68 },
+      { name: '牛肉', y: 16 },
+      { name: '水果', y: 31 }
+    ];
+
+    Highcharts.chart('chart-container3', {
+      chart: {
+        type: 'pie'
+      },
+      title: {
+        text: null //'食品消费饼状图'
+      },
+      plotOptions: {
+        pie: {
+          innerSize: '20%'
+        }
+      },
+      tooltip: {
+        pointFormat: '{point.name}: {point.y:.2f} 吨' // 将提示框内容设置为 chartData 的名称和值，并添加单位
+      },
+      series: [{
+        name: '食品',
+        data: chartData,
+        showInLegend: false // 不显示 series 的名称
+      }]
+        /*
+      series: [{
+        name: chartData['name'],
+        data: chartData
+      }]
+        */
+    });
+  });
+</script>
+<style>
+.links_status{
+  margin-left: 19px;
+}
+.links_status a {
+  letter-spacing: 1px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 400;
+  color: #666666;
+  line-height: 24px;
+}
+
+/* 激活链接样式 */
+.links_status a.active-link {
+  font-size: 16px;
+  font-weight: 500;
+  color: #3F73F6;
+  line-height: 24px;
+  font-weight: bold; /* 加粗 */
+  text-decoration: underline; /* 下划线 */
+  text-underline-position: under; /* 下划线位置 */
+  text-decoration-color: #006DF1;
+}
+</style>

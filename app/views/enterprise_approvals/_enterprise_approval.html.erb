@@ -1,0 +1,78 @@
+<div id="<%= dom_id enterprise_approval %>">
+  <table class='table table-hover table-bordered'>
+    <tr>
+      <th style="width: 200px;">申请人姓名:</th>
+      <td>
+        <%= enterprise_approval.approval_name %>
+      </td>
+    </tr>
+    <tr>
+      <th>企业名称:</th>
+      <td>
+        <%= enterprise_approval.enterprise_name %>
+      </td>
+    </tr>
+    <tr>
+      <th>手机号码:</th>
+      <td>
+        <%= enterprise_approval.tel %>
+      </td>
+    </tr>
+
+    <tr>
+      <th>营业执照:</th>
+      <td>
+        <% if enterprise_approval.business_license? %>
+          <%= link_to (image_tag enterprise_approval.business_license.url, style: 'width: 200px; height: 200px;'), @enterprise_approval.business_license.url %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th>经营加工许可证:</th>
+      <td>
+        <% if enterprise_approval.business_processing_license? %>
+          <%= link_to (image_tag enterprise_approval.business_processing_license.url, style: 'width: 200px; height: 200px;'), @enterprise_approval.business_processing_license.url %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th>食品流通许可证:</th>
+      <td>
+        <% if enterprise_approval.food_distribution_license? %>
+          <%= link_to (image_tag enterprise_approval.food_distribution_license.url, style: 'width: 200px; height: 200px;'), @enterprise_approval.food_distribution_license.url %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th>仓库照片:</th>
+      <td>
+        <% if enterprise_approval.warehouse_photos_one? %>
+          <%= link_to (image_tag enterprise_approval.warehouse_photos_one.url, style: 'width: 200px; height: 200px;'), @enterprise_approval.warehouse_photos_one.url %>
+        <% end %>
+        <% if enterprise_approval.warehouse_photos_two? %>
+          <%= link_to (image_tag enterprise_approval.warehouse_photos_two.url, style: 'width: 200px; height: 200px;'), @enterprise_approval.warehouse_photos_two.url %>
+        <% end %>
+        <% if enterprise_approval.warehouse_photos_three? %>
+          <%= link_to (image_tag enterprise_approval.warehouse_photos_three.url, style: 'width: 200px; height: 200px;'), @enterprise_approval.warehouse_photos_three.url %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        审批状态
+      </th>
+      <td>
+        <% if current_manager.category == '企业' %>
+          <%= enterprise_approval.status %>
+        <% else %>
+          <% if enterprise_approval.status == '待处理' %>
+            <%= button_to "拒绝", reject_enterprises_path(id: enterprise_approval.id), class: "btn btn-danger", style: 'width: 100px; float: left;'  %>
+            <%= button_to "通过", approve_enterprises_path(id: enterprise_approval.id), class: "btn btn-primary", style: 'width: 100px; margin-left: 20px;'  %>
+          <% else %>
+            <%= enterprise_approval.status %>
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+</div>

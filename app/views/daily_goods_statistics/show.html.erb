@@ -1,0 +1,175 @@
+<div class="show">
+  <span class="show_title">
+    <span style="margin-right: 5px;">
+      <%= image_tag "enterprise.png" %>
+    </span>
+    基本信息
+  </span>
+  <div style="display: flex;">
+    <table class='' style="margin-top: 35px;">
+      <tr>
+        <td>
+          <span class="show_table_name">地州:</span>
+          <span class="show_table_content"><%= @daily_goods_statistic.region %></span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="show_table_name">销售库存情况:</span>
+          <span class="show_table_content"><%= @daily_goods_statistic.sales_inventory_situation%></span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="show_table_name">大米（吨）:</span>
+          <span class="show_table_content"><%= @daily_goods_statistic.rice %></span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="show_table_name">面粉（吨）:</span>
+          <span class="show_table_content"><%= @daily_goods_statistic.flour %></span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="show_table_name">食用油（吨）:</span>
+          <span class="show_table_content"><%= @daily_goods_statistic.oil %></span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="show_table_name">蔬菜（吨）:</span>
+          <span class="show_table_content"><%= @daily_goods_statistic.vegetables %></span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="show_table_name">猪肉（吨）:</span>
+          <span class="show_table_content"><%= @daily_goods_statistic.pork %></span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="show_table_name">牛肉（吨）:</span>
+          <span class="show_table_content"><%= @daily_goods_statistic.beef %></span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="show_table_name">羊肉（吨）:</span>
+          <span class="show_table_content"><%= @daily_goods_statistic.lamb %></span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="show_table_name">家禽（吨）:</span>
+          <span class="show_table_content"><%= @daily_goods_statistic.poultry %></span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="show_table_name">鸡蛋（吨）:</span>
+          <span class="show_table_content"><%= @daily_goods_statistic.egg %></span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="show_table_name">牛奶（吨）:</span>
+          <span class="show_table_content"><%= @daily_goods_statistic.milk %></span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="show_table_name">水果（吨）:</span>
+          <span class="show_table_content"><%= @daily_goods_statistic.fruit %></span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="show_table_name">方便食品（袋）:</span>
+          <span class="show_table_content"><%= @daily_goods_statistic.convenient_food %></span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="show_table_name">日期:</span>
+          <span class="show_table_content"><%= @daily_goods_statistic.daily_goods_date %></span>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div style="display: flex; margin: 40px 300px;">
+    <%= link_to '编辑', edit_daily_goods_statistic_path(@daily_goods_statistic), class: 'btn btn-primary', style:'width: 150px;' %>
+    <%= link_to '返回', daily_goods_statistics_path, class: 'btn btn-primary', style: 'width: 150px; margin-left: 50px;'%>
+  </div>
+</div>
+
+<style>
+.list {
+  background: #f8f9fa;
+  padding: 10px;
+}
+.each-row {
+  border-radius: 5px;
+  margin: 50px 180px;
+  background: white;
+  padding: 10px;
+}
+.show_title {
+  font-size: 20px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.9);
+  line-height: 28px;
+}
+.show_table_name_two {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.4);
+  margin-left: 216px;
+  line-height: 22px;
+}
+.show_table_content_two {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  margin-left: 10px;
+  color: rgba(0,0,0,0.9);
+  line-height: 22px;
+}
+.show_table_name {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  margin-left: 10px;
+  color: rgba(0,0,0,0.4);
+  line-height: 22px;
+}
+.show_table_content {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  margin-left: 10px;
+  color: rgba(0,0,0,0.9);
+  line-height: 22px;
+}
+.show {
+  width: 1194px;
+  padding: 31px 24px;
+  height: auto;
+  background: #FFFFFF;
+  border-radius: 6px;
+
+}
+.show_table_image_name{
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  margin-top: 20px;
+  margin-left: 20px;
+  font-weight: 400;
+  color: rgba(0,0,0,0.9);
+  line-height: 22px;
+}
+</style>

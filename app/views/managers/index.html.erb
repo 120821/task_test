@@ -1,0 +1,245 @@
+<div style="background: white;width: 1192px; padding: 20px 0px 0 24px; height: auto;
+            background: #FFFFFF; margin: 30px 0; opacity: 1;">
+  <p style="margin: 20px;">
+    <svg xmlns="http://www.w3.org/2000/svg" color="#0066ff" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+      <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+    </svg>
+    <span style="margin-left: 10px;font-weight: 600; font-size: 18px;">账号列表<span>
+  </p>
+  <div style="">
+    <%= form_tag '', method: :get do %>
+      状态:&nbsp;&nbsp;&nbsp;&nbsp; <%= select_tag :status, options_for_select([['启用', true], ['禁用', false]], params[:status]), class: 'select_enterprise' %>
+      &nbsp;&nbsp;&nbsp;&nbsp; <%= text_field_tag :email, params[:email], placeholder: '请输入账号', class: 'select_enterprise', style:'margin-left: 10px; width: 250px;' %>
+      &nbsp;&nbsp;&nbsp;&nbsp;<%= submit_tag "查询", class: "form_submit", class: 'btn btn-primary btn-sm', style: 'width: 80px;' %>
+      &nbsp;&nbsp;&nbsp;&nbsp;<%= link_to '重置', managers_path,class: "form_submit", class: 'btn btn-light btn-sm', style:'border: 1px solid #006df1;width: 80px;' %>
+      <br/>
+    <% end %>
+    <p><span style="margin-top: 30px; font-size: 18px; position: absolute;">数据列表</span>
+    <%= link_to '添加账号', new_manager_path, class: 'btn btn-light btn-sm', style: 'margin-top: 30px; margin-left: 100px;border: 1px solid #006df1;' %>
+    </p
+  </div>
+  <div style="margin-top: 30px; margin-right: 20px;">
+      <table class='table' style='border-left: 1px solid #dcdcdc;
+              border: 1px solid #dcdcdc;
+              border-right: 1px solid #dcdcdc;
+              background: snow;'>
+        <tr class="table_title" class="">
+          <td class="table_td_title" style="color: snow;">
+            <span class="table_td_title" style="color: snow;">编号</span>
+          </td>
+          <td class="table_td_title"  style="margin-top: 16px; display: ;color: snow;">账号</td>
+          <td class="table_td_title"  style="color: snow;">姓名/备注</td>
+          <td class="table_td_title"  style="color: snow;">角色</td>
+          <td class="table_td_title"  style="color: snow;">账号归属</td>
+          <td class="table_td_title"  style="color: snow;">创建时间</td>
+          <td class="table_td_title"  style="color: snow;">最后登录时间</td>
+          <td class="table_td_title"  style="color: snow;">最后登陆IP</td>
+          <td class="table_td_title"  style="color: snow;">状态</td>
+          <!--
+          <td class="table_td_title"  style="color: snow; text-align: center;">操作</td>
+          -->
+        </tr>
+        <% @managers.each do |manager| %>
+          <tr class="" class="border-bottom" style="border: 1px solid #dcdcdc;background: #ffffff87;">
+            <td class="table_text_submission">00<%= manager.id %></td>
+            <td class="table_text_submission"><%= manager.email %></td>
+            <td class="table_text_submission"><%= manager.name %></td>
+            <td class="table_text_submission">
+              <%= manager.category %>
+            </td>
+            <td class="table_text_submission"><%= manager.owner %></td>
+            <td class="table_text_submission"><%= manager.created_at.strftime('%Y-%m-%d') %></td>
+            <td class="table_text_submission"><%= manager.last_sign_in_at || manager.current_sign_in_at %></td>
+            <td class="table_text_submission"><%= manager.last_sign_in_ip || manager.current_sign_in_ip %></td>
+            <td class="table_text_submission">
+              <% if manager.status? %>
+                <span class="status_true">启用</span>
+              <% else %>
+                <span class="status_false">禁用</span>
+              <% end %>
+            </td>
+            <!--
+            <td style="display: flex; justify-content: space-around;">
+              <%#= link_to '增加', new_manager_path, style: 'text-decoration: none;' %>
+              <%#= link_to '修改', edit_manager_path(manager), style: 'text-decoration: none;' %>
+              <%#= button_to '删除', manager, method: :delete, form: { data: { turbo_confirm: '删除高危企业将一并删除该企业联系人，危化品信息，应急方案信息!' } }, class: "btn btn-danger btn-sm" %>
+            </td>
+            -->
+          </tr>
+        <% end %>
+      </table>
+
+  </div>
+  <div style="display: flex; float: right;">
+
+    <% start_index = @managers.offset_value + 1 %>
+    <% end_index = start_index + @managers.length - 1 %>
+
+    <p class="page_text">
+      <span> 第 <%= start_index %> - <%= end_index %> 条/总共 <%= @managers.total_count %> 条
+
+        <% if @managers.total_pages > 1 %>
+
+          <% first_page = [1, @managers.current_page - 3].max %>
+          <% last_page = [first_page + 6, @managers.total_pages].min %>
+          <% page_links = (first_page..last_page).map do |page|
+            if page == @managers.current_page
+              content_tag :span, page, class: 'current'
+            else
+              link_to page, { page: page }, class: 'page_link'
+            end
+          end %>
+          <%= content_tag :div, page_links.join.html_safe, class: 'paging_links', style: 'display: flex;' %>
+          <span class="page_text">
+            <%= form_tag '', method: :get do %>
+              &nbsp;&nbsp;<span class="page_text">每页 <%= select_tag :per_page, options_for_select([10, 20, 50], params[:per_page]), onchange: "$('#filter_form').submit()" %> 条</span>
+              &nbsp;&nbsp;跳至:&nbsp;&nbsp; <%= text_field_tag :page, params[:page], class: 'page_skip', onchange: "$('#filter_form').submit()"%>&nbsp;&nbsp;页
+              &nbsp;&nbsp;<%= submit_tag "跳转", class: "page_skip", class: 'btn btn-primary btn-sm', style: 'width: 55px; font-size: 14px; height: 32px; background: #006DF1; opacity: 1; margin-right: 20px;' %>
+            <% end %>
+          </span>
+        <% end %>
+      </span>
+    </p>
+  </div>
+  <div style="height: 200px;"></div>
+</div>
+
+<style>
+.code {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.list {
+  background: #f8f9fa;
+  padding: 10px;
+}
+.each-row {
+  border-radius: 5px;
+  margin: 50px 180px;
+  background: white;
+  padding: 10px;
+}
+.input_enterprise {
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: var(--bs-border-radius);
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  border: 1px solid blue;
+  width: 300px;
+}
+.input_tel {
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: var(--bs-border-radius);
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  border: 1px solid blue;
+  width: 200px;
+}
+.current {
+  background: #2381f3;
+  color: white;
+  border: 1px solid blue;
+  border: 1px solid #1890FF;
+  width: 32px;
+  height: 32px;
+  border-radius: 2px 2px 2px 2px;
+  opacity: 1;
+  display: block;
+  text-align: center;
+  line-height: 32px;
+  font-weight: 400;
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+.page_link {
+  margin: 0 8px;
+  width: 32px;
+  height: 32px;
+  background: #FFFFFF;
+  border-radius: 2px 2px 2px 2px;
+  opacity: 1;
+  border: 1px solid rgba(0,0,0,0.15);
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  line-height: 32px;
+  font-size: 14px;
+  color: #000000;
+  font-weight: 400;
+}
+
+
+.page_text{
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  line-height: 32px;
+}
+
+.page_skip{
+  width: 48px;
+  height: 32px;
+  line-height: 28px;
+  background: #FFFFFF;
+  border-radius: 2px 2px 2px 2px;
+  opacity: 1;
+  border: 1px solid rgba(0,0,0,0.15);
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  line-height: 22px;
+}
+.select_enterprise {
+  width: 148px;
+  height: 32px;
+  background: #FFFFFF;
+  border-radius: 3px 3px 3px 3px;
+  opacity: 1;
+  border: 1px solid #DCDCDC;
+}
+.status_true {
+  width: 39px;
+  height: 22px;
+  background: #F6FFED;
+  border-radius: 2px;
+  border: 1px solid #B7EB8F;
+  font-size: 12px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #52C41A;
+  line-height: 20px;
+}
+.status_false {
+  width: 39px;
+  height: 22px;
+  background: rgba(245,63,63,0.12);
+  border-radius: 2px;
+  border: 1px solid #FF8787;
+  font-size: 12px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #F53F3F;
+  line-height: 20px;
+
+
+}
+</style>

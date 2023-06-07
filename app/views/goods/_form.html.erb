@@ -1,0 +1,63 @@
+<%= form_with(model: good) do |form| %>
+  <h3 style="margin:0 180px">
+    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+      <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+      <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+    </svg>
+    基本信息
+  </h3>
+  <div class="from">
+    <table class='table table-hover table-bordered table-striped'>
+      <tr>
+        <th style="width: 200px;">
+          企业名称
+        </th>
+        <td>
+          <%= form.select :enterprise_id, options_from_collection_for_select(current_manager.enterprises.all, :id, :name), {}, class:'form-control' %>
+        </td>
+      </tr>
+
+      <tr>
+        <th>储备库点</th>
+        <td>
+          <%= form.select :material_reserf_id, options_from_collection_for_select(current_manager.material_reserves.all, :id, :warehouse_location), {}, class:'form-control' %>
+        </td>
+      </tr>
+
+      <tr>
+        <th>行政区域</th>
+        <td><%= form.text_field :administrative_division, class: 'form-control', placeholder: '例如 乌鲁木齐' %></td>
+      </tr>
+
+      <tr>
+        <th>物资种类</th>
+        <td><%= form.text_field :goods_type, class: 'form-control', placeholder: '例如 大米' %></td>
+      </tr>
+
+      <tr>
+        <th>物资数量(吨)</th>
+        <td><%= form.text_field :quantity, class: 'form-control', placeholder: '例如 20' %></td>
+      </tr>
+
+      <tr>
+        <th>企业负责人</th>
+        <td><%= form.text_field :person_in_charge, class: 'form-control', placeholder: '例如 李华' %></td>
+      </tr>
+
+      <tr>
+        <th>企业负责人联系电话</th>
+        <td><%= form.text_field :person_in_charge_tel, class: 'form-control', placeholder: '例如 15588888888' %></td>
+      </tr>
+
+    </table>
+  </div>
+  <div style="margin-bottom: 200px; margin-top: 100px; margin-left: 180px;">
+    <%= link_to '返回', goods_path, style: 'color: black; text-decoration:none; width: 200px;' %>
+    <%= form.submit "确定", class: 'btn btn-primary', style: 'width: 200px; margin-left: 200px;' %>
+  </div>
+<% end %>
+<style>
+.from {
+  margin:0 180px;
+}
+</style>

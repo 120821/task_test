@@ -1,0 +1,336 @@
+<div class="card_div">
+  <div class="card_index">
+    <p class="every_card">保供企业总量</p>
+    <span class="data_index">568家<span class="data_unit" style="margin-left: 6px;"></span></span>
+    <p class="data_time">较上周
+      <span class="data_up">12家
+      <%= image_tag 'rate_up.png', style: 'margin-top: -10px;' %>
+      </span>
+      <span style="margin-left: 47px;">较上月</span>
+      <span class="data_down">2家
+        <%= image_tag 'rate_down.png', style:"margin-top: -10px;" %>
+      </span>
+    </p>
+  </div>
+  <div class="card_index">
+    <p class="every_card">一级保供企业</p>
+    <p class="data_index">356家<span class="data_unit" style="margin-left: 6px;"></span></p>
+    <p class="data_time" style="margin-top: -8px;">较上周
+      <span class="data_up">12家
+      <%= image_tag 'rate_up.png', style: 'margin-top: -10px;' %>
+      </span>
+      <span style="margin-left: 47px;">较上月</span>
+      <span class="data_down">2家
+        <%= image_tag 'rate_down.png', style:"margin-top: -10px;" %>
+      </span>
+    </p>
+  </div>
+  <div class="card_index">
+    <p class="every_card">其他保供企业</p>
+    <p class="data_index">219家<span class="data_unit" style="margin-left: 6px;"></span></p>
+    <p class="data_time" style="margin-top: -8px;">较上周
+      <span class="data_up">12家
+      <%= image_tag 'rate_up.png', style: 'margin-top: -10px;' %>
+      </span>
+      <span style="margin-left: 47px;">较上月</span>
+      <span class="data_down">2家
+        <%= image_tag 'rate_down.png', style:"margin-top: -10px;" %>
+      </span>
+    </p>
+  </div>
+</div>
+<div style="background: white;width: 1192px; padding: 20px 0px 0 24px; height: auto;
+            background: #FFFFFF; margin: 30px 0; opacity: 1;">
+  <p style="">保供企业列表</p>
+  <div style="">
+    <%= form_tag '', method: :get do %>
+      区域: <%= select_tag :region, options_for_select(REGIONS_WITH_NIL, params[:region]), class: 'select_enterprise', style: 'margin-left: 20px;' %>
+      &nbsp;&nbsp;&nbsp;&nbsp;企业类型:&nbsp;&nbsp; <%= select_tag :enterprise_category, options_for_select(@categories, params[:enterprise_category]), class: 'select_enterprise', style: 'margin-left: 10px;' %>
+      &nbsp;&nbsp;&nbsp;&nbsp;企业名称:&nbsp;&nbsp; <%= text_field_tag :name, params[:name], placeholder: '新疆广宏食品集团有限公司', class: 'select_enterprise', style:'width: 250px; margin-left: 10px;' %>
+      &nbsp;&nbsp;&nbsp;&nbsp;负责人:&nbsp;&nbsp;&nbsp;<%= text_field_tag :person_in_charge, params[:person_in_charge], placeholder: '李华', class: 'select_enterprise', style: 'margin-left: 10px;' %><br/>
+      联系电话:&nbsp;&nbsp;&nbsp;&nbsp;<%= text_field_tag :person_in_charge_tel, params[:person_in_charge_tel], placeholder: '13307830000', class: 'select_enterprise', style: 'margin: 15px 0;' %>
+      &nbsp;&nbsp;&nbsp;&nbsp;<%= submit_tag "查询", class: "form_submit", class: 'btn btn-primary btn-sm', style: 'width: 60px; height: 35px; margin-top: -5px; margin-left: 10px; font-size: 16px' %>
+      <br/>
+    <% end %>
+    <%#= paginate @enterprises %>
+    <% if current_manager.category == '企业' %>
+      <%= link_to '新建', new_enterprise_path, class: 'btn btn-primary', style: '' %>
+    <% end %>
+  </div>
+  <div style="margin-top: 30px; margin-right: 20px;">
+      <table class='table' style='border-left: 1px solid #dcdcdc;
+              border: 1px solid #dcdcdc;
+              border-right: 1px solid #dcdcdc;
+              background: snow;'>
+        <tr class="table_title" class="">
+          <td class="table_td_title" style="color: snow;">
+            <span class="table_td_title" style="color: snow;">序号</span>
+          </td>
+          <td class="table_td_title"  style="color: snow;">区域</td>
+          <td class="table_td_title"  style="color: snow;">储备物资</td>
+          <td class="table_td_title"  style="color: snow;">保供企业分类</td>
+          <td class="table_td_title"  style="margin-top: 16px; display: ;color: snow;">保供企业名称</td>
+          <td class="table_td_title"  style="color: snow;">企业负责人</td>
+          <td class="table_td_title"  style="color: snow;">手机号</td>
+          <td class="table_td_title"  style="color: snow;">有无仓储</td>
+          <td class="table_td_title"  style="color: snow;">有无分拣中心</td>
+          <td class="table_td_title"  style="color: snow; text-align: center;">操作</td>
+        </tr>
+        <% @enterprises.each do |enterprise| %>
+          <tr class="" class="border-bottom" style="border: 1px solid #dcdcdc;background: #ffffff87;">
+            <td class="table_text_submission"><%= enterprise.id %></td>
+            <td class="table_text_submission"><%= enterprise.region %></td>
+            <td class="table_text_submission"><%= enterprise.goods_category %></td>
+            <td class="table_text_submission">
+              <%= enterprise.enterprise_category %>
+            </td>
+            <td class="table_text_submission"><%= link_to enterprise.name, enterprise, style: 'text-decoration: none;' %></td>
+            <td class="table_text_submission"><%= enterprise.person_in_charge %></td>
+            <td class="table_text_submission"><%= enterprise.person_in_charge_tel %></td>
+            <td class="table_text_submission">
+              <% if enterprise.material_reserves.present? %>
+                有
+              <% else %>
+                无
+              <% end %>
+            </td>
+            <td class="table_text_submission">
+              <% if enterprise.material_reserves.present? %>
+                有
+              <% else %>
+                无
+              <% end %>
+            </td>
+            <td style="display: flex; justify-content: space-around;">
+              <%= link_to '查看', enterprise, style: 'text-decoration: none;' %>
+              <span style="color: #b2b2b2;">|</span>
+              <%= link_to '修改', edit_enterprise_path(enterprise), style: 'color: #68c0fb;text-decoration: none;' %>
+              <span style="color: #b2b2b2;">|</span>
+              <%= button_to '删除', enterprise, method: :delete, form: { data: { turbo_confirm: '删除高危企业将一并删除该企业联系人，危化品信息，应急方案信息!' } }, class: "btn btn-danger btn-sm" %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+      <!--
+    <% @enterprises.each do |enterprise| %>
+      <div class="each-row">
+        <h5><%= link_to enterprise.name, enterprise, style: 'text-decoration: none;' %><span style="color: gray; float: right;"><%= link_to '查看详情', enterprise, style: 'text-decoration: none; color: gray;' %> ></span></h5>
+        <hr/>
+        <div>
+          <table class='table table-borderless'>
+            <tr>
+              <td>所属地州: <%= enterprise.region %></td>
+              <td> 企业分类: <%= enterprise.enterprise_category %> </td>
+            </tr>
+            <tr>
+              <td> 物资分类: <%= enterprise.goods_category %> </td>
+              <td> 负责人: <%= enterprise.person_in_charge %> </td>
+            </tr>
+            <tr>
+              <td>联系电话: <%= enterprise.person_in_charge_tel %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      负责数据录入人员姓名
+      联系电话
+      邮箱地址
+      营业执照
+      经营加工许可证
+      食品流通许可证
+      仓库照片
+      审批状态
+      <%= enterprise.person_in_charge_of_data_entry %>
+      <%= enterprise.person_in_charge_of_data_entry_tel %>
+      <%= enterprise.email %>
+      <td>
+      <% if enterprise.business_license? %>
+        <%= link_to (image_tag enterprise.business_license.url, style: 'width: 200px; height: 200px;'), enterprise.business_license.url, target: "_blank" %>
+      <% end %>
+      </td>
+      <td>
+      <% if enterprise.business_processing_license? %>
+        <%= link_to (image_tag enterprise.business_processing_license.url, style: 'width: 200px; height: 200px;'), enterprise.business_processing_license.url, target: "_blank" %>
+      <% end %>
+      </td>
+      <td>
+      <% if enterprise.food_distribution_license? %>
+        <%= link_to (image_tag enterprise.food_distribution_license.url, style: 'width: 200px; height: 200px;'), enterprise.food_distribution_license.url, target: "_blank" %>
+      <% end %>
+      </td>
+      <td>
+      <% if enterprise.warehouse_photos_one? %>
+        <%= link_to (image_tag enterprise.warehouse_photos_one.url, style: 'width: 200px; height: 200px;'), enterprise.warehouse_photos_one.url, target: "_blank" %>
+      <% end %>
+      <% if enterprise.warehouse_photos_two? %>
+        <%= link_to (image_tag enterprise.warehouse_photos_two.url, style: 'width: 200px; height: 200px;'), enterprise.warehouse_photos_two.url, target: "_blank" %>
+      <% end %>
+      <% if enterprise.warehouse_photos_three? %>
+        <%= link_to (image_tag enterprise.warehouse_photos_three.url, style: 'width: 200px; height: 200px;'), enterprise.warehouse_photos_three.url, target: "_blank" %>
+      <% end %>
+      </td>
+      <td>
+      <% if enterprise.status.blank? %>
+        <%= button_to "拒绝", reject_enterprises_path(id: enterprise.id), class: "btn btn-secondary btn-sm"  %>
+        <%= button_to "通过", approve_enterprises_path(id: enterprise.id), class: "btn btn-primary btn-sm"  %>
+      <% end %>
+      </td>
+      <td>
+      <%= link_to '增加', new_enterprise_path %>
+      <%= link_to '修改', edit_enterprise_path(enterprise) %>
+      </td>
+      <td>
+      <%= button_to '删除', enterprise, method: :delete, form: { data: { turbo_confirm: '删除高危企业将一并删除该企业联系人，危化品信息，应急方案信息!' } }, class: "btn btn-danger btn-sm" %>
+      </td>
+    <% end %>
+    -->
+
+  </div>
+  <div style="display: flex; float: right;">
+
+    <% start_index = @enterprises.offset_value + 1 %>
+    <% end_index = start_index + @enterprises.length - 1 %>
+
+    <p class="page_text">
+      <span> 第 <%= start_index %> - <%= end_index %> 条/总共 <%= @enterprises.total_count %> 条
+
+        <% if @enterprises.total_pages > 1 %>
+
+          <% first_page = [1, @enterprises.current_page - 3].max %>
+          <% last_page = [first_page + 6, @enterprises.total_pages].min %>
+          <% page_links = (first_page..last_page).map do |page|
+            if page == @enterprises.current_page
+              content_tag :span, page, class: 'current'
+            else
+              link_to page, { page: page }, class: 'page_link'
+            end
+          end %>
+          <%= content_tag :div, page_links.join.html_safe, class: 'paging_links', style: 'display: flex;' %>
+          <span class="page_text">
+            <%= form_tag '', method: :get do %>
+              &nbsp;&nbsp;<span class="page_text"><%#= @daily_goods_statistics.current_page %> 每页 <%= select_tag :per_page, options_for_select([10, 20, 50], params[:per_page]), onchange: "$('#filter_form').submit()" %> 条</span>
+              &nbsp;&nbsp;跳至:&nbsp;&nbsp; <%= text_field_tag :page, params[:page], class: 'page_skip', onchange: "$('#filter_form').submit()"%>&nbsp;&nbsp;页
+              &nbsp;&nbsp;<%= submit_tag "跳转", class: "page_skip", class: 'btn btn-primary btn-sm', style: 'width: 55px; font-size: 14px; height: 32px; background: #006DF1; opacity: 1; margin-right: 20px;' %>
+            <% end %>
+          </span>
+        <% end %>
+      </span>
+    </p>
+  </div>
+
+  <div style="height: 200px;"></div>
+</div>
+
+<style>
+.code {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.list {
+  background: #f8f9fa;
+  padding: 10px;
+}
+.each-row {
+  border-radius: 5px;
+  margin: 50px 180px;
+  background: white;
+  padding: 10px;
+}
+.input_enterprise {
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: var(--bs-border-radius);
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  border: 1px solid blue;
+  width: 300px;
+}
+.input_tel {
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: var(--bs-border-radius);
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  border: 1px solid blue;
+  width: 200px;
+}
+.current {
+  background: #2381f3;
+  color: white;
+  border: 1px solid blue;
+  border: 1px solid #1890FF;
+  width: 32px;
+  height: 32px;
+  border-radius: 2px 2px 2px 2px;
+  opacity: 1;
+  display: block;
+  text-align: center;
+  line-height: 32px;
+  font-weight: 400;
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+.page_link {
+  margin: 0 8px;
+  width: 32px;
+  height: 32px;
+  background: #FFFFFF;
+  border-radius: 2px 2px 2px 2px;
+  opacity: 1;
+  border: 1px solid rgba(0,0,0,0.15);
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  line-height: 32px;
+  font-size: 14px;
+  color: #000000;
+  font-weight: 400;
+}
+
+
+.page_text{
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  line-height: 32px;
+}
+
+.page_skip{
+  width: 48px;
+  height: 32px;
+  line-height: 28px;
+  background: #FFFFFF;
+  border-radius: 2px 2px 2px 2px;
+  opacity: 1;
+  border: 1px solid rgba(0,0,0,0.15);
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  line-height: 22px;
+}
+.select_enterprise {
+  width: 148px;
+  height: 32px;
+  background: #FFFFFF;
+  border-radius: 3px 3px 3px 3px;
+  opacity: 1;
+  border: 1px solid #DCDCDC;
+}
+</style>

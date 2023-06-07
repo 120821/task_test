@@ -1,0 +1,301 @@
+<div class="data_div" id="myDiv" onclick="toggleDiv()">
+  <%= image_tag 'title.png', style: 'width: 1192px; position: absolute;' %>
+  <span class="data_time"><%= @time %></span>
+  <span class="data_day"><%= @day %></span>
+  <span class="data_week"><%= @today_weekday %></span>
+
+  <div class="div_some">
+    <div class="left_list">
+      <div class="left_list_title">
+        <em>进销存情况</em>
+      </div>
+      <div class="div_data">
+        <div>
+          <%= image_tag 'icon1.png' %>
+          <span class="text_title">总进货量(吨)</span>
+          <br/>
+          <span class="text_number">1000</span>
+        </div>
+        <div class="data_date_div">
+          <span class="text_date"> 较昨日</span>
+          <span class="text_data_number">12家</span>
+          <%= image_tag 'rate_up.png', style: 'margin-top: -5px;' %>
+          <br/>
+          <span class="text_date">较上周</span>
+          <span class="text_data_number_two">8家</span>
+          <%= image_tag 'rate_down.png', style:"margin-top: -5px;" %>
+        </div>
+      </div>
+
+      <div class="div_data">
+        <div>
+          <%= image_tag 'icon2.png', style: 'margin-left: -10px;' %>
+          <span class="text_title">总销售量(吨)</span>
+          <br/>
+          <span class="text_number" style="margin-top: -20px;position: absolute;">1000</span>
+        </div>
+        <div class="data_date_div">
+          <span class="text_date"> 较昨日</span>
+          <span class="text_data_number">12家</span>
+          <%= image_tag 'rate_up.png', style: 'margin-top: -5px;' %>
+          <br/>
+          <span class="text_date">较上周</span>
+          <span class="text_data_number_two">8家</span>
+          <%= image_tag 'rate_down.png', style:"margin-top: -5px;" %>
+        </div>
+      </div>
+
+      <div class="div_data">
+        <div>
+          <%= image_tag 'icon3.png' %>
+          <span class="text_title">总库存量(吨)</span>
+          <br/>
+          <span class="text_number">1000</span>
+        </div>
+        <div class="data_date_div">
+          <span class="text_date"> 较昨日</span>
+          <span class="text_data_number">12家</span>
+          <%= image_tag 'rate_up.png', style: 'margin-top: -5px;' %>
+          <br/>
+          <span class="text_date">较上周</span>
+          <span class="text_data_number_two">8家</span>
+          <%= image_tag 'rate_down.png', style:"margin-top: -5px;" %>
+        </div>
+      </div>
+      <div class="region_each">
+        <span>乌鲁木齐</span><br/>
+        <p class="region_rate">进
+        <span style="margin-left: 5px;">
+          <%= image_tag 'save_blue.png', style: 'margin-left: -23px; width: 55px' %>
+          <%= image_tag 'save_blue.png', style: 'margin-left: -44px; width: 55px;' %>
+          <%= image_tag 'save_blue.png', style: 'margin-left: -45px; width: 55px;' %>
+          <%= image_tag 'save_gray.png', style: 'margin-left: -20px; width: 15px;'%>
+          <% (1..5).each do |i| %>
+            <%= image_tag 'save_gray.png', style: 'width: 15px;'%>
+          <% end %>
+        </span>
+        <span class="region_rate_number">1024</span>
+        </p><br/>
+        <p class="region_rate" style="margin-top: -66px;">销
+        <span style="margin-left: 5px;">
+          <%= image_tag 'save_blue.png', style: 'margin-left: -23px; width: 55px' %>
+          <%= image_tag 'save_blue.png', style: 'margin-left: -44px; width: 55px;' %>
+          <%= image_tag 'save_blue.png', style: 'margin-left: -45px; width: 55px;' %>
+          <%= image_tag 'save_gray.png', style: 'margin-left: -20px; width: 15px;'%>
+          <% (1..5).each do |i| %>
+            <%= image_tag 'save_gray.png', style: 'width: 15px;'%>
+          <% end %>
+        </span>
+        <span class="region_rate_number">1024</span>
+        </p><br/>
+        <p class="region_rate" style="margin-top: -66px;">存
+        <span style="margin-left: 5px;">
+          <%= image_tag 'save_blue.png', style: 'margin-left: -23px; width: 55px' %>
+          <%= image_tag 'save_blue.png', style: 'margin-left: -44px; width: 55px;' %>
+          <%= image_tag 'save_blue.png', style: 'margin-left: -45px; width: 55px;' %>
+          <%= image_tag 'save_gray.png', style: 'margin-left: -20px; width: 15px;'%>
+          <% (1..5).each do |i| %>
+            <%= image_tag 'save_gray.png', style: 'width: 15px;'%>
+          <% end %>
+        </span>
+        <span class="region_rate_number">1024</span>
+        </p>
+      </div>
+
+      <div class="region_each" style="margin-top: -20px;">
+        <span>伊犁州</span><br/>
+        <p class="region_rate">进
+        <span style="margin-left: 5px;">
+          <%= image_tag 'save_blue.png', style: 'margin-left: -23px; width: 55px' %>
+          <%= image_tag 'save_blue.png', style: 'margin-left: -44px; width: 55px;' %>
+          <%= image_tag 'save_blue.png', style: 'margin-left: -45px; width: 55px;' %>
+          <%= image_tag 'save_gray.png', style: 'margin-left: -20px; width: 15px;'%>
+          <% (1..5).each do |i| %>
+            <%= image_tag 'save_gray.png', style: 'width: 15px;'%>
+          <% end %>
+        </span>
+        <span class="region_rate_number">1024</span>
+        </p><br/>
+        <p class="region_rate" style="margin-top: -66px;">销
+        <span style="margin-left: 5px;">
+          <%= image_tag 'save_blue.png', style: 'margin-left: -23px; width: 55px' %>
+          <%= image_tag 'save_blue.png', style: 'margin-left: -44px; width: 55px;' %>
+          <%= image_tag 'save_blue.png', style: 'margin-left: -45px; width: 55px;' %>
+          <%= image_tag 'save_gray.png', style: 'margin-left: -20px; width: 15px;'%>
+          <% (1..5).each do |i| %>
+            <%= image_tag 'save_gray.png', style: 'width: 15px;'%>
+          <% end %>
+        </span>
+        <span class="region_rate_number">1024</span>
+        </p><br/>
+        <p class="region_rate" style="margin-top: -66px;">存
+        <span style="margin-left: 5px;">
+          <%= image_tag 'save_blue.png', style: 'margin-left: -23px; width: 55px' %>
+          <%= image_tag 'save_blue.png', style: 'margin-left: -44px; width: 55px;' %>
+          <%= image_tag 'save_blue.png', style: 'margin-left: -45px; width: 55px;' %>
+          <%= image_tag 'save_gray.png', style: 'margin-left: -20px; width: 15px;'%>
+          <% (1..5).each do |i| %>
+            <%= image_tag 'save_gray.png', style: 'width: 15px;'%>
+          <% end %>
+        </span>
+        <span class="region_rate_number">1024</span>
+        </p>
+      </div>
+    </div>
+    <div>
+      <div class="title_center">
+        <div class="title_center_each" style="margin-left: 5px;">
+          <div style="display: flex; margin-top: 10px;">
+            <div style="">
+              <%= image_tag 'icon_each1.png' %>
+            </div>
+            <div>
+              <span class="text_title_center" style="">保供企业</span>
+              <span class="text_number_center">900</span>
+            </div>
+          </div>
+          <span class="text_date2">较上周</span>
+          <span class="text_data_number">12家</span>
+          <%= image_tag 'rate_up.png', style: 'margin-top: -5px;' %>
+          <span class="text_date2">较上月</span>
+          <span class="text_data_number_two">8家</span>
+          <%= image_tag 'rate_down.png', style:"margin-top: -5px;" %>
+        </div>
+        <div class="title_center_each" style="margin-left: 10px;">
+          <div style="display: flex; margin-top: 10px;">
+            <div style="">
+              <%= image_tag 'icon_each2.png' %>
+            </div>
+            <div>
+              <span class="text_title_center">全区重点商超</span>
+              <span class="text_number_center">234</span>
+            </div>
+          </div>
+          <span class="text_date2">较上周</span>
+          <span class="text_data_number">12家</span>
+          <%= image_tag 'rate_up.png', style: 'margin-top: -5px;' %>
+          <span class="text_date2">较上月</span>
+          <span class="text_data_number_two">8家</span>
+          <%= image_tag 'rate_down.png', style:"margin-top: -5px;" %>
+        </div>
+        <div class="title_center_each" style="margin-left: 10px;">
+          <div style="display: flex; margin-top: 10px;">
+            <div style="">
+              <%= image_tag 'icon_each3.png' %>
+            </div>
+            <div>
+              <span class="text_title_center">蔬菜交易市场监控</span>
+              <span class="text_number_center">234</span>
+            </div>
+          </div>
+          <span class="text_date2">较上周</span>
+          <span class="text_data_number">12家</span>
+          <%= image_tag 'rate_up.png', style: 'margin-top: -5px;' %>
+          <span class="text_date2">较上月</span>
+          <span class="text_data_number_two">8家</span>
+          <%= image_tag 'rate_down.png', style:"margin-top: -5px;" %>
+        </div>
+      </div>
+      <div class="div_bottom">
+        <%= image_tag 'center_bottom_background.png', style: 'width: 300px;position: absolute;' %>
+        <span class="bottom_center_title">新疆新联农产品有限公司001号储备仓</span>
+        <div class="bottom_center_content" style="font-size: 15px;">
+
+          <p class="bottom_center_content_text">物资名称：面粉</p>
+          <p class="bottom_center_content_text">储备数量：3000吨</p>
+          <p class="bottom_center_content_text">联系人：周利民</p>
+
+          <p class="bottom_center_content_text">联系电话：13682509276</p>
+
+          <p class="bottom_center_content_text">企业类型：生产加工企业</p>
+
+          <%= image_tag 'link_to.png', style: 'margin-left: 30px; margin-top: 10px;width: 200px;' %>
+          <span class="link_to_text"><%= link_to '点击查看物资报表', @material_reserf, style: 'color: #01c2ff; text-decoration:none;' %></span>
+        </div>
+        <%= image_tag 'map_icon_list.png', class: 'map_icon1' %>
+
+      </div>
+    </div>
+    <div class="div_some" style="margin-top: 0px;">
+      <div class="left_list">
+        <div class="left_list_title">
+          <em>库存情况</em>
+        </div>
+        <div class="div_data">
+          <div style="padding-top: 10px;">
+            <span class="text_title" style="margin-left: 10px;">销售量监控</span>
+            <br/>
+            <span class="text_number">28<span>个品类</span></span>
+          </div>
+          <div class="data_date_div">
+            <span class="text_date">较上周</span>
+            <span class="text_data_number">12家</span>
+            <%= image_tag 'rate_up.png', style: 'margin-top: -5px;' %>
+            <br/>
+            <span class="text_date">较上月</span>
+            <span class="text_data_number_two">8家</span>
+            <%= image_tag 'rate_down.png', style:"margin-top: -5px;" %>
+          </div>
+        </div>
+
+        <div class="div_data_list">
+          <div class="list_danger">
+            <%= image_tag 'danger.png', style: 'margin: 20px;' %>
+            <br/>
+            <span class="list_danger_title">17种商品中</span>
+            <br/>
+            <span class="text_danger_number">2<span class="text_danger">个品类预警</span></span>
+            <br/>
+            <span class="text_date">较上周</span>
+            <span class="text_data_number">12家</span>
+            <%= image_tag 'rate_up.png', style: 'margin-top: -5px;' %>
+            <br/>
+            <span class="text_date">较上月</span>
+            <span class="text_data_number_two">8家</span>
+            <%= image_tag 'rate_down.png', style:"margin-top: -5px;" %>
+          </div>
+          <div class="list_danger" style="margin-left: 10px">
+            <%= image_tag 'warn.png', style: 'margin: 20px;' %>
+            <br/>
+            <span class="list_warn_title">17种商品中</span>
+            <br/>
+            <span class="text_warn_number">2<span class="text_warn">个品类不足</span></span>
+            <br/>
+            <span class="text_date">较上周</span>
+            <span class="text_data_number">12家</span>
+            <%= image_tag 'rate_up.png', style: 'margin-top: -5px;' %>
+            <br/>
+            <span class="text_date">较上月</span>
+            <span class="text_data_number_two">8家</span>
+            <%= image_tag 'rate_down.png', style:"margin-top: -5px;" %>
+          </div>
+        </div>
+
+        <div>
+          <%= image_tag 'charts.png', style: 'margin: 20px;' %>
+          <div style="margin-top: -10px;">
+            <span class="charts_text_warn">预警</span>
+            <span class="charts_text_simple">充足</span>
+            <span class="charts_text_danger">不足</span></br>
+            <span class="charts_text_bottom">牛奶库存</span>
+            <span class="charts_text_bottom">蔬菜库存</span>
+            <span class="charts_text_bottom" style="margin-left: 15px;">方便面库存</span>
+          </div>
+          <%= image_tag 'charts.png', style: 'margin: 20px;' %>
+          <div style="margin-top: -10px;">
+            <span class="charts_text_warn">预警</span>
+            <span class="charts_text_simple">充足</span>
+            <span class="charts_text_danger">不足</span></br>
+            <span class="charts_text_bottom">牛奶库存</span>
+            <span class="charts_text_bottom">蔬菜库存</span>
+            <span class="charts_text_bottom" style="margin-left: 15px;">方便面库存</span>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>
+</div>
+

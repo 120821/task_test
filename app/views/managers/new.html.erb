@@ -1,0 +1,158 @@
+<div style="position: absolute;background: #fff; width: 1192px;">
+
+  <div class="new_enterprise_title">创建账号</div>
+  <div style="height: 80px;"></div>
+  <%#= form_for @manager do |f| %>
+  <%= form_for @manager, url: create_one_managers_path, method: :post do |f| %>
+    <div class= "table_div">
+      <table class='table_new_material' style="">
+        <tr>
+          <th class="table_name">
+            <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+              <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+            </svg>&nbsp;&nbsp;
+            邮箱：</th>
+          <td>
+            <%= f.email_field :email, class: 'form-control', placeholder: 'xinlian@email.com', required: true %>
+          </td>
+        </tr>
+        <tr>
+          <th class="table_name">
+            <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+              <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+            </svg>&nbsp;&nbsp;
+            密码：</th>
+          <td>
+            <%= f.password_field :password, class: 'form-control', placeholder: '请输入密码', required: true %>
+          </td>
+        </tr>
+        <tr>
+          <th class="table_name">
+            <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+              <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+            </svg>&nbsp;&nbsp;
+            确认密码：</th>
+          <td>
+            <%= f.password_field :password_confirmation, class: 'form-control', placeholder: '请确认密码', required: true %>
+          </td>
+        </tr>
+        <tr>
+          <th class="table_name">
+            <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+              <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+            </svg>&nbsp;&nbsp;
+            拥有者：</th>
+          <td>
+            <%= f.text_field :owner, class: 'form-control', placeholder: '拥有者', required: true %>
+          </td>
+        </tr>
+        <tr>
+          <th class="table_name">
+            <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+              <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+            </svg>&nbsp;&nbsp;
+            姓名或备注：</th>
+          <td>
+            <%= f.text_field :name, class: 'form-control', placeholder: '姓名或备注', required: true %>
+          </td>
+        </tr>
+        <tr>
+          <th class="table_name">
+            <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+              <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+            </svg>&nbsp;&nbsp;
+            角色：</th>
+          <td>
+            <%= f.text_field :category, class: 'form-control', placeholder: '角色', required: true %>
+            <%= f.hidden_field :region_id, class: 'form-control', placeholder: '地州', required: true, value: 1 %>
+          </td>
+        </tr>
+        <tr>
+          <th class="table_name">
+            <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+              <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+            </svg>&nbsp;&nbsp;
+            状态：</th>
+          <td>
+            <%= f.select :status, options_for_select([['启用', true], ['禁用', false]], selected: true), {}, class: 'form-control', required: true %>
+          </td>
+        </tr>
+      </table>
+      <div style="margin-bottom: 200px; margion: 0 auto; margin-top: 60px;">
+        <%= link_to '返回', managers_path, class: 'btn btn-light', style: 'width: 200px; margin-left: 100px;border: 1px solid #0d6efd;' %>
+        <%= f.submit "确定", class: 'btn btn-primary', style: 'width: 200px;; margin-right: 50px;margin-left: 150px;' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<style>
+.upload-box {
+  width: 200px;
+  height: 100px;
+  position: relative;
+  border: 1px dashed #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  text-align: center;
+}
+.upload-box:hover {
+  background-color: #f9f9f9;
+}
+.upload-box span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: #ccc;
+}
+.table_div{
+  margin: 0 200px;
+}
+.table_name {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.9);
+  line-height: 22px;
+  margin-right: 10px;
+}
+.table_new_material{
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  margin-left: 100px;
+  text-align: right;
+
+}
+.form_new_control{
+  width: 200px;
+  margin-left: 10px;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: var(--bs-border-radius);
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+</style>
+
+<style>
+.new_enterprise_title {
+  font-size: 22px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  height: auto;
+  color: #1D2129;
+  margin-left: 38px;
+  margin-top: 40px;
+  line-height: 30px;
+  position: absolute;
+}
+</style>

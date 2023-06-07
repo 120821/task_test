@@ -1,0 +1,218 @@
+<div style="background: white;width: 1192px; padding: 20px 0px 0 24px; height: auto;
+     background: #FFFFFF; margin: 30px 0; opacity: 1;">
+  <p style="margin: 20px;">
+    <svg xmlns="http://www.w3.org/2000/svg" color="#0066ff" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+      <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+    </svg>
+    <span style="margin-left: 10px;font-weight: 600; font-size: 18px;">企业审批<span>
+  </p>
+  <%= form_tag '', method: :get do %>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;企业分类:&nbsp;&nbsp; <%= select_tag :enterprise_category, options_for_select(@categories, params[:enterprise_category]), class: 'select_enterprise', style: 'margin-left: 10px;' %>
+
+    <span class="query_submissions" style="margin-left: 6px;">&nbsp;&nbsp;&nbsp;&nbsp;企业名称:&nbsp;&nbsp;&nbsp;&nbsp; <%= text_field_tag :enterprise_name, params[:enterprise_name], placeholder: '请输入企业名称', class: 'select_region', style: 'width: 200px;' %></span>
+    &nbsp;&nbsp;&nbsp;&nbsp;<%= submit_tag "查询", class: "form_submit", class: 'btn btn-primary btn-sm fa-input' %>
+  <% end %>
+  <%= link_to '新建', new_enterprise_path, class: 'btn btn-primary',style: 'width: 81px; height: 32px; background: #006DF1;font-size: 14px;
+              width: 80px; font-family: PingFangSC-Regular, PingFang SC; font-weight: 400; color: #FFFFFF; margin-top: 30px; line-height: 14px;' %>
+  <%= link_to '批量导入', upload_csv_page_enterprises_path, class: 'btn btn-light', style: 'width: 88px; height: 32px; background: #FFFFFF; border-radius: 3px; border: 1px solid #DCDCDC;color: block;font-size: 14px;
+              font-family: PingFangSC-Regular, PingFang SC; font-weight: 400; margin-top: 30px; margin-left: 10px; color: rgba(0,0,0,0.9); line-height: 14px; ' %>
+  <%= link_to '下载', download_csv_enterprises_path, class: 'btn btn-light', style: 'width: 88px; height: 32px; background: #FFFFFF; border-radius: 3px; border: 1px solid #DCDCDC;color: block;font-size: 14px;
+              font-family: PingFangSC-Regular, PingFang SC; float: right; margin-right: 120px; font-weight: 400; margin-top: 30px; margin-left: 10px; color: rgba(0,0,0,0.9); line-height: 14px; ' %>
+  <div style="margin-top: 30px; margin-right: 20px;">
+    <table class='table' style='border-left: 1px solid #dcdcdc;
+    border: 1px solid #dcdcdc;
+    border-right: 1px solid #dcdcdc;
+    background: snow;'>
+      <tr class="table_title" class="">
+        <td class="table_td_title" style="color: snow;">
+          <span class="table_td_title" style="color: snow;">序号</span>
+        </td>
+        <td class="table_td_title"  style="color: snow;">保供企业分类</td>
+        <td class="table_td_title"  style="color: snow;">保供企业名称</td>
+        <td class="table_td_title"  style="color: snow;">存储能力（吨)</td>
+        <td class="table_td_title"  style="color: snow;">有无分拣配送中心</td>
+        <td class="table_td_title"  style="margin-top: 16px; display: ;color: snow;">负责人姓名</td>
+        <td class="table_td_title"  style="margin-top: 16px; display: ;color: snow;">负责人手机号</td>
+        <td class="table_td_title"  style="color: snow; text-align: center;">操作</td>
+      </tr>
+      <% @enterprises.each do |enterprise| %>
+        <tr class="" class="border-bottom" style="border: 1px solid #dcdcdc;background: #ffffff87;">
+          <td class="table_text_submission"><%= enterprise.id %></td>
+          <td class="table_text_submission"><%= enterprise.enterprise_category %></td>
+          <td class="table_text_submission"><%= enterprise.name %></td>
+          <td class="table_text_submission"><%= enterprise.storage_capacity %></td>
+          <td class="table_text_submission"><%= enterprise.sorting_and_distribution ? '无' : '有' %></td>
+          <td class="table_text_submission"><%= enterprise.person_in_charge %></td>
+          <td class="table_text_submission"><%= enterprise.person_in_charge_tel %></td>
+          <td style="display: flex; justify-content: space-around;">
+            <%= link_to "查看", enterprise, style: 'text-decoration: none; margin-top: 2px;' %>
+            <%#= link_to '修改', edit_enterprise_path(enterprise), style: 'text-decoration: none;' %>
+            <%#= button_to '删除', enterprise, method: :delete, form: { data: { turbo_confirm: '确定删除?' } }, class: "btn btn-danger btn-sm" %>
+            <% if current_manager.category == '企业' %>
+              <%= enterprise.status %>
+            <% else %>
+              <%= button_to "通过", approve_enterprises_path(id: enterprise.id), style: "color: #0d6efd; background: transparent; border: 1px solid transparent;"  %>
+              <%= button_to "拒绝", reject_enterprises_path(id: enterprise.id), style: "color: red;text-decoration: none;background: transparent; border: 1px solid transparent;"  %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <div style="display: flex; float: right;">
+
+    <% start_index = @enterprises.offset_value + 1 %>
+    <% end_index = start_index + @enterprises.length - 1 %>
+
+    <p class="page_text">
+    <span> 第 <%= start_index %> - <%= end_index %> 条/总共 <%= @enterprises.total_count %> 条
+
+    <% if @enterprises.total_pages > 1 %>
+
+      <% first_page = [1, @enterprises.current_page - 3].max %>
+      <% last_page = [first_page + 6, @enterprises.total_pages].min %>
+      <% page_links = (first_page..last_page).map do |page|
+        if page == @enterprises.current_page
+          content_tag :span, page, class: 'current'
+        else
+          link_to page, { page: page }, class: 'page_link'
+        end
+      end %>
+      <%= content_tag :div, page_links.join.html_safe, class: 'paging_links', style: 'display: flex;' %>
+      <span class="page_text">
+        <%= form_tag '', method: :get do %>
+          &nbsp;&nbsp;<span class="page_text"><%#= @daily_goods_statistics.current_page %> 每页 <%= select_tag :per_page, options_for_select([10, 20, 50], params[:per_page]), onchange: "$('#filter_form').submit()" %> 条</span>
+          &nbsp;&nbsp;跳至:&nbsp;&nbsp; <%= text_field_tag :page, params[:page], class: 'page_skip', onchange: "$('#filter_form').submit()"%>&nbsp;&nbsp;页
+          &nbsp;&nbsp;<%= submit_tag "跳转", class: "page_skip", class: 'btn btn-primary btn-sm', style: 'width: 55px; font-size: 14px; height: 32px; background: #006DF1; opacity: 1; margin-right: 20px;' %>
+      <% end %>
+      </span>
+    <% end %>
+    </span>
+    </p>
+  </div>
+
+  <div style="height: 200px;"></div>
+</div>
+<style>
+.code {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.list {
+  background: #f8f9fa;
+  padding: 10px;
+}
+.each-row {
+  border-radius: 5px;
+  margin: 50px 180px;
+  background: white;
+  padding: 10px;
+}
+.input_enterprise {
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: var(--bs-border-radius);
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  border: 1px solid blue;
+  width: 300px;
+}
+.input_tel {
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: var(--bs-border-radius);
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  border: 1px solid blue;
+  width: 200px;
+}
+.current {
+  background: #2381f3;
+  color: white;
+  border: 1px solid blue;
+  border: 1px solid #1890FF;
+  width: 32px;
+  height: 32px;
+  border-radius: 2px 2px 2px 2px;
+  opacity: 1;
+  display: block;
+  text-align: center;
+  line-height: 32px;
+  font-weight: 400;
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+.page_link {
+  margin: 0 8px;
+  width: 32px;
+  height: 32px;
+  background: #FFFFFF;
+  border-radius: 2px 2px 2px 2px;
+  opacity: 1;
+  border: 1px solid rgba(0,0,0,0.15);
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  line-height: 32px;
+  font-size: 14px;
+  color: #000000;
+  font-weight: 400;
+}
+
+
+.page_text{
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  line-height: 32px;
+}
+
+.page_skip{
+  width: 48px;
+  height: 32px;
+  line-height: 28px;
+  background: #FFFFFF;
+  border-radius: 2px 2px 2px 2px;
+  opacity: 1;
+  border: 1px solid rgba(0,0,0,0.15);
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  line-height: 22px;
+}
+.select_enterprise {
+  width: 148px;
+  height: 32px;
+  background: #FFFFFF;
+  border-radius: 3px 3px 3px 3px;
+  opacity: 1;
+  border: 1px solid #DCDCDC;
+}
+
+.select_region {
+  height: 32px;
+  background: #FFFFFF;
+  border-radius: 3px 3px 3px 3px;
+  opacity: 1;
+  margin-left: 12px;
+  border: 1px solid #DCDCDC;
+}
+</style>

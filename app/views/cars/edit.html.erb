@@ -1,0 +1,140 @@
+<div style="position: absolute;background: #fff; width: 1192px;">
+
+  <div class="new_enterprise_title">修改车辆信息</div>
+  <div style="height: 80px;"></div>
+
+    <%#= render 'form', car: @car %>
+    <%= form_with(model: @car) do |form| %>
+      <div class= "table_div">
+        <table class='table_new_car' style="">
+          <tr>
+            <th class="table_name">
+              企业名称&nbsp;&nbsp;&nbsp;&nbsp;
+            </th>
+            <td>
+              <%= form.select :enterprise_id, options_from_collection_for_select(current_manager.enterprises.all, :id, :name), {}, class:'form-control' %>
+            </td>
+          </tr>
+          <tr>
+            <th class="table_name">
+              所属门店&nbsp;&nbsp;&nbsp;&nbsp;
+            </th>
+            <td>
+              <%= form.select :material_reserf_id, options_from_collection_for_select(current_manager.material_reserves.all, :id, :warehouse_location), {}, class:'form-control' %>
+            </td>
+          </tr>
+          <tr>
+            <th class="table_name">
+              <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+                <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+              </svg>&nbsp;&nbsp;
+              车牌号&nbsp;&nbsp;&nbsp;&nbsp;
+            </th>
+            <td>
+              <%= form.text_field :car_number, class: 'form-control', placeholder: '新A13572' %>
+            </td>
+          </tr>
+          <tr>
+            <th class="table_name">
+              <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+                <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+              </svg>&nbsp;&nbsp;
+              车辆载货重量&nbsp;&nbsp;&nbsp;&nbsp;
+            </th>
+            <td>
+              <%= form.text_field :weight, class: 'form-control', placeholder: '10吨' %>
+            </td>
+          </tr>
+          <tr>
+            <th class="table_name">
+              <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+                <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+              </svg>&nbsp;&nbsp;
+              司机姓名&nbsp;&nbsp;&nbsp;&nbsp;
+            </th>
+            <td>
+              <%= form.text_field :driver_name, placeholder: '李友天', class: 'form-control' %>
+            </td>
+          </tr>
+          <tr>
+            <th class="table_name">
+              <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+                <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+              </svg>&nbsp;&nbsp;
+              司机手机号码&nbsp;&nbsp;&nbsp;&nbsp;
+            </th>
+            <td>
+              <%= form.text_field :driver_tel, class: 'form-control', placeholder: '13320208888' %>
+            </td>
+          </tr>
+          <tr>
+            <th class="table_name">
+              <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+                <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+              </svg>&nbsp;&nbsp;
+              司机身份证号码&nbsp;&nbsp;&nbsp;&nbsp;
+            </th>
+            <td>
+              <%= form.text_field :driver_id_card_number, class: 'form-control', placeholder: '330334199002033333' %>
+            </td>
+          </tr>
+          <tr>
+            <th class="table_name">
+              <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+                <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+              </svg>&nbsp;&nbsp;
+              家庭住址&nbsp;&nbsp;&nbsp;&nbsp;
+            </th>
+            <td>
+              <%= form.text_field :driver_address, class: 'form-control', placeholder: '乌鲁木齐市天山区中山路479号' %>
+            </td>
+          </tr>
+          <!--
+          <tr>
+            <th style="text-align: right;">
+              联系电话
+            </th>
+            <td>
+              <%= form.text_field :driver_tel, class: 'form-control', placeholder: '15588888888 ' %>
+            </td>
+          </tr>
+          -->
+        </table>
+        <div style="margin-bottom: 200px; margin-top: 30px;">
+          <%= link_to '返回', cars_path, class: 'btn btn-primary', style: 'width: 150px; margin-left:100px;' %>
+          <%= form.submit "确定", class: 'btn btn-primary', style: 'width: 150px; margin-right: 50px; margin-left: 200px;'%>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<style>
+.table_div{
+  margin: 0 200px;
+}
+.table_name {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.9);
+  line-height: 22px;
+  margin-right: 10px;
+}
+.table_new_car {
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  margin-left: 150px;
+  text-align: right;
+
+}
+.new_enterprise_title {
+  font-size: 22px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #1D2129;
+  margin-left: 38px;
+  margin-top: 40px;
+  line-height: 30px;
+  position: absolute;
+}
+</style>

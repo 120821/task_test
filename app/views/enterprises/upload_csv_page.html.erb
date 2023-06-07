@@ -1,0 +1,16 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h4 class="modal-title" style="float: left;">导入CSV</h4>
+    <span style="margin-left: 50px; line-height: 200%; height: 200%">
+      点击下载：<a href="<%= asset_path '企业审批批量创建示例文件.csv' %>">企业审批上传csv示例</a>
+    </span>
+  </div>
+  <div class="modal-body">
+    <%= form_tag upload_csv_enterprises_path, multipart: true do %>
+      <span>
+        导入文件：<%= file_field_tag :file %>
+        <%= submit_tag raw('导入CSV'), class: "form_submit", class: 'btn btn-primary btn-sm fa-input' %>
+      </span>
+    <% end %>
+  </div>
+</div>

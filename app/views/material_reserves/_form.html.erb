@@ -1,0 +1,327 @@
+<%= form_with(model: material_reserf) do |form| %>
+  <div class= "table_div">
+    <table class='table_new_material' style="">
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          物资储备量
+        </th>
+        <td><%= form.text_field :storage_apacity, class: 'form-control', placeholder: '2000吨', style: 'width: 775px;margin-left:10px;' %></td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          分拣配送中心
+        </th>
+        <td><%= form.select :sorting_and_distribution, options_for_select([["有", true], ["无", false]]), {}, class: 'form-control', placeholder: '2000吨', style: 'width: 775px;margin-left: 10px;' %></td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          仓库地址1</th>
+        <td>
+          <%= form.text_field :warehouse_location, class: 'form-control', placeholder: '东村冷库', style: 'width: 775px;margin-left: 10px;' %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          经纬度</th>
+        <td>
+          <%= form.text_field :longitude, class: 'form_new_control', placeholder: '经度', style: 'width: 380px; margin-left: 10px;' %>
+          <%= form.text_field :latitude, class: 'form_new_control', placeholder: '纬度', style: 'width: 370px; margin-left: 20px;' %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          仓库地址2</th>
+        <td>
+          <%= form.text_field :warehouse_location_two, class: 'form-control', placeholder: '东村冷库', style: 'width: 775px;margin-left: 10px;' %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          经纬度</th>
+        <td>
+          <%= form.text_field :longitude_two, class: 'form_new_control', placeholder: '经度', style: 'width: 380px; margin-left: 10px;' %>
+          <%= form.text_field :latitude_two, class: 'form_new_control', placeholder: '纬度', style: 'width: 370px; margin-left: 20px;' %>
+        </td>
+      </tr>
+      <tr>
+        <th  class="table_name" style="width: 200px;">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          负责人</th>
+        <td>
+          <%= form.text_field :person_in_charge, class: 'form-control', placeholder: '李华', style: 'width: 775px;margin-left: 10px;' %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          联系电话</th>
+        <td>
+          <%= form.text_field :tel, class: 'form-control', placeholder: '15588888888', style: 'width: 775px;margin-left: 10px;' %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table_name" style="width: 200px;">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          所属地州</th>
+        <td>
+          <%= form.select :region, options_for_select(REGIONS), {}, class: 'form-control', style: 'width: 775px;margin-left: 10px;' %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          企业名称</th>
+        <td>
+          <%= form.select :enterprise_id, options_from_collection_for_select(current_manager.enterprises.all, :id, :name), {}, class:'form-control', style: 'width: 775px;margin-left: 10px;' %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          企业分类</th>
+        <td><%= form.text_field :enterprise_category, class: 'form-control', placeholder: '批发市场', style: 'width: 775px;margin-left: 10px;' %></td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          物资分类</th>
+        <td><%= form.text_field :goods_type, class: 'form-control', placeholder: '大米', style: 'width: 775px;margin-left: 10px;' %></td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          仓库所在城市</th>
+        <td>
+          <%= form.text_field :city, class: 'form-control', placeholder: '乌鲁木齐', style: 'width: 775px;margin-left: 10px;' %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          最大储备容量</th>
+        <td>
+          <%= form.text_field :max_store, class: 'form-control', placeholder: '2000吨', style: 'width: 775px;margin-left: 10px;' %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          仓库照片</th>
+        <td>
+        </td>
+      </tr>
+    </table>
+    <table class='table table-hover table-bordered table-striped'>
+
+      <div style="margin-top: -40px;">
+        <div class="box" style="width: 1025px;margin-left: 88px;">
+          <div class="column">
+            <div>
+              <div class="upload-box">
+                <label for="post_image">
+                  <span>+</span>
+                  <%= form.file_field :image_one, class: 'form-control', accept: ".jpg,.jpeg,.png,.gif", id: 'image_one' %>
+                  <% if @material_reserf.image_one? || params[:image_one].present? %>
+                    <%= link_to (image_tag @material_reserf.image_one.url, style: 'width: 200px; height: 200px;'), @material_reserf.image_one.url %>
+                  <% else %>
+                    <%= image_tag '仓库1.jpg', style: 'width: 200px; height: 160px;' %>
+                  <% end %>
+                </label>
+              </div>
+            </div>
+
+            <div>
+              <div class="upload-box">
+                <label for="post_image">
+                  <span>+</span>
+                  <%= form.file_field :image_two, class: 'form-control', accept: ".jpg,.jpeg,.jpg,.gif", id: 'image_two' %>
+                  <% if @material_reserf.image_two? || params[:image_two].present? %>
+                    <%= link_to (image_tag @material_reserf.image_two.url, style: 'width: 200px; height: 200px;'), @material_reserf.image_two.url %>
+                  <% else %>
+                    <%= image_tag '仓库2.jpg', style: 'width: 200px; height: 160px;' %>
+                  <% end %>
+                </label>
+              </div>
+            </div>
+            <div>
+              <div class="upload-box">
+                <label for="post_image">
+                  <span>+</span>
+                  <%= form.file_field :image_three, class: 'form-control', accept: ".jpg,.jpeg,.jpg,.gif", id: 'image_three' %>
+                  <% if @material_reserf.image_three? || params[:image_three].present? %>
+                    <%= link_to (image_tag @material_reserf.image_three.url, style: 'width: 200px; height: 200px;'), @material_reserf.image_three.url %>
+                  <% else %>
+                    <%= image_tag '仓库3.jpg', style: 'width: 200px; height: 160px;' %>
+                  <% end %>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="preview-container" style="display: flex; justify-content: flex-start; width: 1122px; margin-top: -150px; margin-left: 259px;">
+      </div>
+    </table>
+
+  </div>
+
+  <div>
+    <% if params[:number].present? %>
+      <%= link_to '返回', new_enterprise_path(number: 1), class: 'btn btn-light btn-sm', style: 'width: 88px; height: 38px; background: #FFFFFF; border-radius: 3px; border: 1px solid #DCDCDC; color: black; margin-left: 451px;'%>&nbsp;&nbsp;
+      <%= link_to '添加', new_material_reserf_path(name: 'new'), class: 'btn btn-primary', style: 'width: 88px; height: 38px; background: #FFFFFF; border-radius: 3px; border: 1px solid #DCDCDC; color: black;font-size: 14px;
+                   font-family: PingFangSC-Regular, PingFang SC; font-weight: 400; color: rgba(0,0,0,0.9); line-height: 22px;' %>&nbsp;&nbsp;
+      <%= form.submit "下一步", class: 'btn btn-primary', style: 'width: 150px; margin-right: 50px;width: 82px; height: 38px; background: #006DF1; border-radius: 2px;font-size: 14px;
+                      font-family: AppleSystemUIFont; color: #FFFFFF; line-height: 22px;' %>
+    <% else %>
+      <%= link_to '返回', enterprises_path, class: 'btn btn-light', style: 'width: 150px; margin-left: 300px;border: 1px solid #0d6efd;' %>
+      <%= form.submit "确定", class: 'btn btn-primary', style: 'width: 150px; margin-left: 150px;'%>
+    <% end %>
+  </div>
+
+<% end %>
+<style>
+.from{
+  margin: 0 180px;
+}
+.upload-box {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  border: 1px dashed #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  text-align: center;
+}
+.upload-box:hover {
+  background-color: #f9f9f9;
+}
+.upload-box span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: #ccc;
+}
+.table_div{
+  height: 1000px;
+}
+.table_name {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.9);
+  line-height: 22px;
+  margin-right: 10px;
+}
+.table_new_material{
+  margin-left: 56px;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  text-align: right;
+
+}
+.form_new_control{
+  width: 200px;
+  margin-left: 10px;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: var(--bs-border-radius);
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+#preview-images img {
+  max-width: 200px;
+  max-height: 200px;
+  margin-right: 5px;
+}
+#preview-container > img:nth-child(1) {
+ width: 200px;
+ margin-left: -98px;
+}
+
+#preview-container > img:nth-child(2) {
+ width: 200px;
+ margin-left: 135px;
+}
+
+#preview-container > img:nth-child(3) {
+  width: 200px;
+  margin-left: 145px;
+}
+
+</style>
+
+<script>
+  $(document).ready(function() {
+  // code to load images
+  function readURL(input, id) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#preview-container').append('<img id="' + id +'" src="' + e.target.result + '" />');
+      }
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $('#image_one').change(function() {
+    readURL(this, 'image_one');
+  });
+
+  $('#image_two').change(function() {
+    readURL(this, 'image_two');
+  });
+
+  $('#image_three').change(function() {
+    readURL(this, 'image_three');
+  });
+});
+</script>

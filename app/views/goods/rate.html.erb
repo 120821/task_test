@@ -1,0 +1,422 @@
+<script src="https://code.highcharts.com/highcharts.js"></script>
+
+<div class="rate_card_div"
+  style="width: 1192px; height: 215px; background: #FFFFFF; opacity: 1; padding-top: 18px;">
+  <span style="margin-left: 15px; font-size: 16px; font-weight: 500; color: #1D2129; line-height: 24px;">销售量监控</span>
+  <div class="card_div_store" style="justify-content: left;">
+    <div class="rate_card_blue">
+      <div class="">
+        <p class="every_card_rate"><span class="rate_number">17</span>个品类</p>
+        <p class="up_or_down"> 较上周 <span class="up_rate">12个品类
+          <%= image_tag 'rate_up.png', style: 'margin-top: -10px;' %>
+          </span> 较上月<span class="down_rate"> 1个品类</span>
+          <%= image_tag 'rate_down.png', style:"margin-top: -10px;" %>
+        </p>
+      </div>
+    </div>
+    <div class="rate_card_green">
+      <div>
+        <p class="every_card_rate"><span class="rate_number">7</span>个品类</p>
+        <p class="up_or_down"> 较昨日<span class="up_rate">销量增长2个百分点
+          <%= image_tag 'rate_up.png', style: 'margin-top: -10px;' %>
+        </span>
+        </p>
+      </div>
+    </div>
+    <div class="rate_card_light_blue">
+      <div>
+        <p class="every_card_rate"><span class="rate_number">9</span>个品类</p>
+        <p class="up_or_down"> 较昨日<span class="down_rate">销量下降5个百分点
+          <%= image_tag 'rate_down.png', style:"margin-top: -10px;" %>
+        </span> </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="rate_div_charts">
+  <span class="rate_chart_title">
+    <% if current_manager.category == '企业' %>
+      17个品类较昨日销量环比增（降）幅度
+    <% elsif current_manager.category == '管理员' %>
+      11个品类较昨日销量环比增（降）幅度
+    <% end %>
+  </span>
+  <%= form_tag '' do %>
+    <%= text_field_tag :daily_goods_date, params[:start_at], id: 'datepicker', placeholder: '开始日期时间', class: 'select_date', style: 'margin-top: 20px; margin-right: 20px;' %>
+    <%= text_field_tag :daily_goods_date, params[:end_at], id: 'newdatepicker', placeholder: '结束日期时间', class: 'select_date', style: 'margin-right: 15px;' %>
+    <%= submit_tag "查询", class: "form_submit", class: 'btn btn-primary' %>
+    <span><%= link_to '下载excel', dwonload_rate_csv_goods_url(date: 'day'), class: 'btn btn-primary', style: ' height: 35px; background: #006DF1; opacity: 1; margin-left: 420px; ' %>
+  <% end %>
+  <div class="chart_rate_day">
+      <span class="chart_rate_day_title">重点商品销量差额与增（降）幅环比</span>
+    <div id="container_day" style="margin-top: 20px;"></div>
+  </div>
+  <%= render 'table' %>
+</div>
+
+<div class="rate_div_charts">
+  <span class="rate_chart_title">
+    <% if current_manager.category == '企业' %>
+      17个品类较上周销售量增（降）幅
+    <% elsif current_manager.category == '管理员' %>
+      11个品类较上周销售量增（降）幅
+    <% end %>
+  </span>
+
+  <%= form_tag '' do %>
+    <%= text_field_tag :daily_goods_date, params[:start_at], id: 'datepicker_week', placeholder: '开始日期时间', class: 'select_date', style: 'margin-top: 20px; margin-right: 20px;' %>
+    <%= text_field_tag :daily_goods_date, params[:end_at], id: 'newdatepicker_week', placeholder: '结束日期时间', class: 'select_date', style: 'margin-right: 15px;' %>
+    <%= submit_tag "查询", class: "form_submit", class: 'btn btn-primary' %>
+
+    <span><%= link_to '下载excel', dwonload_rate_csv_goods_url(date: 'week'), class: 'btn btn-primary', style: ' height: 35px; background: #006DF1; opacity: 1; margin-left: 420px;' %>
+    </span>
+  <% end %>
+  <div class="chart_rate_day">
+    <span class="chart_rate_day_title">重点商品销量差额与增（降）幅周环比</span>
+    <div id="container_week"></div>
+  </div>
+  <%= render 'table' %>
+</div>
+
+<script>
+  $( function() {
+    $( "#newdatepicker" ).datepicker({dateFormat: "yy-mm-dd"});
+  } );
+  $( function() {
+    $( "#datepicker_week" ).datepicker({dateFormat: "yy-mm-dd"});
+  } );
+  $( function() {
+    $( "#newdatepicker_week" ).datepicker({dateFormat: "yy-mm-dd"});
+  } );
+</script>
+<style>
+.charts {
+  width: 1500px;
+  height: 500px;
+}
+
+  .box {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .column {
+    flex-basis: 100%;
+    display: flex;
+  }
+
+  .chart_rate {
+    margin: 0 80px;
+  }
+</style>
+<script>
+  Highcharts.chart('container_day_with_right_data', {
+      title: {
+          text: '销售数据'
+        },
+      xAxis: {
+          categories: ['鲜奶', '蔬菜', '方便面', '饮用水', '民用口罩', '消毒液', '洗涤用品', '香皂', '卫生巾', '厨具', '调味剂']
+        },
+      yAxis: [{
+          title: {
+              text: '销售量（吨）',
+              style: {
+                  color: '#165DFF' // 柱状数据3月4月销售量（吨）的颜色
+                }
+            },
+          labels: {
+              style: {
+                  color: '#165DFF'
+                }
+            }
+        }, {
+            title: {
+                text: '环比（增）降幅',
+                style: {
+                    color: '#BF47E1' // 折线数据环比（增）降幅的颜色
+                  }
+              },
+            labels: {
+                style: {
+                    color: '#BF47E1'
+                  }
+              },
+            opposite: true
+          }, {
+              title: {
+                  text: '环比销售量差额',
+                  style: {
+                      color: '#F7BA1E' // 折线数据环比销售量差额的颜色
+                    }
+                },
+              labels: {
+                  style: {
+                      color: '#F7BA1E'
+                    }
+                },
+              opposite: true
+            }],
+      series: [{
+          type: 'column',
+          name: '3月4日销售量（吨）',
+          color: '#165DFF',
+          data: [1090, 2100, 1500, 2500, 1705, 1250, 1980,1090,1600, 1070, 1120]
+        }, {
+            type: 'column',
+            name: '3月5日销售量（吨）',
+            color: '#14C9C9',
+            data: [50, 75, 100, 125, 75, 50, 35, 40, 25, 30, 60]
+          }, {
+              type: 'spline',
+              yAxis: 1,
+              name: '环比（增）降幅',
+              color: '#BF47E1',
+              data: [10, -20, 5, -15, 8, 12, -5, 3, -7, 6, -10]
+            }, {
+                type: 'spline',
+                yAxis: 2,
+                name: '环比销售量差额',
+                color: '#F7BA1E',
+                data: [5000, -10000, 2500, -7500, 4000, 6000, -2500, 1500, -3500, 3000, -5000]
+              }]
+    });
+</script>
+<script>
+  Highcharts.chart('container_week', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: null //'销售数据'
+    },
+    exporting: {
+      enabled: false // 设置为false表示禁用导出功能
+    },
+    xAxis: {
+        categories: ['鲜奶', '蔬菜', '方便面', '饮用水', '民用口罩', '消毒液', '洗涤用品', '香皂', '卫生巾', '厨具', '调味料'],
+        crosshair: true
+    },
+    yAxis: [{
+        title: {
+            text: '销售量（吨）'
+        }
+    }, {
+        title: {
+            text: '环比增降幅/销售量差额'
+        },
+        opposite: true
+    }],
+    tooltip: {
+        shared: true
+    },
+    plotOptions: {
+        column: {
+            stacking: 'normal'
+        }
+    },
+    series: [{
+        name: '3月4日销售量（吨）',
+        color: '#165DFF',
+        data: [50, 20, 30, 80, 50, 40, 60, 70, 55, 65, 45]
+    }, {
+        name: '3月5日销售量（吨）',
+        color: '#14C9C9',
+        data: [60, 30, 40, 90, 45, 50, 70, 80, 60, 40, 50]
+    }, {
+        type: 'line',
+        name: '环比增降幅',
+        color: '#BF47E1',
+        data: [5, 5.6, 6.52, 7.73, 6.06, 5.31, 4.05, 5.73, 6.87, 5, 6.2],
+        yAxis: 1
+    }, {
+        type: 'line',
+        name: '环比销售量差额',
+        color: '#F7BA1E',
+        data: [25, 24, 22, 25, 27, 25, 28, 23, 25, 22, 21],
+        yAxis: 1
+    }]
+});
+
+  Highcharts.chart('container_day', {
+  chart: {
+    type: 'column'
+  },
+  exporting: {
+    enabled: false // 设置为false表示禁用导出功能
+  },
+  title: {
+    text: null // 'Monthly Sales'
+  },
+  xAxis: {
+    categories: ['鲜奶', '蔬菜', '方便面', '饮用水', '民用口罩', '消毒液', '洗涤用品', '香皂', '卫生巾', '厨具', '调味料']
+  },
+  yAxis: {
+    title: {
+      text: 'Sales (tons)'
+    }
+  },
+  series: [{
+    name: '3月4日销售量（吨）',
+    color: '#165DFF',
+    data: [359133,	411063.2,	310366,	181875.11,	510051,	511360,	315530,	210847,	117803]
+  }, {
+    name: '3月5日销售量（吨）',
+    color: '#14C9C9',
+    data: [155001, 517880.12, 345079, 210448.36, 627100, 311425, 	413172,  301110, 	227651]
+  }, {
+    type: 'line',
+    name: '环比（增）降幅',
+    color: '#BF47E1',
+    data: [-1666.99, 12223.6, 155525.52, 17774.73, -11311.06, -3333.31, 23333.05, 50555.73, 27778.87]
+  }, {
+    type: 'line',
+    name: '环比销售量差额',
+    color: '#F7BA1E',
+    data: [-14132,	14441.92,	41713,	11573.25,	77833,	-11711.00,	81199,	16833,	49621]
+  }]
+});
+</script>
+<style>
+.rate_card_blue {
+  width: 370px;
+  height: 134px;
+  background: linear-gradient(180deg, #F2F9FE 0%, #E6F4FE 100%);
+  border-radius: 4px 4px 4px 4px;
+  opacity: 1;
+  margin-left: 19px;
+
+}
+.rate_card_green {
+  width: 370px;
+  height: 136px;
+  background: linear-gradient(180deg, #F5FEF2 0%, #E6FEEE 100%);
+  border-radius: 4px 4px 4px 4px;
+  opacity: 1;
+  margin-left: 17px;
+
+}
+.rate_card_light_blue {
+  width: 370px;
+  height: 136px;
+  background: linear-gradient(180deg, #F2F9FE 0%, #E6F4FE 100%);
+  border-radius: 4px 4px 4px 4px;
+  margin-left: 17px;
+  opacity: 1;
+
+}
+.rate_number {
+  font-size: 30px;
+  font-weight: 700;
+  color: #1D2129;
+  line-height: 38px;
+  margin-right: 8px;
+}
+.every_card_rate {
+  font-size: 12px;
+  font-weight: 400;
+  color: #4E5969;
+  line-height: 24px;
+  margin-left: 23px;
+  margin-top: 29px;
+}
+.up_or_down {
+  font-size: 12px;
+  font-weight: 400;
+  color: #4E5969;
+  line-height: 20px;
+  margin-left: 23px;
+}
+.up_rate{
+  font-size: 14px;
+  font-weight: 400;
+  color: #F53F3F;
+  line-height: 20px;
+  margin-left: 6px;
+  margin-right: 18px;
+}
+.down_rate{
+  font-size: 14px;
+  margin-left: 6px;
+  font-weight: 400;
+  color: #00B42A;
+  line-height: 20px;
+}
+.rate_div_charts {
+  width: 1192px;
+  height: 837px;
+  margin-top: 16px;
+  background: #FFFFFF;
+  opacity: 1;
+  padding: 20px;
+
+
+}
+
+.rate_chart_title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1D2129;
+  line-height: 24px;
+}
+.chart_rate_day{
+  width: 1158px;
+  background: #FFFFFF;
+  border-radius: 12px 12px 12px 12px;
+  opacity: 1;
+  padding: 20px;
+}
+.chart_rate_day_title {
+  font-size: 20px;
+  font-weight: 500;
+  color: #1D2129;
+  line-height: 28px;
+}
+
+
+.color_table {
+  width: 55px;
+  height: 20px;
+  background: #165DFF;
+  border-radius: 0px 0px 0px 0px;
+  opacity: 1;
+  margin-right: 20px;
+  margin-left: 18px;
+
+}
+.rate_up_or_down_png{
+  width: 55px;
+  height: 20px;
+  border-radius: 0px 0px 0px 0px;
+  opacity: 1;
+  margin-right: 20px;
+  margin-left: 18px;
+
+}
+.td_name{
+  font-size: 14px;
+  font-weight: 400;
+  color: #1D2129;
+  line-height: 22px;
+}
+.td_data {
+  font-size: 14px;
+  font-weight: 400;
+  color: #666666;
+}
+.th_name{
+  font-size: 14px;
+  font-weight: 500;
+  color: #1D2129;
+  line-height: 22px;
+}
+.select_date {
+  height: 32px;
+  background: #FFFFFF;
+  border-radius: 3px 3px 3px 3px;
+  opacity: 1;
+  border: 1px solid #DCDCDC;
+}
+}
+</style>
+
+

@@ -1,0 +1,121 @@
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<div class="card_div">
+  <div class="card_index">
+    <p class="every_card">全区重点商超</p>
+    <span class="data_index">268<span class="data_unit" style="margin-left: 6px;">家</span></span>
+    <p class="data_time">
+      较上周<span style="margin-left: 6px; color: #d84644;">12家</span>
+      <%= image_tag 'rate_up.png', style: 'margin-top: -10px;' %>
+      <span style="margin-left: 47px;">较上月</span>
+      <span class="" style="margin-left: 6px; color: #5fb136;">8家</span>
+      <%= image_tag 'rate_down.png', style:"margin-top: -10px;" %>
+    <p>
+  </div>
+  <div class="card_index">
+    <p class="every_card">开展营业</p>
+    <p class="data_index">300<span class="data_unit" style="margin-left: 6px;">万元</span></p>
+    <p class="data_time">较昨日<span class="data_up" style="margin-left: 6px;color: #d84644;">12家</span>
+      <%= image_tag 'rate_up.png', style: 'margin-top: -10px;' %>
+      <span style="margin-left: 47px;">较上周</span><span class="data_down" style="margin-left: 6px;color: #5fb136;">2家</span>
+      <%= image_tag 'rate_down.png', style: 'margin-top: -10px;' %>
+    <p>
+  </div>
+  <div class="card_index">
+    <p class="every_card">未开展营业</p>
+    <p class="data_index">300<span class="data_unit" style="margin-left: 6px;">家</span>
+    </p>
+    <p class="data_time">较昨日<span class="data_up" style="margin-left: 6px;color: #d84644;">12家</span>
+      <%= image_tag 'rate_up.png', style: 'margin-top: -10px;' %>
+    <span style="margin-left: 47px;">较上周</span><span class="data_down" style='margin-left: 6px;color: #5fb136'>2家</span>
+      <%= image_tag 'rate_down.png', style: 'margin-top: -10px;' %>
+    <p>
+  </div>
+</div>
+<div class="card_div_store">
+  <div class="card_store">
+    <div class="picture_danger">
+    </div>
+    <div class="data_danger">
+      <span class="every_card_store">在17种商品中</span></br>
+      <span class="data_index_store_danger">品类预警<span class="store_number">2</span><span class="data_unit" style="margin-left: 6px;color: #5fb136;">个</span></span>
+    </div>
+  </div>
+  <div class="card_store2">
+    <div class="picture_warn">
+    </div>
+    <div>
+      <span class="every_card_store">在17种商品中</span></br>
+      <span class="data_index_store_warn">品类不足<span class="store_number">6</span><span class="data_unit">个</span></span>
+    </div>
+  </div>
+  <div class="card_store3">
+    <div class="picture_primary">
+    </div>
+    <div>
+      <span class="every_card_store">在17种商品中</span><br/>
+      <span class="data_index_store_primary">品类充足<span class="store_number">11</span><span class="data_unit">个</span></span>
+    </div>
+  </div>
+</div>
+
+<%= render 'store' %>
+<!--
+
+<div class="cicle_charts_div_store" style="padding: 20px;">
+  <p style="width: 80px; height: 24px; margin-left: 20px; font-size: 16px; font-weight: 500; color: #1D2129; line-height: 24px;">物资预警图</p>
+  <%#= render 'warn_chart' %>
+  <%#= render 'warn_chart_bottom' %>
+</div>
+-->
+<style>
+.store_number {
+  font-size: 30px;
+  font-weight: 700;
+  color: #1D2129;
+  margin-left: 23px;
+  font-weight: 700;
+  color: #1D2129;
+  margin-right: 8px;
+  margin-top: 9px;
+}
+  .links-container {
+    display: flex;
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(0,0,0,0.65);
+    line-height: 17px;
+    text-align: center;
+    line-height: 32px;
+    color: rgba(0,0,0,0.65);
+    text-decoration: none;
+  }
+
+  .links-container a {
+    width: 68px;
+    height: 32px;
+    background: #FFFFFF;
+    border-radius: 2px 0px 0px 2px;
+    opacity: 1;
+    border: 1px solid #D9D9D9;
+
+  }
+
+  .links_active{
+    color: #006DF1;
+    opacity: 1;
+    border: 1px solid #006DF1;
+  }
+  .links-container a.active,
+/*.links-container a:hover */
+  {
+    color: blue;
+    opacity: 1;
+    border: 1px solid #006DF1;
+
+  }
+
+  select {
+  color: red; /* 定义选中选项文字颜色为红色 */
+  background-color: #eee; /* 定义背景颜色为浅灰色 */
+}
+</style>

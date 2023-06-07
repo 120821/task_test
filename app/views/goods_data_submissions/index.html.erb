@@ -1,0 +1,499 @@
+<div class="card_div">
+  <div class="card_index">
+    <p class="every_card">监测企业</p>
+    <span class="data_index">228<span class="data_unit" style="margin-left: 6px;">家</span></span>
+    <p class="data_time">较上周
+      <span class="data_up">+1
+      <%= image_tag 'rate_up.png', style: 'margin-top: -10px;' %>
+      </span>
+      <span style="margin-left: 47px;">较上月</span>
+      <span class="data_down">-2
+        <%= image_tag 'rate_down.png', style:"margin-top: -10px;" %>
+      </span>
+    </p>
+  </div>
+  <div class="card_index">
+    <p class="every_card">已报送企业</p>
+    <p class="data_index">212<span class="data_unit" style="margin-left: 6px;">家</span></p>
+    <p class="data_time">较昨日<span class="data_up">+1
+      <%= image_tag 'rate_up.png', style: 'margin-top: -10px;' %>
+      </span>
+      <span style="margin-left: 47px;">较上周</span>
+      <span class="data_down">-2
+        <%= image_tag 'rate_down.png', style:"margin-top: -10px;" %>
+      </span>
+    </p>
+  </div>
+  <div class="card_index">
+    <p class="every_card">未报送企业</p>
+    <p class="data_index">16<span class="data_unit" style="margin-left: 6px;">家</span></p>
+    <p class="data_time">较昨日<span class="data_up">+5
+      <%= image_tag 'rate_up.png', style: 'margin-top: -10px;' %>
+      </span>
+      <span style="margin-left: 47px;">较上周</span>
+      <span class="data_down">-3
+        <%= image_tag 'rate_down.png', style:"margin-top: -10px;" %>
+      </span>
+    </p>
+  </div>
+</div>
+
+<div class="form_query">
+  <p class="form_title">物资数据报送</p>
+  <%= form_tag '', method: :get do %>
+    <p class="form_row">
+      <span class="query_submissions" >&nbsp;&nbsp;&nbsp;&nbsp;地州:&nbsp;&nbsp;&nbsp;&nbsp; <%= select_tag :region, options_for_select(@regions, params[:region]), class: 'select_region', style: 'width: 200px;' %></span>
+      <span class="query_submissions">&nbsp;&nbsp;&nbsp;&nbsp;企业类型:&nbsp;&nbsp;&nbsp;&nbsp; <%= select_tag :enterprise_category, options_for_select(@categories, params[:enterprise_category]), class: 'select_region', style: 'width: 200px;' %></span>
+      <span class="query_submissions" style="margin-left: 6px;">&nbsp;&nbsp;&nbsp;&nbsp;企业名称:&nbsp;&nbsp;&nbsp;&nbsp; <%= text_field_tag :enterprise_name, params[:enterprise_name], placeholder: '企业名称查询', class: 'select_region', style: 'width: 200px;' %></span>
+      &nbsp;&nbsp;&nbsp;&nbsp;<%= submit_tag "查询", class: "form_submit", class: 'btn btn-primary', style: 'width: 65px; font-size: 14px; height: 32px; background: #006DF1; opacity: 1' %>
+    </p>
+  <% end %>
+  <p class="links_status">
+  <% if params[:report_status_today] == 'false' %>
+    <%= link_to '全部', goods_data_submissions_path %>
+    <%= link_to '未报送', goods_data_submissions_path(report_status_today: false), class: 'active-link', style: 'margin-left: 26px;' %>
+    <%= link_to '已报送', goods_data_submissions_path(report_status_today: true), style: 'margin-left: 26px;'  %>
+  <% elsif params[:report_status_today] == 'true' %>
+    <%= link_to '全部', goods_data_submissions_path %>
+    <%= link_to '未报送', goods_data_submissions_path(report_status_today: false), style: 'margin-left: 26px;'  %>
+    <%= link_to '已报送', goods_data_submissions_path(report_status_today: true), class: 'active-link', style: 'margin-left: 26px;' %>
+  <% else %>
+    <%= link_to '全部', goods_data_submissions_path, class: 'active-link' %>
+    <%= link_to '未报送', goods_data_submissions_path(report_status_today: false), style: 'margin-left: 26px;' %>
+    <%= link_to '已报送', goods_data_submissions_path(report_status_today: true), style: 'margin-left: 26px;'%>
+  <% end %>
+  </p>
+</div>
+
+<h5>
+</h5>
+<br/>
+  <% if current_manager.category == '企业' %>
+    <span style="float: left;"><%= link_to '新建', new_goods_data_submission_path, class: 'btn btn-primary btn-sm', style: 'text-decoration: none; width: 80px; margin: 20px; margin-left: 40px;' %></span>
+    <span><%= button_to '一键报送', all_update_status_goods_data_submissions_path, form: { data: { turbo_confirm: '确定一键催报送？' } }, class: "btn btn-info", class: 'button_all_submission' %></span>
+  <% else %>
+    <span><%= button_to '一键催报送', '#', form: { data: { turbo_confirm: '确定一键催报送？' } }, class: "btn btn-info", class: 'button_all_submission' %></span>
+  <% end %>
+<div class="list" style="background: #ffffff">
+  <div class="table_div">
+    <table class='table' style='border-left: 1px solid #dcdcdc;
+            border: 1px solid #dcdcdc;
+            border-right: 1px solid #dcdcdc;
+            background: snow;'>
+      <tr class="table_title" class="table_dashed">
+        <td class="table_td_title" style="color: snow;">
+          <span class="table_td_title" style="color: snow;">序号</span>
+        </td>
+        <td class="table_td_title"  style="margin-top: 16px; display: ;color: snow;">区域</td>
+        <td class="table_td_title"  style="margin-top: 16px; display: ;color: snow;">储备物资</td>
+        <td class="table_td_title"  style="color: snow;">保供企业类型</td>
+        <td class="table_td_title"  style="color: snow;">保供企业名称</td>
+        <td class="table_td_title"  style="color: snow;">报送人</td>
+        <td class="table_td_title"  style="color: snow;">手机号</td>
+        <td class="table_td_title"  style="color: snow;">上次报送时间</td>
+        <td class="table_td_title"  style="color: snow;">今日报送状态</td>
+        <td class="table_td_title"  style="color: snow;">操作</td>
+      </tr>
+      <% @goods_data_submissions.each do |goods_data_submission| %>
+        <tr class="" class="border-bottom" style="border: 1px solid #dcdcdc;background: #ffffff87;">
+          <td class="table_text_submission"><%= goods_data_submission.id %></td>
+          <td class="table_text_submission"><%= goods_data_submission.region %></td>
+          <td class="table_text_submission">
+            <%= goods_data_submission.goods_category %>
+            <%#= goods_data_submission.enterprise_category %>
+          </td>
+          <td class="table_text_submission">
+            <%= goods_data_submission.enterprise_category %>
+          </td>
+          <td class="table_text_submission"><%= goods_data_submission.enterprise.try(:name) %></td>
+          <td class="table_text_submission"><%= goods_data_submission.report_person %></td>
+          <!--
+            <td class="table_text_submission">上报数据（吨）<%= goods_data_submission.reported_data %></td>
+            <td class="table_text_submission">企业分类: <%= goods_data_submission.enterprise_category %></td>
+            <td class="table_text_submission">物资类型: <%= goods_data_submission.goods_category %></td>
+            <td class="table_text_submission">联系电话: <%= goods_data_submission.report_person_tel %></td>
+          -->
+          <td class="table_text_submission">
+            <%= goods_data_submission.report_person_tel %>
+          </td class="table_text_submission">
+          <td class="table_text_submission"><%= goods_data_submission.last_reported_time.strftime("%Y/%m/%d") rescue ''%></td>
+          <td>
+            <% if goods_data_submission.report_status_today? %>
+              <span class="status_success">已报送</span>
+            <% else %>
+              <% if current_manager.category == '地州商务局' %>
+                <span class="status_warn">未报送</span>
+              <% else %>
+                <span class="status_warn">未报送</span>
+              <% end %>
+            <% end %>
+          </td>
+          <td>
+            <% if goods_data_submission.report_status_today? %>
+              <%= link_to '查看详情', goods_data_submission, class: 'link_to_show', style: 'text-decoration: none;' %>
+            <% else %>
+              <% if current_manager.category == '地州商务局' || current_manager.category == "管理员"%>
+                <%= button_to '催促报送', "#", form: { data: { turbo_confirm: '操作成功'} }, class: "button_urge_submission" %>
+              <% else %>
+                <%= button_to '立即报送', update_status_goods_data_submissions_path(id: goods_data_submission.id), form: { data: { turbo_confirm: '操作成功'} }, class: "btn btn-danger btn-sm" %>
+              <% end %>
+            <% end %>
+          </td>
+          <!--
+            <td>
+            <%= button_to '催促报送', '#', form: { data: { turbo_confirm: '操作成功'} }, class: "btn btn-primary btn-sm" %>
+            <%= link_to '修改', edit_goods_data_submission_path(goods_data_submission) %>
+            <%= button_to '删除', goods_data_submission, method: :delete, form: { data: { turbo_confirm: '确定删除?' } }, class: "btn btn-danger btn-sm" %>
+            </td>
+          -->
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <div style="display: flex; float: right;">
+
+
+    <% start_index = @goods_data_submissions.offset_value + 1 %>
+    <% end_index = start_index + @goods_data_submissions.length - 1 %>
+
+    <p class="page_text">
+      <span> 第 <%= start_index %> - <%= end_index %> 条/总共 <%= @goods_data_submissions.total_count %> 条
+
+        <% if @goods_data_submissions.total_pages > 1 %>
+
+          <% first_page = [1, @goods_data_submissions.current_page - 3].max %>
+          <% last_page = [first_page + 6, @goods_data_submissions.total_pages].min %>
+          <% page_links = (first_page..last_page).map do |page|
+            if page == @goods_data_submissions.current_page
+              content_tag :span, page, class: 'current'
+            else
+              link_to page, { page: page }, class: 'page_link'
+            end
+          end %>
+          <%= content_tag :div, page_links.join.html_safe, class: 'paging_links', style: 'display: flex;' %>
+          <span class="page_text"><%#= @goods_data_submissions.current_page %> 每页 <%= select_tag :per_page, options_for_select([10, 20, 50], params[:per_page]), onchange: "$('#filter_form').submit()" %> 条</span>
+
+          <span class="page_text">
+            跳至<%= text_field_tag :page, params[:page], class: 'page_skip' %>页
+            <%= button_tag '跳转', onclick: "$('#filter_form').submit()" , class: 'page_skip' %>
+          </span>
+        <% end %>
+      </span>
+    </p>
+    <% if current_manager.email.include? 'goods_data_submission' %>
+      <h5><%= link_to '新建物资报送数据', new_goods_data_submission_path, style: 'text-decoration: none;' %></h5>
+    <% end %>
+
+  </div>
+  <div style="height: 200px;"></div>
+  </div>
+
+</div>
+<style>
+.list {
+  width: 1192px;
+  background: #FFFFFF;
+  opacity: 1;
+
+}
+.links{
+  margin-left: 19px;
+}
+.links a {
+  letter-spacing: 1px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #666666;
+  line-height: 24px;
+}
+
+/* 激活链接样式 */
+.links a.active-link {
+  font-size: 16px;
+  font-weight: 500;
+  color: #3F73F6;
+  line-height: 24px;
+  font-weight: bold; /* 加粗 */
+  text-decoration: underline; /* 下划线 */
+  text-underline-position: under; /* 下划线位置 */
+  text-decoration-color: #006DF1;
+}
+.button_all_submission{
+  width: 102px;
+  height: 32px;
+  background: #FFFFFF;
+  border-radius: 3px 3px 3px 3px;
+  opacity: 1;
+  border: 1px solid #0052D9;
+  float: right;
+  font-size: 14px;
+  font-weight: 400;
+  color: #0052D9;
+  line-height: 22px;
+  margin-top: 20px;
+  margin-bottom: 24px;
+  margin-right: -56px;
+}
+.table_div{
+  width: 1152px;
+  margin: 0 20px;
+}
+.table_title{
+  width: 1152px;
+  height: 53px;
+  background: #1478f2;
+  border-radius: 0px 0px 0px 0px;
+  border-bottom: dashed;
+  border-bottom-color: #1478f2;
+  border-bottom-style: solid;
+}
+.table_td_title{
+  font-size: 14px;
+  font-family: PingFang SC-Medium, PingFang SC;
+  font-weight: 500;
+  color: snow;
+  line-height: 22px;
+  opacity: 1;
+}
+.border-bottom-dashed::after {
+  content: "";
+  display: block;
+  border-bottom: 1px dashed #ccc;
+  margin-top: -1px; /* 留出一点空隙 */
+}
+.button_urge_submission{
+  border: 1px solid transparent;
+  background: transparent;
+  color: font-size: 14px;
+  font-family: PingFang SC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #F53F3F;
+  line-height: 22px;
+  font-size: 14px;
+}
+.status_warn{
+  width: 40px;
+  height: 22px;
+  background: rgba(245,63,63,0.12);
+  opacity: 1;
+  border: 1px solid #FF8787;
+  font-size: 12px;
+  font-family: PingFang SC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #F53F3F;
+  line-height: 20px;
+  display: block;
+  text-align: center;
+  margin-left: 6px;
+}
+.status_success {
+  display: block;
+  text-align: center;
+  width: 52px;
+  height: 22px;
+  font-size: 12px;
+  font-family: PingFang SC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #52C41A;
+  line-height: 20px;
+  width: 52px;
+  height: 22px;
+  background: #F6FFED;
+  opacity: 1;
+  border: 1px solid #B7EB8F;
+
+}
+.link_to_show{
+  font-size: 14px;
+  font-family: PingFang SC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #006DF1;
+  line-height: 22px;
+  margin-left: 5px;
+}
+.table_text_submission {
+  font-size: 14px;
+  font-family: PingFang SC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #000000;
+  line-height: 22px;
+}
+tr.border-bottom-dashed::after {
+  /* 边框样式 */
+  content: "";
+  display: block;
+  border-bottom: 1px dashed #ccc;
+  margin-top: -1px; /* 留出一点空隙 */
+}
+.table .border-bottom-dashed {
+  border-style: dashed;
+  border-color: #ccc;
+}
+.table_dashed {
+  border-bottom: dashed;
+  border-bottom-color: #9b9b9b;
+  border-bottom-style: dotted;
+}
+.query_submissions{
+  font-size: 14px;
+  font-family: PingFang SC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.85);
+  line-height: 22px;
+}
+</style>
+<style>
+.code {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.list {
+  background: #f8f9fa;
+  padding: 10px;
+}
+.each-row {
+  border-radius: 5px;
+  margin: 50px 180px;
+  background: white;
+  padding: 10px;
+}
+.input_enterprise {
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: var(--bs-border-radius);
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  border: 1px solid blue;
+  width: 300px;
+}
+.input_tel {
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: var(--bs-border-radius);
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  border: 1px solid blue;
+  width: 200px;
+}
+.current {
+  background: #2381f3;
+  color: white;
+  border: 1px solid blue;
+  border: 1px solid #1890FF;
+  width: 32px;
+  height: 32px;
+  border-radius: 2px 2px 2px 2px;
+  opacity: 1;
+  display: block;
+  text-align: center;
+  line-height: 32px;
+  font-weight: 400;
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+.page_link {
+  margin: 0 8px;
+  width: 32px;
+  height: 32px;
+  background: #FFFFFF;
+  border-radius: 2px 2px 2px 2px;
+  opacity: 1;
+  border: 1px solid rgba(0,0,0,0.15);
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  line-height: 32px;
+  font-size: 14px;
+  color: #000000;
+  font-weight: 400;
+}
+
+
+.page_text{
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  line-height: 32px;
+}
+
+.page_skip{
+  width: 48px;
+  height: 32px;
+  line-height: 28px;
+  background: #FFFFFF;
+  border-radius: 2px 2px 2px 2px;
+  opacity: 1;
+  border: 1px solid rgba(0,0,0,0.15);
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  line-height: 22px;
+}
+.links_status{
+  margin-left: 19px;
+}
+.links_status a {
+  letter-spacing: 1px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 400;
+  color: #666666;
+  line-height: 24px;
+}
+
+/* 激活链接样式 */
+.links_status a.active-link {
+  font-size: 16px;
+  font-weight: 500;
+  color: #3F73F6;
+  line-height: 24px;
+  font-weight: bold; /* 加粗 */
+  text-decoration: underline; /* 下划线 */
+  text-underline-position: under; /* 下划线位置 */
+  text-decoration-color: #006DF1;
+}
+
+#enterprise_name {
+ width: 330px;
+ height: 32px;
+ background: #FFFFFF;
+ border-radius: 3px 3px 3px 3px;
+ opacity: 1;
+ border: 1px solid #DCDCDC;
+}
+
+#enterprise_category {
+ width: 330px;
+ height: 32px;
+ background: #FFFFFF;
+ border-radius: 3px 3px 3px 3px;
+ opacity: 1;
+ border: 1px solid #DCDCDC;
+}
+.select_region {
+  height: 32px;
+  background: #FFFFFF;
+  border-radius: 3px 3px 3px 3px;
+  opacity: 1;
+  margin-left: 12px;
+  border: 1px solid #DCDCDC;
+}
+</style>

@@ -1,0 +1,2 @@
+module WarnSettingsHelper
+end

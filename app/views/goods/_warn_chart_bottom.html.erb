@@ -1,0 +1,311 @@
+<div style="display: flex; justify-content: space-around; background: #F7F7F7; margin-top: 20px;">
+  <div style="height: 300px; text-align: center;">
+    <a href= "#">
+      <div id='container_danger_bottom' style="width: 200px;"></div>
+      <div class="warn_text">
+        <span style="color: #f53f3f;">预警</span>
+        <p class="warn_text_small">库存量低于30%</p>
+      </div>
+    </a>
+  </div>
+  <div style="height: 300px; text-align: center;">
+    <a href= "#">
+      <div id='container_simple_bottom' style="width: 200px;"></div>
+      <div class="warn_text">
+        充足
+        <p class="warn_text_small" style="">库存量高于80%</p>
+      </div>
+    </a>
+  </div>
+  <div style="height: 300px; text-align: center;">
+    <a href= "#">
+      <div id='container_warn_bottom' style="width: 200px;"></div>
+      <div class="warn_text">
+        <span style="color: #FF783A;">不足<span>
+            <p class="warn_text_small">库存量低于60%</p>
+      </div>
+    </a>
+  </div>
+
+</div>
+
+<script>
+  Highcharts.chart('container_warn_bottom', {
+    chart: {
+      type: 'pie',
+      height: 300, // 设置高度为300像素
+      backgroundColor: '#F7F7F7' // 设置背景色为 #F7F7F7
+    },
+    title: {
+      text: null//'圆环图'
+    },
+    exporting: {
+      enabled: false // 设置为false表示禁用导出功能
+    },
+    plotOptions: {
+      pie: {
+        innerSize: '75%',
+        colors: ['#FF783A', '#E6EBF1'],
+        dataLabels: {
+          enabled: false
+        },
+        showInLegend: true
+      }
+    },
+    caption: {
+      text: null //'鸡蛋'
+    },
+    series: [{
+      name: '数据',
+      data: [
+        ['鸡蛋', 60],
+        ['', 40]
+      ]
+    }]
+  });
+  Highcharts.chart('container_simple_bottom', {
+    chart: {
+      type: 'pie',
+      height: 300, // 设置高度为300像素
+      backgroundColor: '#F7F7F7' // 设置背景色为 #F7F7F7
+    },
+    exporting: {
+      enabled: false // 设置为false表示禁用导出功能
+    },
+    title: {
+      text: null // '圆环图'
+    },
+    plotOptions: {
+      pie: {
+        innerSize: '75%',
+        colors: ['#2E89F9', '#E6EBF1'],
+        dataLabels: {
+          enabled: false
+        },
+        showInLegend: true
+      }
+    },
+    caption: {
+      text: null // '牛奶'
+    },
+    series: [{
+      name: '数据',
+      data: [
+        ['蔬菜', 80],
+        ['', 30]
+      ]
+    }]
+  });
+  Highcharts.chart('container_danger_bottom', {
+    chart: {
+      type: 'pie',
+      height: 300, // 设置高度为300像素
+      backgroundColor: '#F7F7F7' // 设置背景色为 #F7F7F7
+    },
+    title: {
+      text: null // '圆环图'
+    },
+    exporting: {
+      enabled: false // 设置为false表示禁用导出功能
+    },
+    plotOptions: {
+      pie: {
+        innerSize: '75%',
+        colors: ['#F53F3F', '#E6EBF1'],
+        dataLabels: {
+          enabled: false
+        },
+        showInLegend: true
+      }
+    },
+    caption: {
+      text: null //'牛奶'
+    },
+    series: [{
+      name: '数据',
+      data: [
+        ['牛奶', 30],
+        ['', 70]
+      ]
+    }]
+  });
+
+  // 带了线条
+  Highcharts.chart('container_test', {
+  chart: {
+    type: 'pie',
+    height: 300, // 设置高度为300像素
+    backgroundColor: '#F7F7F7' // 设置背景色为 #F7F7F7
+  },
+  subtitle: {
+    // text: 'Highcharts'
+    text: null // 'Highcharts'
+  },
+  exporting: {
+    enabled: false // 设置为false表示禁用导出功能
+  },
+  plotOptions: {
+    pie: {
+      innerSize: '50%'
+    }
+  },
+  series: [{
+    name: '数据',
+    data: [
+      ['蔬菜', 60],
+      ['', 40]
+    ]
+  }]
+});
+
+  // 带了线条
+  Highcharts.chart('container_test', {
+  chart: {
+    type: 'pie',
+    height: 300, // 设置高度为300像素
+    backgroundColor: '#F7F7F7' // 设置背景色为 #F7F7F7
+  },
+  exporting: {
+    enabled: false // 设置为false表示禁用导出功能
+  },
+  subtitle: {
+    // text: 'Highcharts'
+    text: null // 'Highcharts'
+  },
+  plotOptions: {
+    pie: {
+      innerSize: '50%'
+    }
+  },
+  series: [{
+    name: '数据',
+    data: [
+      ['蔬菜', 60],
+      ['', 40]
+    ]
+  }]
+});
+  Highcharts.chart('container_warn1', {
+    chart: {
+      type: 'pie',
+      height: 300, // 设置高度为300像素
+      backgroundColor: '#F7F7F7' // 设置背景色为 #F7F7F7
+    },
+    title: {
+      text: null // '圆环图'
+    },
+    exporting: {
+      enabled: false // 设置为false表示禁用导出功能
+    },
+    plotOptions: {
+      pie: {
+        innerSize: '75%',
+        colors: ['#ff783a', '#E6EBF1'],
+        dataLabels: {
+          enabled: false
+        },
+        showInLegend: true
+      }
+    },
+    caption: {
+      text: '鸡蛋'
+    },
+    series: [{
+      name: '数据',
+      data: [
+        ['鸡蛋', 60],
+        ['', 40]
+      ]
+    }]
+  });
+  Highcharts.chart('container_simple1', {
+    chart: {
+      type: 'pie',
+      height: 300, // 设置高度为300像素
+      backgroundColor: '#F7F7F7' // 设置背景色为 #F7F7F7
+    },
+    title: {
+      text: null //  '圆环图'
+    },
+    exporting: {
+      enabled: false // 设置为false表示禁用导出功能
+    },
+    plotOptions: {
+      pie: {
+        innerSize: '75%',
+        colors: ['#2E89F9', '#E6EBF1'],
+        dataLabels: {
+          enabled: false
+        },
+        showInLegend: true
+      }
+    },
+    caption: {
+      text: null // '牛奶'
+    },
+    series: [{
+      name: '数据',
+      data: [
+        ['牛奶', 80],
+        ['', 30]
+      ]
+    }]
+  });
+  Highcharts.chart('container_danger1', {
+    chart: {
+      type: 'pie',
+      height: 300, // 设置高度为300像素
+      backgroundColor: '#F7F7F7' // 设置背景色为 #F7F7F7
+    },
+    title: {
+      text: null //  '圆环图'
+    },
+    exporting: {
+      enabled: false // 设置为false表示禁用导出功能
+    },
+    plotOptions: {
+      pie: {
+        innerSize: '75%',
+        colors: ['#F53F3F', '#E6EBF1'],
+        dataLabels: {
+          enabled: false
+        },
+        showInLegend: true
+      }
+    },
+    caption: {
+      text: null // '牛奶'
+    },
+    series: [{
+      name: '数据',
+      data: [
+        ['牛奶', 30],
+        ['', 70]
+      ]
+    }]
+  });
+
+</script>
+<style>
+  .warn_text {
+    margin-top: -200px;
+    font-size: 30px;
+    z-index: 10;
+    margin-left: 45px;
+    height: 22px;
+    font-size: 22px;
+    font-weight: 500;
+    position: absolute;
+    font-size: 22px;
+    font-weight: 500;
+    color: #2E89F9;
+    line-height: 22px;
+  }
+  .warn_text_small{
+    font-size: 16px;
+    font-weight: 400;
+    color: #1D2129;
+    line-height: 22px;
+  }
+</style>
+

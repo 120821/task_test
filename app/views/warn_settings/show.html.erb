@@ -1,0 +1,124 @@
+
+<%#= render @warn_setting %>
+<div class="list">
+  <span class="show_title">
+    <span style="margin-right: 5px;">
+      <%= image_tag "enterprise.png" %>
+    </span>
+    <span> 基本信息</span>
+  </span>
+  <div style="display: flex;">
+    <table class='' style="margin-top: 35px;">
+
+      <tr>
+        <td>
+          <span class="show_table_name">商品名称:&nbsp;</span>
+          <span class="show_table_content"><%= @warn_setting.goods_name %></span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="show_table_name">商品分类:&nbsp;</span>
+          <span class="show_table_content"><%= @warn_setting.goods_category %></span>
+        </td>
+      </tr>
+
+
+      <tr>
+        <td>
+          <span class="show_table_name">最高预警量:&nbsp;</span>
+          <span class="show_table_content"><%= @warn_setting.simple_data %></span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="show_table_name">最低预警量:&nbsp;</span>
+          <span class="show_table_content"><%= @warn_setting.danger_data %></span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="show_table_name">备注:&nbsp;</span>
+          <span class="show_table_content"><%= @warn_setting.remak %></span>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div style="margin-top: 50px;">
+    <%= link_to "编辑", edit_warn_setting_path(@warn_setting), class: 'btn btn-light btn-sm', style: 'width: 100px; border: 1px solid #0d6efd;' %>
+    <%= link_to "返回", warn_settings_path, class: 'btn btn-primary btn-sm', style: 'width: 100px; margin-left: 20px;' %>
+    <%#= button_to "删除", @warn_setting, method: :delete, class: 'btn btn-sm btn-danger' %>
+  </div>
+  <div style="height: 89px;"></div>
+</div>
+<style>
+.list {
+  background: #ffffff;
+  padding: 20px;
+  height: auto;
+  min-height: 1100px;
+}
+.each-row {
+  border-radius: 5px;
+  margin: 50px 180px;
+  background: white;
+  padding: 10px;
+}
+.show_title {
+  font-size: 20px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.9);
+  line-height: 28px;
+}
+.show_table_name_two {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.4);
+  margin-left: 216px;
+  line-height: 22px;
+}
+.show_table_content_two {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  margin-left: 10px;
+  color: rgba(0,0,0,0.9);
+  line-height: 22px;
+}
+.show_table_name {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  margin-left: 10px;
+  color: rgba(0,0,0,0.4);
+  line-height: 22px;
+}
+.show_table_content {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  margin-left: 30px;
+  color: rgba(0,0,0,0.9);
+  line-height: 22px;
+}
+.show {
+  width: 1194px;
+  padding: 31px 24px;
+  height: auto;
+  background: #FFFFFF;
+  border-radius: 6px;
+
+}
+.show_table_image_name{
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  margin-top: 20px;
+  margin-left: 20px;
+  font-weight: 400;
+  color: rgba(0,0,0,0.9);
+  line-height: 22px;
+}
+</style>

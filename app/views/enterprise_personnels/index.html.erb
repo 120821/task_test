@@ -1,0 +1,7 @@
+<% if current_manager.category == '企业' %>
+  <%= render 'enterprise_personnels/enterpirse_index' %>
+<% elsif current_manager.category == '管理员' %>
+  <%= render 'enterprise_personnels/manager_index' %>
+<% elsif current_manager.category == '地州商务局' %>
+  <%= render 'enterprise_personnels/manager_index' %>
+<% end %>

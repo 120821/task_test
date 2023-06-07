@@ -1,0 +1,596 @@
+<div style="display: flex;">
+  <div>
+    <div class="daily_card_div">
+      <div class="daily_card_index">
+        <p class="every_card">企业数量</p>
+        <span class="data_index">268<span class="data_unit" style="margin-left: 6px;">家</span></span>
+        <p class="daily_data_time">较昨日
+          <span class="data_up">12家
+          <%= image_tag 'rate_up.png', style: 'margin-top: -10px;' %>
+          </span>
+          <span style="margin-left: 47px;">较上周</span>
+          <span class="data_down">2家
+            <%= image_tag 'rate_down.png', style:"margin-top: -10px;" %>
+          </span>
+        </p>
+      </div>
+      <div class="daily_card_index">
+        <p class="every_card">人员总数量</p>
+        <p class="data_index">2<span class="data_unit" style="margin-left: 6px;">人</span></p>
+        <p class="daily_data_time" style="margin-top: -18px;">较昨日
+          <span class="data_up">12家
+          <%= image_tag 'rate_up.png', style: 'margin-top: -10px;' %>
+          </span>
+          <span style="margin-left: 47px;">较上周</span>
+          <span class="data_down">2家
+            <%= image_tag 'rate_down.png', style:"margin-top: -10px;" %>
+          </span>
+        </p>
+      </div>
+      <div class="daily_card_index">
+        <p class="every_card">车辆总数量</p>
+        <p class="data_index">28<span class="data_unit" style="margin-left: 6px;">辆</span></p>
+        <p class="daily_data_time" style="margin-top: -18px;">较昨日
+          <span class="data_up">12家
+          <%= image_tag 'rate_up.png', style: 'margin-top: -10px;' %>
+          </span>
+          <span style="margin-left: 47px;">较上周</span>
+          <span class="data_down">2家
+            <%= image_tag 'rate_down.png', style:"margin-top: -10px;" %>
+          </span>
+        </p>
+      </div>
+    </div>
+    <div class="daily_table">
+      <p class="links_status" style="margin: 20px 0;">
+        &nbsp;&nbsp;&nbsp;&nbsp;<%= link_to '数据报送', daily_goods_statistics_path, class: 'active-link' %>
+        <%= link_to '仓储数据', material_reserves_path, style: 'margin-left: 26px;'  %>
+        <%= link_to '车辆数据', cars_path, style: 'margin-left: 26px;'  %>
+        <%= link_to '人员数据', enterprise_personnels_path, style: 'margin-left: 26px;' %>
+      </p>
+      <%= form_tag '', method: :get do %>
+        <p class="form_row">
+          <span class="query_submissions" >地州&nbsp;&nbsp;&nbsp; <%= select_tag :region, options_for_select(@regions, params[:region]), class: 'select_region', style: 'width: 200px;' %></span>
+          <span class="query_submissions" style="margin-left: 6px;">&nbsp;&nbsp;&nbsp;&nbsp;日期&nbsp;&nbsp;&nbsp; <%= text_field_tag :daily_goods_date, params[:daily_goods_date], id: 'datepicker', placeholder: '例如 20230402', class: 'select_region', style: 'width: 200px;' %></span>
+          &nbsp;&nbsp;&nbsp;&nbsp;<%= submit_tag "查询", class: "form_submit", class: 'btn btn-primary', style: 'width: 65px; font-size: 14px; height: 32px; line-height: 14px; background: #006DF1; opacity: 1' %>
+        </p>
+      <% end %>
+
+      <%= link_to '+ 填报', new_daily_goods_statistic_path, class: 'btn btn-primary',style:'width: 81px; font-size: 14px; font-family: PingFangSC-Regular, PingFang SC;
+                  font-weight: 400; color: #006df1; line-height: 14px; height: 32px; margin-bottom: 25px; background: #FAFAFB; margin-left: 20px; margin-top: 25px;' %>
+      <%= link_to '批量导入', upload_csv_page_daily_goods_statistics_path, class: 'btn btn-primary',style:' width: 88px; height: 32px; border: #00B42A;
+                  background: #00B42A; border-radius: 3px; font-size: 14px; font-family: PingFangSC-Regular, PingFang SC; font-weight: 400; color: #FFFFFF;
+                  line-height: 14px; margin-bottom: 25px; margin-left: 20px; margin-top: 25px;' %>
+      <table id="" class="table table-bordered" style="font-size: 14px; width: 843px;">
+        <thead>
+          <tr>
+            <td rowspan="2">所属地州</td>
+            <td rowspan="2">进销存</td>
+            <td colspan="4">产品类别</td>
+            <td rowspan="2">日期</td>
+            <td rowspan="2">填报人</td>
+            <td rowspan="2">联系方式</td>
+            <td rowspan="2">状态</td>
+          </tr>
+          <tr>
+            <td class=""  style="color: snow;">大米（吨）</td>
+            <td class=""  style="color: snow;">面粉（吨）</td>
+            <td class=""  style="color: snow;">食用油（吨）</td>
+            <td class=""  style="color: snow;">蔬菜（吨）</td>
+            <!--
+            <td class=""  style="color: snow;">猪肉（吨）</td>
+            <td class=""  style="color: snow;">牛肉（吨）</td>
+            <td class=""  style="color: snow;">羊肉（吨）</td>
+            <td class=""  style="color: snow;">禽肉（吨）</td>
+            <td class=""  style="color: snow;">鸡蛋（吨）</td>
+            <td class=""  style="color: snow;">牛奶（吨）</td>
+            <td class=""  style="color: snow;">水果（吨）</td>
+            <td class=""  style="color: snow;">方便食品（袋）</td>
+            -->
+          </tr>
+        </thead>
+        <tbody id="">
+          <% @daily_goods_statistics.each do |daily_goods_statistic| %>
+            <tr class="" class="border-bottom" style="border: 1px solid #dcdcdc;background: #ffffff87;">
+              <td rowspan="3" class="table_text_submission"><%= link_to daily_goods_statistic.region, daily_goods_statistic, style: 'text-decoration: none;' %></td>
+              <td class="table_text_submission">
+                <%#= daily_goods_statistic.sales_inventory_situation %>
+                进货量
+              </td>
+
+              <td class="table_text_submission"><%= daily_goods_statistic.rice_purchase %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.flour_purchase %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.oil_purchase %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.vegetables_purchase %></td>
+              <!--
+              <td class="table_text_submission"><%= daily_goods_statistic.pork %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.beef %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.lamb %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.poultry %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.egg %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.milk %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.fruit %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.convenient_food %></td>
+              -->
+              <td rowspan="3" class="table_text_submission"><%= daily_goods_statistic.daily_goods_date.strftime('%Y-%m-%d')%></td>
+              <td rowspan="3" class="table_text_submission"><%= daily_goods_statistic.informant %></td>
+              <td rowspan="3" class="table_text_submission"><%= daily_goods_statistic.informant_tel %></td>
+              <td>
+                <%#= link_to '详情', daily_goods_statistic, style: 'text-decoration: none;' %>
+                <%#= link_to '修改', edit_daily_goods_statistic_path(daily_goods_statistic), class: 'update_link_to', style: 'text-decoration: none;' %>
+                <%#= button_to '删除', daily_goods_statistic, method: :delete, form: { data: { turbo_confirm: '确定删除?' } }, class: "btn btn-danger btn-sm" %>
+
+                <% if daily_goods_statistic.status? %>
+                  <span class="status_success">已报送</span>
+                <% else %>
+                  <span class="status_warn">未报送</span>
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <td class="table_text_submission">
+                <%#= daily_goods_statistic.sales_inventory_situation %>
+                销售量
+              </td>
+              <td class="table_text_submission"><%= daily_goods_statistic.rice_sales %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.flour_sales %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.oil_sales %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.vegetables_sales %></td>
+              <!--
+              <td class="table_text_submission"><%= daily_goods_statistic.pork %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.beef %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.lamb %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.poultry %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.egg %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.milk %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.fruit %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.convenient_food %></td>
+              -->
+              <td>
+                <%#= link_to '详情', daily_goods_statistic, style: 'text-decoration: none;' %>
+                <%#= link_to '修改', edit_daily_goods_statistic_path(daily_goods_statistic), class: 'update_link_to', style: 'text-decoration: none;' %>
+                <%#= button_to '删除', daily_goods_statistic, method: :delete, form: { data: { turbo_confirm: '确定删除?' } }, class: "btn btn-danger btn-sm" %>
+
+                <% if daily_goods_statistic.status? %>
+                  <span class="status_success">已报送</span>
+                <% else %>
+                  <span class="status_warn">未报送</span>
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <td class="table_text_submission">
+                <%#= daily_goods_statistic.sales_inventory_situation %>
+                库存量
+              </td>
+              <td class="table_text_submission"><%= daily_goods_statistic.rice %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.flour %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.oil %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.vegetables %></td>
+              <!--
+              <td class="table_text_submission"><%= daily_goods_statistic.pork %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.beef %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.lamb %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.poultry %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.egg %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.milk %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.fruit %></td>
+              <td class="table_text_submission"><%= daily_goods_statistic.convenient_food %></td>
+              -->
+              <td>
+                <% if daily_goods_statistic.status? %>
+                  <span class="status_success">已报送</span>
+                <% else %>
+                  <span class="status_warn">未报送</span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div style="height: 30px;"></div>
+
+      <div style="display: flex; float: right;">
+
+        <% start_index = @daily_goods_statistics.offset_value + 1 %>
+        <% end_index = start_index + @daily_goods_statistics.length - 1 %>
+
+        <p class="page_text">
+          <span> 第 <%= start_index %> - <%= end_index %> 条/总共 <%= @daily_goods_statistics.total_count %> 条
+            <% if @daily_goods_statistics.total_pages > 1 %>
+
+              <% first_page = [1, @daily_goods_statistics.current_page - 3].max %>
+              <% last_page = [first_page + 6, @daily_goods_statistics.total_pages].min %>
+              <% page_links = (first_page..last_page).map do |page|
+                if page == @daily_goods_statistics.current_page
+                  content_tag :span, page, class: 'current'
+                else
+                  link_to page, { page: page }, class: 'page_link'
+                end
+              end %>
+              <%= content_tag :div, page_links.join.html_safe, class: 'paging_links', style: 'display: flex;' %>
+              <span class="page_text">
+                <%= form_tag '', method: :get do %>
+                  &nbsp;&nbsp;<span class="page_text">每页 <%= select_tag :per_page, options_for_select([10, 20, 50], params[:per_page]), onchange: "$('#filter_form').submit()" %> 条</span>
+                  &nbsp;&nbsp;跳至:&nbsp;&nbsp; <%= text_field_tag :page, params[:page], class: 'page_skip', onchange: "$('#filter_form').submit()"%>&nbsp;&nbsp;页
+                  &nbsp;&nbsp;<%= submit_tag "跳转", class: "page_skip", class: 'btn btn-primary btn-sm', style: 'width: 55px; font-size: 14px; height: 32px; background: #006DF1; opacity: 1' %>
+              <% end %>
+              </span>
+            <% end %>
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="daily_card_enterprise">
+    <div style="margin-bottom: 20px;margin-left: 15px; width: 30px; border-radius: 15px; height: 30px; background: #fff;margin-top: 24px; ">
+      <%= image_tag 'user_icon.png', style: "margin-left: 3px; margin-top: 3px;" %>
+    </div>
+    <span class="daily_enterprise_name">
+      乌鲁木齐市国安宏盛生鲜供应有限公司
+    </span>
+    <p style="margin-top: 30px;">
+    <span class="daily_card_enterprise_title">
+        社会信用代码：
+    </span>
+    <span class="daily_card_enterprise_content">
+      13792752059MP3950
+    </span>
+    </p>
+    <div class="daily_card_enterprise_status">
+      <p class="daily_card_enterprise_status_title">报送计划</p>
+      <%= image_tag 'status_warn.png', style:"margin-left: 28px;" %>
+      <span class="daily_status">待报送</span>
+      <span class="daily_status_date">04-28</span><br/>
+      <div class="daily_status_border">
+        <span class="daily_status_text">请及时完成报送</span><br/>
+      </div>
+
+      <%= image_tag 'status_success.png', style:"margin-left: 28px;" %>
+      <span class="daily_status">已完成报送</span>
+      <span class="daily_status_date_success">04-25</span><br/>
+      <div class="daily_status_border">
+        <span class="daily_status_text">已报送正常通行</span><br/>
+      </div>
+      <%= image_tag 'status_success.png', style:"margin-left: 28px;" %>
+      <span class="daily_status">已完成报送</span>
+      <span class="daily_status_date_success">04-24</span><br/>
+      <div class="daily_status_border">
+        <span class="daily_status_text">已报送正常通行</span><br/>
+      </div>
+      <%= image_tag 'status_error.png', style:"margin-left: 28px;" %>
+      <span class="daily_status">未报送</span>
+      <span class="daily_status_date_error">04-24</span><br/>
+      <div class="daily_status_border">
+        <span class="daily_status_text">信息获取障碍</span><br/>
+      </div>
+      <%= image_tag 'status_success.png', style:"margin-left: 28px;" %>
+      <span class="daily_status">已完成报送</span>
+      <span class="daily_status_date_success">04-24</span><br/>
+      <div class="daily_status_border">
+        <span class="daily_status_text">已报送正常通行</span><br/>
+      </div>
+    </div>
+
+</div>
+
+</div>
+
+
+<style>
+.code {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.list {
+  background: #f8f9fa;
+  padding: 10px;
+}
+.each-row {
+  border-radius: 5px;
+  margin: 50px 180px;
+  background: white;
+  padding: 10px;
+}
+.input_enterprise {
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: var(--bs-border-radius);
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  border: 1px solid blue;
+  width: 300px;
+}
+.input_tel {
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: var(--bs-border-radius);
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  border: 1px solid blue;
+  width: 200px;
+}
+.current {
+  background: #2381f3;
+  color: white;
+  border: 1px solid blue;
+  border: 1px solid #1890FF;
+  width: 32px;
+  height: 32px;
+  border-radius: 2px 2px 2px 2px;
+  opacity: 1;
+  display: block;
+  text-align: center;
+  line-height: 32px;
+  font-weight: 400;
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+.page_link {
+  margin: 0 8px;
+  width: 32px;
+  height: 32px;
+  background: #FFFFFF;
+  border-radius: 2px 2px 2px 2px;
+  opacity: 1;
+  border: 1px solid rgba(0,0,0,0.15);
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  line-height: 32px;
+  font-size: 14px;
+  color: #000000;
+  font-weight: 400;
+}
+
+
+.page_text{
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  line-height: 32px;
+}
+
+.page_skip{
+  width: 48px;
+  height: 32px;
+  line-height: 28px;
+  background: #FFFFFF;
+  border-radius: 2px 2px 2px 2px;
+  opacity: 1;
+  border: 1px solid rgba(0,0,0,0.15);
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  line-height: 22px;
+}
+.links_status{
+  margin-left: 19px;
+}
+.links_status a {
+  letter-spacing: 1px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 400;
+  color: #666666;
+  line-height: 24px;
+}
+
+/* 激活链接样式 */
+.links_status a.active-link {
+  font-size: 16px;
+  font-weight: 500;
+  color: #3F73F6;
+  line-height: 24px;
+  font-weight: bold; /* 加粗 */
+  text-decoration: underline; /* 下划线 */
+  text-underline-position: under; /* 下划线位置 */
+  text-decoration-color: #006DF1;
+}
+.select_region {
+  height: 32px;
+  background: #FFFFFF;
+  border-radius: 3px 3px 3px 3px;
+  opacity: 1;
+  margin-left: 12px;
+  border: 1px solid #DCDCDC;
+}
+.select_store {
+  height: 32px;
+  background: #FFFFFF;
+  border-radius: 3px 3px 3px 3px;
+  opacity: 1;
+  margin-left: 12px;
+  border: 1px solid #DCDCDC;
+}
+.daily_status_border {
+  height: 54px;
+  border-radius: 1px;
+  width: 144px;
+  border-left: 2px solid #DDD;
+  margin-left: 37px;
+  margin-top: 3px;
+
+}
+.daily_status_date_success {
+  font-size: 14px;
+  margin-left: 45px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.45);
+  line-height: 22px;
+}
+
+.daily_status_date_error {
+  font-size: 14px;
+  margin-left: 78px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.45);
+  line-height: 22px;
+}
+
+.daily_status_date {
+  font-size: 14px;
+  margin-left: 80px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.45);
+  line-height: 22px;
+}
+.daily_status {
+  margin-left: 10px;
+  font-size: 16px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: rgba(0,0,0,0.9);
+  line-height: 24px;
+}
+.daily_status_text {
+  margin-left: 20px;
+}
+.daily_card_enterprise_status_title {
+  font-size: 16px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #1D2129;
+  line-height: 22px;
+
+  margin-left: 20px;
+}
+.daily_card_enterprise_status {
+  height: 1200px;
+  background: #FFFFFF;
+  width: 269px;
+  margin-top: 33px;
+  padding-top: 33px;
+  margin-left: 20px;
+
+}
+.daily_card_enterprise_content {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  margin-left: 15px;
+  margin-top: 30px;
+  color: #FFFFFF;
+  line-height: 28px;
+}
+.daily_card_enterprise_title {
+  font-size: 14px;
+  margin-top: 30px;
+  margin-left: 15px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #FFFFFF;
+  line-height: 28px;
+}
+.daily_card_enterprise {
+  width: 289px;
+  height: 170px;
+  background: url('<%= asset_path "enterprise_background.png" %>');
+}
+.daily_table {
+  padding: 10px;
+  height: 1200px;
+  width: 887px;
+  background: #FFFFFF;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+.daily_card_index {
+  width: 274px;
+  height: 134px;
+  background: #F7F8FA;
+  margin-top: 20px;
+  margin-left: 16px;
+  border-radius: 6px;
+
+}
+.daily_card_div {
+  width: 887px;
+  height: 170px;
+  background: #FFFFFF;
+  display: flex;
+
+}
+.daily_enterprise_name {
+  font-size: 15px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #FFFFFF;
+  line-height: 24px;
+  margin-left: 15px;
+}
+.daily_data_time {
+  font-size: 12px;
+  font-weight: 400;
+  color: #4E5969;
+  line-height: 20px;
+  margin-left: 19px;
+  margin-bottom: 18px;
+}
+</style>
+<style>
+.table {
+  max-width: 843px;
+  margin-bottom: 8px;
+  text-align:center;
+}
+table {
+  background-color: transparent;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.table thead tr{
+  background-color: #0d6efd;
+  color: white;
+}
+*, :after, :before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.table-bordered,
+.table-bordered>tbody>tr>td,
+.table-bordered>tbody>tr>th,
+.table-bordered>tfoot>tr>td,
+.table-bordered>tfoot>tr>th,
+.table-bordered>thead>tr>td,
+.table-bordered>thead>tr>th {
+    border: 1px solid #ddd;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+  padding: 3px;
+  vertical-align: middle;
+  border-top: 1px solid #ddd;
+}
+.table-hover>tbody>tr:hover>td {
+  background-color: #ecf3f8;
+}
+/* .table-striped>tbody>tr:nth-child(odd)>td {
+   background-color: #f9f9f9;
+}*/
+.table-striped tr:nth-child(even)>td {
+  background-color: #f9f9f9;
+}
+</style>

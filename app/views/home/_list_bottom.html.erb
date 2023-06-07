@@ -1,0 +1,69 @@
+<div class="daily_card_enterprise">
+  <div style="margin-bottom: 20px;margin-left: 18px; width: 30px; border-radius: 15px; height: 30px; background: #fff;margin-top: 24px; ">
+    <%= image_tag 'user_icon.png', style: "margin-left: 3px; margin-top: 3px;" %>
+  </div>
+  <span class="daily_enterprise_name">
+    <% if current_manager.category == '企业' %>
+      <%if params[:controller] == 'material_reserves' %>
+        <span style="font-size: 14px;">乌鲁木齐市国安宏盛生鲜供应有限公司</span>
+      <% else %>
+        <span style="">乌鲁木齐市国安宏盛生鲜供应有限公司</span>
+      <% end %>
+    <% end %>
+  </span>
+  <p style="margin-top: 30px;">
+  <span class="daily_card_enterprise_title">
+    <% if current_manager.category == '企业' %>
+      <%if params[:controller] == 'material_reserves' %>
+        <span style="font-size: 14px;">社会信用代码</span>
+      <% else %>
+        <span style="">社会信用代码</span>
+      <% end %>
+    <% end %>
+  </span>
+  <span class="daily_card_enterprise_content">
+    <% if current_manager.category == '企业' %>
+      <%if params[:controller] == 'material_reserves' %>
+        <span style="font-size: 14px;">13792752059MP3950</span>
+      <% else %>
+        <span style="">13792752059MP3950</span>
+      <% end %>
+    <% end %>
+  </span>
+  </p>
+  <div class="daily_card_enterprise_status">
+    <p class="daily_card_enterprise_status_title">报送计划</p>
+    <%= image_tag 'status_warn.png', style:"margin-left: 28px;" %>
+    <span class="daily_status">待报送</span>
+    <span class="daily_status_date">04-28</span><br/>
+    <div class="daily_status_border">
+      <span class="daily_status_text">请及时完成报送</span><br/>
+    </div>
+
+    <%= image_tag 'status_success.png', style:"margin-left: 28px;" %>
+    <span class="daily_status">已完成报送</span>
+    <span class="daily_status_date_success">04-25</span><br/>
+    <div class="daily_status_border">
+      <span class="daily_status_text">已报送正常通行</span><br/>
+    </div>
+    <%= image_tag 'status_success.png', style:"margin-left: 28px;" %>
+    <span class="daily_status">已完成报送</span>
+    <span class="daily_status_date_success">04-24</span><br/>
+    <div class="daily_status_border">
+      <span class="daily_status_text">已报送正常通行</span><br/>
+    </div>
+    <%= image_tag 'status_error.png', style:"margin-left: 28px;" %>
+    <span class="daily_status">未报送</span>
+    <span class="daily_status_date_error">04-24</span><br/>
+    <div class="daily_status_border">
+      <span class="daily_status_text">信息获取障碍</span><br/>
+    </div>
+    <%= image_tag 'status_success.png', style:"margin-left: 28px;" %>
+    <span class="daily_status">已完成报送</span>
+    <span class="daily_status_date_success">04-24</span><br/>
+    <div class="daily_status_border">
+      <span class="daily_status_text">已报送正常通行</span><br/>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  goods_name: MyString
+  goods_category: MyString
+  max_warn: MyString
+  min_warn: MyString
+  remak: MyString
+
+two:
+  goods_name: MyString
+  goods_category: MyString
+  max_warn: MyString
+  min_warn: MyString
+  remak: MyString

@@ -1,0 +1,39 @@
+<div id="<%= dom_id good %>">
+  <table class='table table-hover table-bordered'>
+    <tr class="">
+      <th style="width: 200px;">企业名称:</th>
+      <td><%= good.enterprise.try(:name) %></td>
+    </tr>
+
+    <tr class="">
+      <th>储备库点:</th>
+      <td><%= good.material_reserf.try(:warehouse_location) %></td>
+    </tr>
+
+    <tr class="">
+      <th>行政区域:</th>
+      <td><%= good.administrative_division %></td>
+    </tr>
+
+    <tr class="">
+      <th>物资类型:</th>
+      <td><%= good.goods_type %></td>
+    </tr>
+
+    <tr class="">
+      <th>物资数量:</th>
+      <td><%= good.quantity %></td>
+    </tr>
+
+    <tr class="">
+      <th>负责人:</th>
+      <td><%= good.person_in_charge %></td>
+    </tr>
+
+    <tr class="">
+      <th>联系电话:</th>
+      <td><%= good.person_in_charge_tel %></td>
+    </tr>
+
+  </table>
+</div>

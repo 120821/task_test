@@ -1,0 +1,2 @@
+class GoodsWarn < ApplicationRecord
+end

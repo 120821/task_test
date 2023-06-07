@@ -1,0 +1,934 @@
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<div class="select_supply" style="height: 615px;margin-top: 20px; height: auto; min-height: 1200px; ">
+  <p style="margin: 20px;">
+    <svg xmlns="http://www.w3.org/2000/svg" color="#0066ff" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+      <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+    </svg>
+    <span style="margin-left: 10px;font-weight: 600; font-size: 18px;">重点商超进销存<span>
+  </p>
+  <div>
+    <%= form_tag '' do %>
+      <span style="margin-left: 8px; float: left;">
+        <%= select_tag :enterprise_id, options_for_select(@enterprises.all.collect {|p| [ p.name, p.id ] }, params[:enterprise_id]), class: 'my_select', style: 'width: 280px;
+            height: 32px; background: #FFFFFF; color: #9c9c9c; border-radius: 3px 3px 3px 3px;
+            opacity: 1; margin-left: 12px; border: 1px solid #DCDCDC;' %>
+
+        <%= select_tag :goods_name, options_for_select(CATEGORY_ARRAY, params[:goods_name]), class: 'rice', style: 'margin-left: 18px;' %>
+        <%= text_field_tag :daily_goods_date, params[:end_at], id: 'datepicker', placeholder: '当日', style: '
+            width: 148px; height: 32px; background: #FFFFFF; border-radius: 3px 3px 3px 3px; opacity: 1;
+            border: 1px solid #DCDCDC; font-size: 14px; font-family: PingFang SC-Regular, PingFang SC; font-weight: 400;
+            color: rgba(0, 0, 0, 0.74); line-height: 22px; margin-left: 20px;' %>
+      </span>
+      <%= submit_tag "查询", class: "form_submit", class: 'btn btn-primary', style: 'margin-left: 20px;', onclick: "location.reload();" %>
+      <span><%= link_to '下载excel', dwonload_trade_csv_goods_url(enterprise: 'xinlian'), class: 'btn btn-primary', style: ' height: 32px; background: #006DF1; opacity: 1; margin-left: 250px;' %>
+
+    <% end %>
+  </div>
+  <div style="display: flex; justify-content: space-around;">
+    <% if params[:data] == '进货量' || params[:data].blank? %>
+      <div id="chart-container" style="width: 350px; height: 300px; "></div>
+      <div id="chart-container3" style="width: 350px; height: 300px; "></div>
+      <div id="chart-container2" style="width: 350px; height: 300px; "></div>
+    <% elsif params[:data] == '销售量' %>
+      <div id="chart-container3" style="width: 350px; height: 300px; "></div>
+      <div id="chart-container" style="width: 350px; height: 300px; "></div>
+      <div id="chart-container2" style="width: 350px; height: 300px; "></div>
+    <% elsif params[:data] == '库存量' %>
+      <div id="chart-container2" style="width: 350px; height: 300px; "></div>
+      <div id="chart-container3" style="width: 350px; height: 300px; "></div>
+      <div id="chart-container" style="width: 350px; height: 300px; "></div>
+    <% end %>
+  </div>
+  <div class="links_status" style="display: flex; justify-content: space-around;">
+    <%#= link_to '进货量', store_goods_path(sales_inventory_situation: '进货量'), style: 'text-decoration: none;', class: "active-link" %>
+    <%#= link_to '销售量', store_goods_path(sales_inventory_situation: '销售量'), style: 'text-decoration: none;' %>
+    <%#= link_to '库存量', store_goods_path(sales_inventory_situation: '库存量'), style: 'text-decoration: none;'  %>
+    <% if params[:data] == '进货量' || params[:data].blank? %>
+      <%= link_to '进货量', store_goods_path(data: '进货量'), style: 'text-decoration: none;', class: "active-link", onclick: "location.reload();" %>
+      <%= link_to '销售量', store_goods_path(data: '销售量'), style: 'text-decoration: none;', onclick: "location.reload();" %>
+      <%= link_to '库存量', store_goods_path(data: '库存量'), style: 'text-decoration: none;', onclick: "location.reload();" %>
+    <% elsif params[:data] == '销售量' %>
+      <%= link_to '进货量', store_goods_path(data: '进货量'), style: 'text-decoration: none;', onclick: "location.reload();"%>
+      <%= link_to '销售量', store_goods_path(data: '销售量'), style: 'text-decoration: none;', class: "active-link", onclick: "location.reload();"%>
+      <%= link_to '库存量', store_goods_path(data: '库存量'), style: 'text-decoration: none;', onclick: "location.reload();" %>
+    <% elsif params[:data] == '库存量' %>
+      <%= link_to '进货量', store_goods_path(data: '进货量'), style: 'text-decoration: none;', onclick: "location.reload();"%>
+      <%= link_to '销售量', store_goods_path(data: '销售量'), style: 'text-decoration: none;', onclick: "location.reload();"%>
+      <%= link_to '库存量', store_goods_path(data: '库存量'), style: 'text-decoration: none;', class: "active-link", onclick: "location.reload();"%>
+    <% end %>
+  </div>
+  <div style="width: 613px; height: 390px; border-radius: 12px 12px 12px 12px;
+              margin-top: 34px; opacity: 1;">
+    <p style="margin: 20px;">
+      <svg xmlns="http://www.w3.org/2000/svg" color="#0066ff" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+        <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+      </svg>
+      <span style="margin-left: 10px;font-weight: 600; font-size: 18px;">销售占库存比例<span>
+    </p>
+    <p style="margin: 20px;">销售占库存比例（存销比）</p>
+    <% if params[:data] == '进货量' %>
+      <div id="container2_input" style="width: 800px; height: 400px;"></div>
+    <% elsif params[:data] == '销售量' %>
+      <div id="container2_output" style="width: 800px; height: 400px;"></div>
+    <% elsif params[:data] == '库存量' %>
+      <div id="container2_save" style="width: 800px; height: 400px;"></div>
+    <% else %>
+      <div id="container2" style="width: 800px; height: 400px;"></div>
+    <% end %>
+  </div>
+
+</div>
+
+
+<script>
+Highcharts.chart('container_default', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: null,
+    // //{
+      //  text: '',
+       // align: 'left'
+    //},
+    tooltip: {
+      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    accessibility: {
+      point: {
+          valueSuffix: '%'
+      }
+    },
+    exporting: {
+      enabled: false // 设置为false表示禁用导出功能
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+            }
+        }
+    },
+    series: [{
+        name: 'Brands',
+        colorByPoint: true,
+        data: [{ name: '面粉:54.6吨', y: 54.6, sliced: true, selected: true },
+            { name: '食用油:55.6吨', y: 55.6 },
+            { name: '蔬菜:53.13吨', y: 53.13 },
+            { name: '猪肉:58.95吨', y: 58.95 },
+            { name: '牛肉:56.13吨', y: 56.13 },
+            { name: '大米:58.52吨', y: 58.52 },
+            { name: '方便食品:50.96吨', y: 50.96 },
+            { name: '水果:51.96吨', y: 51.96 },
+            { name: '牛奶:52.96吨', y: 52.96 },
+            { name: '鸡蛋:59.23吨', y: 59.23 },
+            { name: '禽肉:57.96吨', y: 57.96 },
+            { name: '羊肉:58.16吨', y: 58.16 } ]
+    }]
+});
+
+</script>
+<script>
+Highcharts.chart('container_save', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: null,
+    // //{
+      //  text: '',
+       // align: 'left'
+    //},
+    tooltip: {
+      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    accessibility: {
+      point: {
+          valueSuffix: '%'
+      }
+    },
+    exporting: {
+      enabled: false // 设置为false表示禁用导出功能
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+            }
+        }
+    },
+    series: [{
+        name: 'Brands',
+        colorByPoint: true,
+        data: [{ name: '面粉:54.6吨', y: 54.6, sliced: true, selected: true },
+            { name: '食用油:55.6吨', y: 55.6 },
+            { name: '蔬菜:53.13吨', y: 53.13 },
+            { name: '猪肉:58.95吨', y: 58.95 },
+            { name: '牛肉:56.13吨', y: 56.13 },
+            { name: '大米:58.52吨', y: 58.52 },
+            { name: '方便食品:50.96吨', y: 50.96 },
+            { name: '水果:51.96吨', y: 51.96 },
+            { name: '牛奶:52.96吨', y: 52.96 },
+            { name: '鸡蛋:59.23吨', y: 59.23 },
+            { name: '禽肉:57.96吨', y: 57.96 },
+            { name: '羊肉:58.16吨', y: 58.16 } ]
+    }]
+});
+
+</script>
+<script>
+Highcharts.chart('container_output', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: null,
+    // //{
+      //  text: '',
+       // align: 'left'
+    //},
+    tooltip: {
+      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    accessibility: {
+      point: {
+          valueSuffix: '%'
+      }
+    },
+    exporting: {
+      enabled: false // 设置为false表示禁用导出功能
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+            }
+        }
+    },
+    series: [{
+        name: 'Brands',
+        colorByPoint: true,
+        data: [{ name: '面粉:54.6吨', y: 54.6, sliced: true, selected: true },
+            { name: '食用油:55.6吨', y: 55.6 },
+            { name: '蔬菜:53.13吨', y: 53.13 },
+            { name: '猪肉:58.95吨', y: 58.95 },
+            { name: '牛肉:53.13吨', y: 53.13 },
+            { name: '大米:58.52吨', y: 58.52 },
+            { name: '方便食品:51.96吨', y: 51.96 },
+            { name: '水果:52.96吨', y: 52.96 },
+            { name: '牛奶:53.96吨', y: 53.96 },
+            { name: '鸡蛋:59.23吨', y: 59.23 },
+            { name: '禽肉:57.96吨', y: 57.96 },
+            { name: '羊肉:58.16吨', y: 58.16 } ]
+    }]
+});
+
+</script>
+<script>
+Highcharts.chart('container_input', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: null,
+    // //{
+      //  text: '',
+       // align: 'left'
+    //},
+    tooltip: {
+      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    accessibility: {
+      point: {
+          valueSuffix: '%'
+      }
+    },
+    exporting: {
+      enabled: false // 设置为false表示禁用导出功能
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+            }
+        }
+    },
+    series: [{
+        name: 'Brands',
+        colorByPoint: true,
+        data: [{ name: '面粉:4.6吨', y: 4.6, sliced: true, selected: true },
+            { name: '食用油:1.6吨', y: 1.6 },
+            { name: '蔬菜:23.13吨', y: 23.13 },
+            { name: '猪肉:128.95吨', y: 128.95 },
+            { name: '牛肉:6.13吨', y: 6.13 },
+            { name: '大米:68.52吨', y: 68.52 },
+            { name: '方便食品:11.9吨', y: 11.9 },
+            { name: '水果:2.96吨', y: 2.96 },
+            { name: '牛奶:38.96吨', y: 38.96 },
+            { name: '鸡蛋:29.23吨', y: 29.23 },
+            { name: '禽肉:70.96吨', y: 70.96 },
+            { name: '羊肉:2.16吨', y: 2.16 } ]
+    }]
+});
+
+</script>
+<script>
+Highcharts.chart('container', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: null,
+    // //{
+      //  text: '',
+       // align: 'left'
+    //},
+    tooltip: {
+      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    accessibility: {
+      point: {
+          valueSuffix: '%'
+      }
+    },
+    exporting: {
+      enabled: false // 设置为false表示禁用导出功能
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+            }
+        }
+    },
+    series: [{
+        name: 'Brands',
+        colorByPoint: true,
+        data: [{ name: '面粉:54.6吨', y: 54.6, sliced: true, selected: true },
+        { name: '食用油:15.6吨', y: 15.6 },
+        { name: '蔬菜:23.13吨', y: 223.13 },
+        { name: '猪肉:18.95吨', y: 18.95 },
+        { name: '牛肉:63.13吨', y: 63.13 },
+        { name: '大米:168.52吨', y: 168.52 },
+        { name: '方便食品:11.96吨', y: 11.96 },
+        { name: '水果:2.96吨', y: 2.96 },
+        { name: '牛奶:33.96吨', y: 33.96 },
+        { name: '鸡蛋:29.23吨', y: 29.23 },
+        { name: '禽肉:7.96吨', y: 7.96 },
+        { name: '羊肉:28.16吨', y: 28.16 } ]
+    }]
+});
+
+</script>
+<style>
+.highcharts-figure,
+.highcharts-data-table table {
+    min-width: 320px;
+    max-width: 660px;
+    margin: 1em auto;
+}
+
+.highcharts-data-table table {
+    border: 1px solid #ebebeb;
+    margin: 10px auto;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.highcharts-data-table caption {
+    padding: 1em 0;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.highcharts-data-table th {
+    font-weight: 600;
+    padding: 0.5em;
+}
+
+.highcharts-data-table td,
+.highcharts-data-table th,
+.highcharts-data-table caption {
+    padding: 0.5em;
+}
+
+.highcharts-data-table thead tr,
+.highcharts-data-table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+.highcharts-data-table tr:hover {
+    background: #f1f7ff;
+}
+
+</style>
+
+
+
+
+<script>
+  Highcharts.chart('container2_input', {
+  chart: {
+    type: 'column'
+  },
+  title: {
+    text: null //'销售占库存比例（存销比）'
+  },
+  exporting: {
+    enabled: false // 设置为false表示禁用导出功能
+  },
+  xAxis: {
+    categories: ['面粉', '食用油', '蔬菜', '猪肉', '牛肉', '大米', '方便食品', '水果', '牛奶', '鸡蛋', '禽肉', '羊肉']
+  },
+  yAxis: [{
+    title: {
+      text: null, // '库存（吨）',
+      style: {
+        color: '#165DFF'// Highcharts.getOptions().colors[1]
+      }
+    }
+  }, {
+    title: {
+      text: null, //'存销比',
+      style: {
+        color: '#14C9C9' //Highcharts.getOptions().colors[0]
+      }
+    },
+    opposite: true
+  }],
+  series: [{
+    name: '存销比',
+    type: 'line',
+    yAxis: 1,
+    color: '#14C9C9', // Highcharts.getOptions().colors[0],
+    data: [32.1, 32.8, 32.3, 32.6, 31.3, 32.5, 33.2, 33.4, 33.1, 33.9, 31.5, 31.8]
+  }, {
+    name: '库存',
+    type: 'column',
+    yAxis: 0,
+    color: '#165DFF',// Highcharts.getOptions().colors[1],
+    data: [34.6, 35.6, 31.13, 38.95, 36.13, 38.52, 31.96, 32.96, 33.96, 39.23, 37.96, 38.16]
+  }]
+});
+</script>
+<script>
+  Highcharts.chart('container2_output', {
+  chart: {
+    type: 'column'
+  },
+  title: {
+    text: null //'销售占库存比例（存销比）'
+  },
+  exporting: {
+    enabled: false // 设置为false表示禁用导出功能
+  },
+  xAxis: {
+    categories: ['面粉', '食用油', '蔬菜', '猪肉', '牛肉', '大米', '方便食品', '水果', '牛奶', '鸡蛋', '禽肉', '羊肉']
+  },
+  yAxis: [{
+    title: {
+      text: null, //'库存（吨）',
+      style: {
+        color: '#165DFF'// Highcharts.getOptions().colors[1]
+      }
+    }
+  }, {
+    title: {
+      text: '存销比',
+      style: {
+        color: '#14C9C9' //Highcharts.getOptions().colors[0]
+      }
+    },
+    opposite: true
+  }],
+  series: [{
+    name: '存销比',
+    type: 'line',
+    yAxis: 1,
+    color: '#14C9C9', // Highcharts.getOptions().colors[0],
+    data: [32.1, 35.8, 33.3, 32.6, 31.3, 32.5, 31.2, 33.4, 33.1, 32.9, 32.5, 31.8]
+  }, {
+    name: '库存',
+    type: 'column',
+    yAxis: 0,
+    color: '#165DFF',// Highcharts.getOptions().colors[1],
+    data: [34.6, 35.6, 33.13, 38.95, 31.13, 38.52, 36.96, 32.9, 36.96, 36.23, 37.9, 36.16]
+  }]
+});
+</script>
+<script>
+  Highcharts.chart('container2_save', {
+  chart: {
+    type: 'column'
+  },
+  title: {
+    text: null //'销售占库存比例（存销比）'
+  },
+  exporting: {
+    enabled: false // 设置为false表示禁用导出功能
+  },
+  xAxis: {
+    categories: ['面粉', '食用油', '蔬菜', '猪肉', '牛肉', '大米', '方便食品', '水果', '牛奶', '鸡蛋', '禽肉', '羊肉']
+  },
+  yAxis: [{
+    title: {
+      text:null, // '库存（吨）',
+      style: {
+        color: '#165DFF'// Highcharts.getOptions().colors[1]
+      }
+    }
+  }, {
+    title: {
+      text: null, //'存销比',
+      style: {
+        color: '#14C9C9' //Highcharts.getOptions().colors[0]
+      }
+    },
+    opposite: true
+  }],
+  series: [{
+    name: '存销比',
+    type: 'line',
+    yAxis: 1,
+    color: '#14C9C9', // Highcharts.getOptions().colors[0],
+    data: [32.1, 31.8, 32.3, 31.6, 31.3, 32.5, 31.2, 33.4, 34.1, 32.9, 31.5, 31.8]
+  }, {
+    name: '库存',
+    type: 'column',
+    yAxis: 0,
+    color: '#165DFF',// Highcharts.getOptions().colors[1],
+    data: [34.6, 31.6, 31.13, 38.95, 36.13, 38.52, 31.9, 35.96, 33.93, 34.2, 36.96, 33.16]
+  }]
+});
+</script>
+<script>
+  Highcharts.chart('container2', {
+  chart: {
+    type: 'column'
+  },
+  title: {
+    text: null //'销售占库存比例（存销比）'
+  },
+  exporting: {
+    enabled: false // 设置为false表示禁用导出功能
+  },
+  xAxis: {
+    categories: ['面粉', '食用油', '蔬菜', '猪肉', '牛肉', '大米', '方便食品', '水果', '牛奶', '鸡蛋', '禽肉', '羊肉']
+  },
+  yAxis: [{
+    title: {
+      text: null, // 设置为null表示不显示标题
+      style: {
+        color: '#165DFF'// Highcharts.getOptions().colors[1]
+      }
+    }
+  }, {
+    title: {
+      text: null, // 设置为null表示不显示标题
+      style: {
+        color: '#14C9C9' //Highcharts.getOptions().colors[0]
+      }
+    },
+    opposite: true
+  }],
+  series: [{
+    name: '存销比',
+    type: 'line',
+    yAxis: 1,
+    color: '#14C9C9', // Highcharts.getOptions().colors[0],
+    data: [32.1, 31.8, 32.3, 31.6, 31.3, 32.5, 31.2, 33.4, 33.1, 32.9, 31.5, 31.8]
+  }, {
+    name: '库存',
+    type: 'column',
+    yAxis: 0,
+    color: '#165DFF',// Highcharts.getOptions().colors[1],
+    data: [34.6, 35.6, 33.13, 38.95, 36.13, 38.52, 30.96, 31.96, 32.96, 39.23, 37.96, 38.16]
+  }]
+});
+</script>
+<style>
+  .rate_links {
+    width: 68px;
+    text-decoration: none;
+    height: 32px;
+    background: #FFFFFF;
+    border-radius: 0px 0px 0px 0px;
+    opacity: 1;
+    line-height: 32px;
+    border: 1px solid #D9D9D9;
+    text-align: center;
+
+  }
+  .rate_links a {
+    font-size: 20px;
+    color: rgba(0,0,0,0.6);
+    line-height: 30px;
+    letter-spacing: 1px;
+    text-decoration: none; /* 去掉下划线 */
+  }
+
+  /* 激活链接样式 */
+  .rate_links a.active-link {
+    font-size: 24px; /* 加大字号 */
+    font-weight: bold; /* 加粗 */
+    color: black; /* 黑色 */
+    text-decoration: underline; /* 下划线 */
+    text-underline-position: under; /* 下划线位置 */
+    text-decoration-color: #006DF1;
+  }
+  .select_div_text {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(0,0,0,0.65); text-decoration: none;
+
+  }
+  .rice {
+    width: 148px;
+    height: 32px;
+    background: #FFFFFF;
+    border-radius: 3px 3px 3px 3px;
+    opacity: 1;
+    border: 1px solid #DCDCDC;
+  }
+  .today {
+    width: 148px;
+    height: 32px;
+    background: #FFFFFF;
+    border-radius: 3px 3px 3px 3px;
+    opacity: 1;
+    border: 1px solid #DCDCDC;
+
+  }
+  .select_enterprise{
+    width: 280px;
+    height: 32px;
+    background: #FFFFFF;
+    border-radius: 3px 3px 3px 3px;
+    opacity: 1;
+    border: 1px solid #DCDCDC;
+
+  }
+
+  .links-container a {
+    color: #D9D9D9;
+    text-decoration: none;
+    font-size: 12px;
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    font-weight: 400;
+    color: rgba(0,0,0,0.65);
+    line-height: 32px;
+
+  }
+
+  .links-container {
+    display: flex;
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(0,0,0,0.65);
+    line-height: 17px;
+    text-align: center;
+    line-height: 32px;
+    color: rgba(0,0,0,0.65);
+    text-decoration: none;
+  }
+  .links_active{
+    color: #006DF1;
+    opacity: 1;
+    border: 1px solid #006DF1;
+  }
+  .links-container a.active,
+  /*.links-container a:hover */
+    {
+    color: blue;
+    opacity: 1;
+    border: 1px solid #006DF1;
+
+  }
+  .select_div {
+    width: 68px;
+    height: 32px;
+    background: #FFFFFF;
+    border-radius: 0px 0px 0px 0px;
+    opacity: 1;
+    line-height: 32px;
+    border: 1px solid #D9D9D9;
+    text-align: center;
+  }
+
+  #region {width: 280px;
+    height: 32px;
+    background: #FFFFFF;
+    border-radius: 3px 3px 3px 3px;
+    opacity: 1;
+    border: 1px solid #DCDCDC;
+    font-weight: 400;
+    color: rgba(0,0,0,0.4);
+    line-height: 22px;
+    font-size: 14px;
+  }
+  #goods_name {
+    font-size: 14px;
+    font-family: PingFang SC-Regular, PingFang SC;
+    font-weight: 400;
+    color: rgba(0,0,0,0.4);
+    line-height: 22px;
+  }
+
+</style>
+<script>
+  function goToRegion(select) {
+    var goodRegion = select.value;
+    if (goodRegion) {
+      window.location.href = "/goods/store?data=save&region=" + goodRegion;
+    }
+  }
+  function goToName(select) {
+    var goodName = select.value;
+    if (goodName) {
+      window.location.href = "/goods/store?data=save&goods_name=" + goodName;
+    }
+  }
+  function goToDate(select) {
+    var goodDate = select.value;
+    if (goodDate) {
+      window.location.href = "/goods/store?data=save&end_at=" + goodDate;
+    }
+  }
+</script>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var chartData = [
+      { name: '大米: 51.31吨', y: 51.31 },
+      { name: '面粉: 52.28吨', y: 52.28 },
+      { name: '食用油: 51.16吨', y: 51.16 },
+      { name: '蔬菜: 53.12吨', y: 53.12 },
+      { name: '猪肉: 52.25吨', y: 52.25 },
+      { name: '羊肉: 54.13吨', y: 54.13 },
+      { name: '鸡肉: 53.27吨', y: 53.27 },
+      { name: '鸡蛋: 55.19吨', y: 55.19 },
+      { name: '鲜奶: 54.23吨', y: 54.23 },
+      { name: '方便面: 51.35吨', y: 51,35 },
+      { name: '牛肉: 52.42吨', y: 52.42 },
+      { name: '水果: 55.11吨', y: 55.11 }
+    ];
+
+    Highcharts.chart('chart-container', {
+      chart: {
+        type: 'pie'
+      },
+      title: {
+        text: null //'食品消费饼状图'
+      },
+      plotOptions: {
+        pie: {
+          innerSize: '20%'
+        }
+      },
+      tooltip: {
+        pointFormat: '{point.name}: {point.y:.2f} 吨' // 将提示框内容设置为 chartData 的名称和值，并添加单位
+      },
+      series: [{
+        name: '食品',
+        data: chartData,
+        showInLegend: false // 不显示 series 的名称
+      }]
+        /*
+      series: [{
+        name: chartData['name'],
+        data: chartData
+      }]
+        */
+    });
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var chartData = [
+      { name: '大米: 10吨', y: 10 },
+      { name: '面粉: 8吨', y: 8 },
+      { name: '食用: 6吨', y: 6 },
+      { name: '蔬菜: 12吨', y: 12 },
+      { name: '猪肉: 5吨', y: 5 },
+      { name: '羊肉: 3吨', y: 3 },
+      { name: '鸡肉: 7吨', y: 7 },
+      { name: '鸡蛋: 9吨', y: 9 },
+      { name: '鲜奶: 4吨', y: 4 },
+      { name: '方便面: 15吨', y: 15 },
+      { name: '牛肉: 2吨', y: 2 },
+      { name: '水果: 11吨', y: 11 }
+    ];
+
+    Highcharts.chart('chart-container', {
+      chart: {
+        type: 'pie'
+      },
+      title: {
+        text: null //'食品消费饼状图'
+      },
+      plotOptions: {
+        pie: {
+          innerSize: '20%'
+        }
+      },
+      tooltip: {
+        pointFormat: '{point.name}: {point.y:.2f} 吨' // 将提示框内容设置为 chartData 的名称和值，并添加单位
+      },
+      series: [{
+        name: '食品',
+        data: chartData,
+        showInLegend: false // 不显示 series 的名称
+      }]
+        /*
+      series: [{
+        name: chartData['name'],
+        data: chartData
+      }]
+        */
+    });
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var chartData = [
+      { name: '大米: 30吨', y: 30 },
+      { name: '面粉: 58吨', y: 58 },
+      { name: '食用油: 36吨', y: 36 },
+      { name: '蔬菜: 33吨', y: 33 },
+      { name: '猪肉: 15吨', y: 15 },
+      { name: '羊肉: 23吨', y: 23 },
+      { name: '鸡肉: 17吨', y: 17 },
+      { name: '鸡蛋: 59吨', y: 59 },
+      { name: '鲜奶: 14吨', y: 14 },
+      { name: '方便面: 35吨', y: 35 },
+      { name: '牛肉: 23吨', y: 23 },
+      { name: '水果: 31吨', y: 31 }
+    ];
+
+    Highcharts.chart('chart-container2', {
+      chart: {
+        type: 'pie'
+      },
+      title: {
+        text: null //'食品消费饼状图'
+      },
+      plotOptions: {
+        pie: {
+          innerSize: '20%'
+        }
+      },
+      tooltip: {
+        pointFormat: '{point.name}: {point.y:.2f} 吨' // 将提示框内容设置为 chartData 的名称和值，并添加单位
+      },
+      series: [{
+        name: '食品',
+        data: chartData,
+        showInLegend: false // 不显示 series 的名称
+      }]
+        /*
+      series: [{
+        name: chartData['name'],
+        data: chartData
+      }]
+        */
+    });
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var chartData = [
+      { name: '大米: 60吨', y: 60 },
+      { name: '面粉: 18吨', y: 18 },
+      { name: '食用: 16吨', y: 16 },
+      { name: '蔬菜: 63吨', y: 63 },
+      { name: '猪肉: 38吨', y: 38 },
+      { name: '羊肉: 26吨', y: 26 },
+      { name: '鸡肉: 27吨', y: 27 },
+      { name: '鸡蛋: 39吨', y: 39 },
+      { name: '鲜奶: 34吨', y: 34 },
+      { name: '方便面: 68吨', y: 68 },
+      { name: '牛肉: 16吨', y: 16 },
+      { name: '水果: 31吨', y: 31 }
+    ];
+
+    Highcharts.chart('chart-container3', {
+      chart: {
+        type: 'pie'
+      },
+      title: {
+        text: null //'食品消费饼状图'
+      },
+      plotOptions: {
+        pie: {
+          innerSize: '20%'
+        }
+      },
+      tooltip: {
+        pointFormat: '{point.name}: {point.y:.2f} 吨' // 将提示框内容设置为 chartData 的名称和值，并添加单位
+      },
+      series: [{
+        name: '食品',
+        data: chartData,
+        showInLegend: false // 不显示 series 的名称
+      }]
+        /*
+      series: [{
+        name: chartData['name'],
+        data: chartData
+      }]
+        */
+    });
+  });
+</script>
+<style>
+.links_status{
+  margin-left: 19px;
+}
+.links_status a {
+  letter-spacing: 1px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 400;
+  color: #666666;
+  line-height: 24px;
+}
+
+/* 激活链接样式 */
+.links_status a.active-link {
+  font-size: 16px;
+  font-weight: 500;
+  color: #3F73F6;
+  line-height: 24px;
+  font-weight: bold; /* 加粗 */
+  text-decoration: underline; /* 下划线 */
+  text-underline-position: under; /* 下划线位置 */
+  text-decoration-color: #006DF1;
+}
+</style>

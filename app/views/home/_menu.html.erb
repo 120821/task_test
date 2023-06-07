@@ -1,0 +1,258 @@
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse" style="background: white; width: 200px;">
+      <div class="position-sticky pt-3">
+        <div class="accordion-item">
+        </div>
+        <ul class="nav flex-column">
+          <% if current_manager.category == '管理员' %>
+            <%= render 'home/charts_menu' %>
+            <%= render 'home/statistics_menu' %>
+            <%= render 'home/warn_menu' %>
+            <%= render 'home/enterprises_menu' %>
+            <%= render 'home/managers_menu' %>
+
+          <% elsif current_manager.category == '地州商务局' %>
+            <%= render 'home/charts_menu' %>
+            <%= render 'home/statistics_menu' %>
+            <%= render 'home/warn_menu' %>
+            <%= render 'home/enterprises_menu' %>
+            <%= render 'home/managers_menu' %>
+
+          <% elsif current_manager.category == '企业' %>
+
+            <li class="nav-item">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#materials-collapse" aria-expanded="false" aria-controls="materials-collapse">
+                <span class="menu_button">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" color="#006DF1" fill="currentColor" class="bi bi-file-bar-graph-fill" viewBox="0 0 16 16">
+                    <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-2 11.5v-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-2.5.5a.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1zm-3 0a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-1z"/>
+                  </svg>
+                  企业信息&nbsp;&nbsp;&nbsp;&nbsp;>
+                </span>
+              </button>
+            </li>
+            <div id="materials-collapse" class="" aria-labelledby="materials-heading" data-bs-parent="#sidebar-menu">
+              <div class="accordion-body">
+                <ul class="list-unstyled">
+                  <li class="active">
+                    <% if params[:controller] == 'enterprises' && params[:action] == 'new' %>
+                      <div class="menu_link_clicked">
+                        <a href="<%= new_enterprise_path(number: 1) %>" class="menu_sub_link">
+                          <span class="" style="margin-left: 40px; line-height: 44px;">企业基本信息</span>
+                        </a>
+                      </div>
+                    <% else %>
+                      <div class="menu_link">
+                        <a href="<%= new_enterprise_path(number: 1) %>" class="menu_sub_link">
+                          <span style="margin-left: 40px; line-height: 44px;">企业基本信息</span>
+                        </a>
+                      </div>
+                    <% end %>
+                  </li>
+                  <% if params[:controller] == 'material_reserves' && params[:action] == 'new' %>
+                    <li class="active">
+                      <div class="menu_link_clicked">
+                        <a href="<%= new_material_reserf_path(number: 2) %>" class="menu_sub_link">
+                          <span style="margin-left: 40px; line-height: 44px;">仓储信息</span>
+                        </a>
+                      </div>
+                    <% else %>
+                      <div class="menu_link">
+                        <a href="<%= new_material_reserf_path(number: 2) %>" class="menu_sub_link">
+                          <span style="margin-left: 40px; line-height: 44px;">仓储信息</span>
+                        </a>
+                      </div>
+                    </li>
+                  <% end %>
+                  <% if params[:controller] == 'cars' && params[:action] == 'new' %>
+                    <li class="active">
+                      <div class="menu_link_clicked">
+                        <a href="<%= new_car_path(number: 3) %>" class="menu_sub_link">
+                          <span style="margin-left: 40px; line-height: 44px;">车辆信息</span>
+                        </a>
+                      </div>
+                    <% else %>
+                      <div class="menu_link">
+                        <a href="<%= new_car_path(number: 3) %>" class="menu_sub_link">
+                          <span style="margin-left: 40px; line-height: 44px;">车辆信息</span>
+                        </a>
+                      </div>
+                    </li>
+                  <% end %>
+                  <% if params[:controller] == 'goods' && params[:action] == 'notice' %>
+                    <li class="active">
+                      <div class="menu_link_clicked">
+                        <a href="<%= notice_goods_path %>" class="menu_sub_link">
+                          <span style="margin-left: 40px; line-height: 44px;">完成创建</span>
+                        </a>
+                      </div>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+            <li class="nav-item">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#materials-collapse" aria-expanded="false" aria-controls="materials-collapse">
+                <span class="menu_button">
+                  <svg xmlns="http://www.w3.org/2000/svg" color="#006df1" width="16" height="16" fill="currentColor" class="bi bi-chat-right-dots-fill" viewBox="0 0 16 16">
+                    <path d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353V2zM5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                  </svg>
+                  数据填报&nbsp;&nbsp;&nbsp;&nbsp;>
+                </span>
+              </button>
+            </li>
+            <div id="materials-collapse" class="" aria-labelledby="materials-heading" data-bs-parent="#sidebar-menu">
+              <div class="accordion-body">
+                <ul class="list-unstyled">
+                  <li class="active">
+                    <% if params[:controller] == 'daily_goods_statistics' && params[:action] == 'new' %>
+                      <div class="menu_link_clicked">
+                        <a href="<%= new_daily_goods_statistic_path %>" class="menu_sub_link">
+                          <span class="" style="margin-left: 40px; line-height: 44px;">立即填报</span>
+                        </a>
+                      </div>
+                    <% else %>
+                      <div class="menu_link">
+                        <a href="<%= new_daily_goods_statistic_path %>" class="menu_sub_link">
+                          <span style="margin-left: 40px; line-height: 44px;">立即填报</span>
+                        </a>
+                      </div>
+                    <% end %>
+                  </li>
+                  <li class="active">
+                    <% if params[:controller] == 'daily_goods_statistics' && params[:action] == 'index' %>
+                      <div class="menu_link_clicked">
+                        <a href="<%= daily_goods_statistics_path %>" class="menu_sub_link">
+                          <span class="" style="margin-left: 40px; line-height: 44px;">填报历史</span>
+                        </a>
+                      </div>
+                    <% else %>
+                      <div class="menu_link">
+                        <a href="<%= daily_goods_statistics_path %>" class="menu_sub_link">
+                          <span style="margin-left: 40px; line-height: 44px;">填报历史</span>
+                        </a>
+                      </div>
+                    <% end %>
+                  </li>
+                  <li class="active">
+                    <% if params[:controller] == 'enterprise_personnels' && params[:action] == 'new' %>
+                      <div class="menu_link_clicked">
+                        <a href="<%= new_enterprise_personnel_path %>" class="menu_sub_link">
+                          <span style="margin-left: 40px; line-height: 44px;">录入填报人员</span>
+                        </a>
+                      </div>
+                    <% else %>
+                      <div class="menu_link">
+                        <a href="<%= new_enterprise_personnel_path %>" class="menu_sub_link">
+                          <span style="margin-left: 40px; line-height: 44px;">录入填报人员</span>
+                        </a>
+                      </div>
+                    <% end %>
+                  </li>
+                  <% if params[:controller] == 'goods' && params[:action] == 'notice' %>
+                    <li class="active">
+                      <div class="menu_link_clicked">
+                        <a href="<%= notice_goods_path %>" class="menu_sub_link">
+                          <span style="margin-left: 40px; line-height: 44px;">完成创建</span>
+                        </a>
+                      </div>
+                    </li>
+                  <% end %>
+                  <li class="nav-item">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#materials-collapse" aria-expanded="false" aria-controls="materials-collapse">
+                      <span class="menu_button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="17" color="#006DF1" height="15" fill="currentColor" class="bi bi-menu-button-wide-fill" viewBox="0 0 16 16">
+                          <path d="M1.5 0A1.5 1.5 0 0 0 0 1.5v2A1.5 1.5 0 0 0 1.5 5h13A1.5 1.5 0 0 0 16 3.5v-2A1.5 1.5 0 0 0 14.5 0h-13zm1 2h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1 0-1zm9.927.427A.25.25 0 0 1 12.604 2h.792a.25.25 0 0 1 .177.427l-.396.396a.25.25 0 0 1-.354 0l-.396-.396zM0 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8zm1 3v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2H1zm14-1V8a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2h14zM2 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
+                        </svg>
+                        企业信息&nbsp;&nbsp;&nbsp;&nbsp;>
+                      </span>
+                    </button>
+                    <div id="materials-collapse" class="" aria-labelledby="materials-heading" data-bs-parent="#sidebar-menu">
+                      <div class="accordion-body">
+                        <ul class="list-unstyled">
+                          <li class="active">
+                            <% if params[:controller] == 'enterprises' && params[:action] == 'list' %>
+                              <div class="menu_link_clicked">
+                                <a href="<%= list_enterprises_path %>" class="menu_sub_link">
+                                  <span class="" style="margin-left: 40px; line-height: 44px;">基础信息</span>
+                                </a>
+                              </div>
+                            <% else %>
+                              <div class="menu_link">
+                                <a href="<%= list_enterprises_path %>" class="menu_sub_link">
+                                  <span style="margin-left: 40px; line-height: 44px;">基础信息</span>
+                                </a>
+                              </div>
+                            <% end %>
+                          </li>
+                          <li class="active">
+                            <% if params[:controller] == 'material_reserves' && params[:action] == 'index' %>
+                              <div class="menu_link_clicked">
+                                <a href="<%= material_reserves_path %>" class="menu_sub_link">
+                                  <span class="" style="margin-left: 40px; line-height: 44px;">仓储信息</span>
+                                </a>
+                              </div>
+                            <% else %>
+                              <div class="menu_link">
+                                <a href="<%= material_reserves_path %>" class="menu_sub_link">
+                                  <span style="margin-left: 40px; line-height: 44px;">仓储信息</span>
+                                </a>
+                              </div>
+                            <% end %>
+                          </li>
+                          <li class="active">
+                            <% if params[:controller] == 'cars' && params[:action] == 'index' %>
+                              <div class="menu_link_clicked">
+                                <a href="<%= cars_path %>" class="menu_sub_link">
+                                  <span class="" style="margin-left: 40px; line-height: 44px;">车辆信息</span>
+                                </a>
+                              </div>
+                            <% else %>
+                              <div class="menu_link">
+                                <a href="<%= cars_path %>" class="menu_sub_link">
+                                  <span style="margin-left: 40px; line-height: 44px;">车辆信息</span>
+                                </a>
+                              </div>
+                            <% end %>
+                          </li>
+                          <li class="active">
+                            <% if params[:controller] == 'enterprise_personnels' && params[:action] == 'index' %>
+                              <div class="menu_link_clicked">
+                                <a href="<%= enterprise_personnels_path %>" class="menu_sub_link">
+                                  <span class="" style="margin-left: 40px; line-height: 44px;">人员信息</span>
+                                </a>
+                              </div>
+                            <% else %>
+                              <div class="menu_link">
+                                <a href="<%= enterprise_personnels_path %>" class="menu_sub_link">
+                                  <span style="margin-left: 40px; line-height: 44px;">人员信息</span>
+                                </a>
+                              </div>
+                            <% end %>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                </ul>
+              </div>
+            </div>
+
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="col-md-9 auto col-lg-10">
+      <div class="content_tables">
+        <%= yield %>
+      </div>
+    </main>
+  </div>
+</div>
+<style>
+.dropdown-menu {
+  width: 150px;
+  height: 80px;
+}
+
+</style>

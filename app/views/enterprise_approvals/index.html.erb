@@ -1,0 +1,126 @@
+<div style="background: white;width: 1192px; padding: 20px 0px 0 24px; height: auto;
+     background: #FFFFFF; margin: 30px 0; opacity: 1;">
+  <p style="text-align: center;">企业审批</p>
+  <%= form_tag '', method: :get do %>
+    企业:&nbsp;&nbsp;&nbsp;&nbsp; <%= text_field_tag :enterprise_name, params[:enterprise_name], placeholder: '新疆广宏食品集团有限公司', class: 'select_enterprise' %>
+    &nbsp;&nbsp;&nbsp;&nbsp;申请人姓名:&nbsp;&nbsp;&nbsp;&nbsp; <%= text_field_tag :approval_name, params[:approval_name], placeholder: '李华', class: 'select_enterprise' %>
+    &nbsp;&nbsp;&nbsp;&nbsp;手机号码:&nbsp;&nbsp;&nbsp;&nbsp; <%= text_field_tag :tel, params[:tel], placeholder: '13307830000', class: 'select_enterprise' %>
+    &nbsp;&nbsp;&nbsp;&nbsp;<%= submit_tag "查询", class: "form_submit", class: 'btn btn-primary btn-sm fa-input' %>
+  <% end %>
+  <div style="margin-top: 30px; margin-right: 20px;">
+    <table class='table' style='border-left: 1px solid #dcdcdc;
+    border: 1px solid #dcdcdc;
+    border-right: 1px solid #dcdcdc;
+    background: snow;'>
+      <tr class="table_title" class="">
+        <td class="table_td_title" style="color: snow;">
+          <span class="table_td_title" style="color: snow;">序号</span>
+        </td>
+        <td class="table_td_title"  style="margin-top: 16px; display: ;color: snow;">申请人姓名</td>
+        <td class="table_td_title"  style="margin-top: 16px; display: ;color: snow;">手机号码</td>
+        <td class="table_td_title"  style="color: snow;">企业名称</td>
+        <td class="table_td_title"  style="color: snow;">状态</td>
+        <td class="table_td_title"  style="color: snow; text-align: center;">操作</td>
+      </tr>
+      <% @enterprise_approvals.each do |enterprise_approval| %>
+        <tr class="" class="border-bottom" style="border: 1px solid #dcdcdc;background: #ffffff87;">
+          <td class="table_text_submission"><%= enterprise_approval.id %></td>
+          <td class="table_text_submission"><%= enterprise_approval.approval_name %></td>
+          <td class="table_text_submission"><%= enterprise_approval.tel %></td>
+          <td class="table_text_submission"><%= enterprise_approval.enterprise_name %></td>
+          <td class="table_text_submission">
+            <% if enterprise_approval.status.include?("通过") %>
+              <span style="color: green;"><%= enterprise_approval.status %></span>
+            <% elsif enterprise_approval.status.include?("拒绝") %>
+              <span style="color: red;"><%= enterprise_approval.status %></span>
+            <% elsif enterprise_approval.status.include?("处理") %>
+              <span style="color: blue;"><%= enterprise_approval.status %></span>
+            <% end %>
+          </td>
+          <td style="display: flex; justify-content: space-around;">
+            <%= link_to "查看", enterprise_approval, style: 'text-decoration: none;' %>
+            <%= link_to '修改', edit_enterprise_approval_path(enterprise_approval), style: 'text-decoration: none;' %>
+            <%= button_to '删除', enterprise_approval, method: :delete, form: { data: { turbo_confirm: '确定删除?' } }, class: "btn btn-danger btn-sm" %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <div style="display: flex; float: right;">
+
+    <% start_index = @enterprise_approvals.offset_value + 1 %>
+    <% end_index = start_index + @enterprise_approvals.length - 1 %>
+
+    <p class="page_text">
+    <span> 第 <%= start_index %> - <%= end_index %> 条/总共 <%= @enterprise_approvals.total_count %> 条
+
+    <% if @enterprise_approvals.total_pages > 1 %>
+
+      <% first_page = [1, @enterprise_approvals.current_page - 3].max %>
+      <% last_page = [first_page + 6, @enterprise_approvals.total_pages].min %>
+      <% page_links = (first_page..last_page).map do |page|
+        if page == @enterprise_approvals.current_page
+          content_tag :span, page, class: 'current'
+        else
+          link_to page, { page: page }, class: 'page_link'
+        end
+      end %>
+      <%= content_tag :div, page_links.join.html_safe, class: 'paging_links', style: 'display: flex;' %>
+      <span class="page_text">
+        <%= form_tag '', method: :get do %>
+          &nbsp;&nbsp;<span class="page_text"><%#= @daily_goods_statistics.current_page %> 每页 <%= select_tag :per_page, options_for_select([10, 20, 50], params[:per_page]), onchange: "$('#filter_form').submit()" %> 条</span>
+          &nbsp;&nbsp;跳至:&nbsp;&nbsp; <%= text_field_tag :page, params[:page], class: 'page_skip', onchange: "$('#filter_form').submit()"%>&nbsp;&nbsp;页
+          &nbsp;&nbsp;<%= submit_tag "跳转", class: "page_skip", class: 'btn btn-primary btn-sm', style: 'width: 55px; font-size: 14px; height: 32px; background: #006DF1; opacity: 1' %>
+      <% end %>
+      </span>
+    <% end %>
+    </span>
+    </p>
+  </div>
+</div>
+<style>
+.list {
+  background: #f8f9fa;
+  padding: 10px;
+}
+.each-row {
+  border-radius: 5px;
+  margin: 50px 180px;
+  background: white;
+  padding: 10px;
+}
+.input_enterprise {
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: var(--bs-border-radius);
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  border: 1px solid blue;
+  width: 300px;
+}
+.input_tel {
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: var(--bs-border-radius);
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  border: 1px solid blue;
+  width: 200px;
+}
+</style>

@@ -1,0 +1,361 @@
+<div class="show">
+  <span class="show_title">
+    <span style="margin-right: 5px;">
+      <!--
+      <svg xmlns="http://www.w3.org/2000/svg" color="#3c6ded" width="16" height="16" fill="currentColor" class="bi bi-menu-button-wide-fill" viewBox="0 0 16 16">
+        <path d="M1.5 0A1.5 1.5 0 0 0 0 1.5v2A1.5 1.5 0 0 0 1.5 5h13A1.5 1.5 0 0 0 16 3.5v-2A1.5 1.5 0 0 0 14.5 0h-13zm1 2h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1 0-1zm9.927.427A.25.25 0 0 1 12.604 2h.792a.25.25 0 0 1 .177.427l-.396.396a.25.25 0 0 1-.354 0l-.396-.396zM0 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8zm1 3v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2H1zm14-1V8a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2h14zM2 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
+      </svg>
+      -->
+      <%= image_tag "enterprise.png" %>
+    </span>
+    基本信息
+  </span>
+  <div style="display: flex;">
+    <table class='' style="margin-top: 35px;">
+      <tr>
+        <td>
+          <span class="show_table_name">企业详情:</span>
+          <span class="show_table_content"><%= @enterprise.name %></span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="show_table_name">负责人姓名:</span>
+          <span class="show_table_content"><%= @enterprise.person_in_charge %></span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="show_table_name">所属地州:</span>
+          <span class="show_table_content"><%= @enterprise.region %></span>
+        </td>
+      </tr>
+    </table>
+    <table class='' style="margin-top: 35px;">
+      <tr>
+        <td>
+          <span class="show_table_name_two">企业分类:</span>
+          <span class="show_table_content_two"><%= @enterprise.enterprise_category %></span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="show_table_name_two">手机号码:</span>
+          <span class="show_table_content_two"><%= @enterprise.person_in_charge_tel %></span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="show_table_name_two">物资分类:</span>
+          <span class="show_table_content_two"><%= @enterprise.goods_category %></span>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <hr style="margin: 25px 0;"/>
+  <span class="show_title">
+    <span style="margin-right: 5px;">
+    <%= image_tag "warehouse.png" %>
+    <!--
+      <svg xmlns="http://www.w3.org/2000/svg" color="#3c6ded" width="16" height="16" fill="currentColor" class="bi bi-menu-button-wide-fill" viewBox="0 0 16 16">
+        <path d="M1.5 0A1.5 1.5 0 0 0 0 1.5v2A1.5 1.5 0 0 0 1.5 5h13A1.5 1.5 0 0 0 16 3.5v-2A1.5 1.5 0 0 0 14.5 0h-13zm1 2h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1 0-1zm9.927.427A.25.25 0 0 1 12.604 2h.792a.25.25 0 0 1 .177.427l-.396.396a.25.25 0 0 1-.354 0l-.396-.396zM0 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8zm1 3v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2H1zm14-1V8a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2h14zM2 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
+      </svg>
+    -->
+    </span>
+    仓储信息
+  </span>
+  <% @material_reserves.each do |material_reserf| %>
+    <div style="display: flex;">
+      <table class='' style="margin-top: 35px;">
+        <tr>
+          <td>
+            <span class="show_table_name">物资储备量：</span>
+            <span class="show_table_content"><%= material_reserf.storage_apacity %></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="show_table_name">仓库分布地址1：</span>
+            <span class="show_table_content"><%= material_reserf.warehouse_location %></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="show_table_name">仓库分布地址2：</span>
+            <span class="show_table_content"><%= material_reserf.warehouse_location_two %></span>
+          </td>
+        </tr>
+      </table>
+      <table class='' style="margin-top: 35px;">
+        <tr>
+          <td>
+            <span class="show_table_name_two">分拣配送中心：</span>
+            <% if material_reserf.sorting_and_distribution? %>
+              <span class="show_table_content_two"><%= material_reserf.sorting_and_distribution_type %></span>
+            <% else %>
+              <span class="show_table_content_two">无</span>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="show_table_name_two">经纬度：</span>
+            <span class="show_table_content_two"><%= material_reserf.longitude %>,<%= material_reserf.latitude %></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="show_table_name_two">经纬度：</span>
+            <span class="show_table_content_two"><%= material_reserf.longitude_two %>,<%= material_reserf.latitude_two %></span>
+          </td>
+        </tr>
+      </table>
+    </div>
+  <% end %>
+  <hr style="margin: 25px 0;"/>
+  <span class="show_title">
+    <span style="margin-right: 5px;">
+      <%= image_tag "car.png" %>
+    </span>
+    车辆信息
+  </span>
+  <% @cars.each do |car| %>
+    <div style="display: flex;">
+      <table class='' style="margin-top: 35px;">
+        <tr>
+          <td>
+            <span class="show_table_name">车牌号：</span>
+            <span class="show_table_content"><%= car.car_number %></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="show_table_name">司机姓名：</span>
+            <span class="show_table_content"><%= car.driver_name %></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="show_table_name">家庭住址：</span>
+            <span class="show_table_content"><%= car.driver_address %></span>
+          </td>
+        </tr>
+      </table>
+      <table class='' style="margin-top: 35px;">
+        <tr>
+          <td>
+            <span class="show_table_name_two">车辆载货重量：</span>
+            <span class="show_table_content_two"><%= car.weight %></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="show_table_name_two">手机号码：</span>
+            <span class="show_table_content_two"><%= car.driver_tel %></span>
+          </td>
+        </tr>
+      </table>
+    </div>
+  <% end %>
+  <hr style="margin: 25px 0;"/>
+  <span class="show_title">
+    <span style="margin-right: 5px;">
+      <%= image_tag "images.png" %>
+    </span>
+    相关证照
+  </span>
+  <div style="display: flex; margin-top: 35px;">
+    <div style="margin-left: 20px;">
+      <span class="show_table_content">
+        <% if @enterprise.business_license? %>
+          <%= link_to (image_tag @enterprise.business_license.url, style: 'width: 200px; height: 200px;'), @enterprise.business_license.url %>
+        <% else %>
+          <%= image_tag 'business_license.jpg', style: 'width: 200px; height: 200px;' %>
+        <% end %>
+      </span>
+      <br/>
+      <p class="show_table_image_name">营业执照</p>
+    </div>
+    <div style="margin-left: 50px;">
+      <span class="show_table_content">
+        <% if @enterprise.business_processing_license? %>
+          <%= link_to (image_tag @enterprise.business_processing_license.url, style: 'width: 200px; height: 200px;'), @enterprise.business_processing_license.url %>
+        <% else %>
+          <%= image_tag 'business_processing_license.jpg', style: 'width: 200px; height: 200px;' %>
+        <% end %>
+      </span>
+      <br/>
+      <p class="show_table_image_name">经营加工许可证</p>
+    </div>
+    <div style="margin-left: 50px;">
+      <span class="show_table_content">
+        <% if @enterprise.food_distribution_license? %>
+          <%= link_to (image_tag @enterprise.food_distribution_license.url, style: 'width: 200px; height: 200px;'), @enterprise.food_distribution_license.url %>
+        <% else %>
+          <%= image_tag 'food.jpg', style: 'width: 200px; height: 200px;' %>
+        <% end %>
+      </span>
+      <br/>
+      <p class="show_table_image_name">食品流通许可证</p>
+    </div>
+  </div>
+
+  <hr style="margin: 25px 0;"/>
+  <span class="show_title">
+    <span style="margin-right: 5px;">
+      <%= image_tag "image_two.png" %>
+    </span>
+    仓库照片
+  </span>
+  <% @material_reserves.each do |material_reserf| %>
+    <div style="display: flex; margin-top: 35px;">
+      <div style="margin-left: 20px;">
+        <span class="show_table_content">
+          <% if material_reserf.image_one? %>
+            <%= link_to (image_tag material_reserf.image_one.url, style: 'width: 200px; height: 200px;'), material_reserf.image_one.url %>
+          <% end %>
+        </span>
+      </div>
+      <div style="margin-left: 50px;">
+        <span class="show_table_content">
+          <% if material_reserf.image_two? %>
+            <%= link_to (image_tag material_reserf.image_two.url, style: 'width: 200px; height: 200px;'), material_reserf.image_two.url %>
+          <% end %>
+        </span>
+      </div>
+      <div style="margin-left: 50px;">
+        <span class="show_table_content">
+          <% if material_reserf.image_three? %>
+            <%= link_to (image_tag material_reserf.image_three.url, style: 'width: 200px; height: 200px;'), material_reserf.image_three.url %>
+          <% end %>
+        </span>
+      </div>
+    </div>
+  <% end %>
+
+  <!--
+      <tr>
+        <th>负责数据录入人员姓名:</th>
+        <td><%= @enterprise.person_in_charge_of_data_entry %></td>
+      </tr>
+
+      <tr>
+        <th>联系电话:</th>
+        <td><%= @enterprise.person_in_charge_of_data_entry_tel %></td>
+      </tr>
+      <tr>
+        <th>邮箱地址:</th>
+        <td><%= @enterprise.email %></td>
+      </tr>
+      <tr>
+        <th>仓库照片:</th>
+        <td>
+          <% if @enterprise.warehouse_photos_one? %>
+            <%= link_to (image_tag @enterprise.warehouse_photos_one.url, style: 'width: 200px; height: 200px;'), @enterprise.warehouse_photos_one.url %>
+          <% end %>
+          <% if @enterprise.warehouse_photos_two? %>
+            <%= link_to (image_tag @enterprise.warehouse_photos_two.url, style: 'width: 200px; height: 200px;'), @enterprise.warehouse_photos_two.url %>
+          <% end %>
+          <% if @enterprise.warehouse_photos_three? %>
+            <%= link_to (image_tag @enterprise.warehouse_photos_three.url, style: 'width: 200px; height: 200px;'), @enterprise.warehouse_photos_three.url %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          审批状态
+        </th>
+        <td>
+          <%= @enterprise.status %>
+        </td>
+      </tr>
+    </table>
+  -->
+  <div style="display: flex; margin: 40px 300px;">
+    <!--
+    <% if  @enterprise.status.include?('处理') %>
+      <% if current_manager.category == '地州商务局' || current_manager.category == '管理员' %>
+        <%= button_to "拒绝", reject_enterprises_path(id: @enterprise.id), class: "btn btn-secondary btn-sm", style: 'width: 186px; height: 38px;
+                      background: #F2F3F5; border: #F2F3F5; border-radius: 2px; font-size: 14px; font-family: AppleSystemUIFont; color: #1D2129;
+                      line-height: 22px; '  %>
+        <%= button_to "通过", approve_enterprises_path(id: @enterprise.id), class: "btn btn-primary btn-sm", style: 'width: 186px; height: 38px;
+                      background: #006DF1; border-radius: 2px; border： #006DF1; font-size: 14px; font-family: AppleSystemUIFont; color: #FFFFFF;
+                      line-height: 22px; margin-left: 100px;' %>
+      <% else %>
+        <%= link_to '编辑', edit_enterprise_path(@enterprise), class: 'btn btn-light', style:'border: 1px solid #006df1; width: 150px;' %>
+        <%= link_to '返回', enterprises_path, class: 'btn btn-primary', style: 'width: 150px; margin-left: 50px;'%>
+      <% end %>
+    <% end %>
+    -->
+    <%= link_to '编辑', edit_enterprise_path(@enterprise), class: 'btn btn-light', style:'border: 1px solid #006df1; width: 150px;' %>
+    <%= link_to '返回', enterprises_path, class: 'btn btn-primary', style: 'width: 150px; margin-left: 50px;'%>
+  </div>
+</div>
+<style>
+.list {
+  background: #f8f9fa;
+  padding: 10px;
+}
+.each-row {
+  border-radius: 5px;
+  margin: 50px 180px;
+  background: white;
+  padding: 10px;
+}
+.show_title {
+  font-size: 20px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.9);
+  line-height: 28px;
+}
+.show_table_name_two {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.4);
+  margin-left: 216px;
+  line-height: 22px;
+}
+.show_table_content_two {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  margin-left: 10px;
+  color: rgba(0,0,0,0.9);
+  line-height: 22px;
+}
+.show_table_name {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  margin-left: 10px;
+  color: rgba(0,0,0,0.4);
+  line-height: 22px;
+}
+.show_table_content {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  margin-left: 10px;
+  color: rgba(0,0,0,0.9);
+  line-height: 22px;
+}
+.show {
+  width: 1194px;
+  padding: 31px 24px;
+  height: auto;
+  background: #FFFFFF;
+  border-radius: 6px;
+
+}
+.show_table_image_name{
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  margin-top: 20px;
+  margin-left: 20px;
+  font-weight: 400;
+  color: rgba(0,0,0,0.9);
+  line-height: 22px;
+}
+</style>

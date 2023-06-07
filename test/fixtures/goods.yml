@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  enterprise_id: 1
+  material_reserf_id: 1
+  administrative_division: MyString
+  goods_type: MyString
+  quantity: MyString
+  person_in_charge: MyString
+  person_in_charge_tel: MyString
+
+two:
+  enterprise_id: 1
+  material_reserf_id: 1
+  administrative_division: MyString
+  goods_type: MyString
+  quantity: MyString
+  person_in_charge: MyString
+  person_in_charge_tel: MyString

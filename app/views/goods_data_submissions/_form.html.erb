@@ -1,0 +1,103 @@
+<%= form_with(model: goods_data_submission) do |form| %>
+  <h3 style="margin:0 180px">
+    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+      <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+      <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+    </svg>
+    基本信息
+  </h3>
+  <div class= "from">
+    <table class='table table-hover table-bordered table-striped'>
+      <tr>
+        <th style="width: 200px;">
+          所属地州
+        </th>
+        <td>
+          <%= form.select :region, options_for_select(REGIONS), {}, class: 'form-control' %>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          企业名称
+        </th>
+        <td>
+          <%= form.select :enterprise_id, options_from_collection_for_select(current_manager.enterprises.all, :id, :name), {}, class:'form-control' %>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          企业分类
+        </th>
+        <td>
+          <%= form.text_field :enterprise_category, class: 'form-control', placeholder: '例如 大型商超' %>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          物资类型
+        </th>
+        <td>
+          <%= form.text_field :goods_category, class: 'form-control', placeholder: '例如 大米' %>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          上次上报时间
+        </th>
+        <td>
+          <%= form.text_field :last_reported_time, id: 'datepicker', placeholder: '例如 20230402', class: 'form-control' %>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          上报数据（吨）
+        </th>
+        <td>
+          <%= form.text_field :reported_data, class: 'form-control', placeholder: '例如 20' %>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          上报人
+        </th>
+        <td>
+          <%= form.text_field :report_person, class: 'form-control', placeholder: '例如 李华' %>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          联系电话
+        </th>
+        <td>
+          <%= form.text_field :report_person_tel, class: 'form-control', placeholder: '例如 15588888888 ' %>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          今日报送状态
+        </th>
+        <td>
+          <%= form.radio_button :report_status_today, 'true', id: "true" %>
+          <%= form.label :true, "已报送", for: "true" %>
+          <%= form.radio_button :report_status_today, 'false', id: "false" %>
+          <%= form.label :false_then_transfer_to_user, "未报送", for: "false" %>
+        </td>
+      </tr>
+      <!--
+      <tr>
+        <th>
+          操作
+        </th>
+        <td>
+          <%= form.text_field :operations, class: 'form-control', placeholder: '例如 催促报送' %>
+        </td>
+      </tr>
+      -->
+    </table>
+    <div style="margin-bottom: 200px; margin-top: 100px;">
+      <%= link_to '返回', goods_data_submissions_path, class: 'btn btn-primary', style: 'width: 150px; float: left;' %>
+      <%#= link_to '详情', @goods_data_submission, class: 'btn btn-primary', style: 'width: 150px; float: right;' %>
+      <%= form.submit "确定", class: 'btn btn-primary', style: 'width: 150px; margin-right: 50px; float:right;' %>
+    </div>
+  </div>
+<% end %>

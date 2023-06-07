@@ -1,0 +1,7 @@
+<% if current_manager.category == '企业' %>
+  <%= render 'home/enterprise_daily_goods_statistics_list' %>
+<% elsif current_manager.category == '管理员' %>
+  <%= render 'home/manager_daily_goods_statistics_list' %>
+<% elsif current_manager.category == '地州商务局' %>
+  <%= render 'home/manager_daily_goods_statistics_list' %>
+<% end %>

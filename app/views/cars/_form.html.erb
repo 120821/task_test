@@ -1,0 +1,149 @@
+<%= form_with(model: car) do |form| %>
+  <div class= "table_div">
+    <table class='table_new_car' style="">
+      <tr>
+        <th class="table_name">
+          已录入车辆&nbsp;&nbsp;&nbsp;&nbsp;
+        </th>
+        <td style="display: flex; justify-content: flex-start;height: 50px;
+                   flex-flow: row wrap;
+                    align-content: flex-start;
+                    width: 430px;">
+          <% @car_numbers.each do |car_number| %>
+            <% if @car_numbers.size > 3 %>
+              <div style="margin: 3px 0;width: 100px; background: #e5e5e5; text-align: center; margin-left: 30px;">
+            <% else %>
+              <div style="margin-top: 10px; width: 100px; background: #e5e5e5; text-align: center; margin-left: 30px;">
+            <% end %>
+              <%= car_number %> <span style="color: red;">#</span>
+            </div>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          企业名称&nbsp;&nbsp;&nbsp;&nbsp;
+        </th>
+        <td>
+          <%= form.select :enterprise_id, options_from_collection_for_select(current_manager.enterprises.all, :id, :name), {}, class: 'form-control', style: 'width: 448px;' %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          所属门店&nbsp;&nbsp;&nbsp;&nbsp;
+        </th>
+        <td>
+          <%= form.select :material_reserf_id, options_from_collection_for_select(current_manager.material_reserves.all, :id, :warehouse_location), {}, class: 'form-control', style: 'width: 448px;' %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          车牌号&nbsp;&nbsp;&nbsp;&nbsp;
+        </th>
+        <td>
+          <%= form.text_field :car_number, placeholder: '新A13572', class: 'form-control', style: 'width: 448px;' %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          车辆载货重量&nbsp;&nbsp;&nbsp;&nbsp;
+        </th>
+        <td>
+          <%= form.text_field :weight, placeholder: '10吨', class: 'form-control', style: 'width: 448px;' %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          司机姓名&nbsp;&nbsp;&nbsp;&nbsp;
+        </th>
+        <td>
+          <%= form.text_field :driver_name, placeholder: '李友天', class: 'form-control', style: 'width: 448px;' %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          司机手机号码&nbsp;&nbsp;&nbsp;&nbsp;
+        </th>
+        <td>
+          <%= form.text_field :driver_tel, placeholder: '13320208888', class: 'form-control', style: 'width: 448px;' %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          司机身份证号码&nbsp;&nbsp;&nbsp;&nbsp;
+        </th>
+        <td>
+          <%= form.text_field :driver_id_card_number, placeholder: '330334199002033333', class: 'form-control', style: 'width: 448px;' %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          家庭住址&nbsp;&nbsp;&nbsp;&nbsp;
+        </th>
+        <td>
+          <%= form.text_field :driver_address, placeholder: '乌鲁木齐市天山区中山路479号', class: 'form-control', style: 'width: 448px;' %>
+        </td>
+      </tr>
+      <!--
+      <tr>
+        <th style="text-align: right;">
+          联系电话
+        </th>
+        <td>
+          <%= form.text_field :driver_tel, placeholder: '15588888888 ' %>
+        </td>
+      </tr>
+      -->
+    </table>
+    <div style="margin-bottom: 200px; margin-top: 30px;">
+      <% if params[:number].present? %>
+        <%= link_to '上一步', new_material_reserf_path(number: 2), class: 'btn btn-primary', style: 'width: 88px; height: 38px; background: #FFFFFF; border-radius: 3px; border: 1px solid #DCDCDC; color: black; margin-left: 400px;' %>&nbsp;&nbsp;
+        <%= link_to '添加', new_car_path(name: 'new'), class: 'btn btn-light btn-sm', style: 'width: 88px; height: 38px; background: #FFFFFF; border-radius: 3px; border: 1px solid #DCDCDC; color: black; '%>&nbsp;&nbsp;
+        <%= form.submit "下一步", class: 'btn btn-primary', style: 'width: 150px; margin-right: 50px;width: 82px; height: 38px; background: #006DF1; border-radius: 2px;' %>
+      <% else %>
+        <%= link_to '返回', cars_path, class: 'btn btn-light', style: 'width: 150px; margin-left: 300px; border: 1px solid #0d6efd;' %>
+        <%= form.submit "确定", class: 'btn btn-primary', style: 'width: 150px; margin-left: 150px;'%>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+<style>
+.table_div{
+  margin: 0 auto;
+}
+.table_name {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.9);
+  line-height: 22px;
+  margin-right: 10px;
+}
+.table_new_car {
+  width: 600px;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  margin-left: 200px;
+  text-align: right;
+
+}
+</style>
+

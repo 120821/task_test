@@ -1,0 +1,124 @@
+<div style="display: flex;">
+  <table class='' styel="margin-top: 35px;">
+    <tr>
+      <td>
+        <span class="show_table_name">企业名称:</span>
+        <span class="show_table_content"><%= enterprise_personnel.enterprise.try(:name) %></span>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span class="show_table_name">人员姓名:</span>
+        <span class="show_table_content"><%= enterprise_personnel.name %></span>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span class="show_table_name">人员性别:</span>
+        <span class="show_table_content"><%= enterprise_personnel.sex %></span>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span class="show_table_name">人员类别:</span>
+        <span class="show_table_content"><%= enterprise_personnel.category %></span>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span class="show_table_name">手机号码:</span>
+        <span class="show_table_content"><%= enterprise_personnel.tel %></span>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span class="show_table_name">身份证号码:</span>
+        <span class="show_table_content"><%= enterprise_personnel.id_card %></span>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span class="show_table_name">邮箱:</span>
+        <span class="show_table_content"><%= enterprise_personnel.email %></span>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span class="show_table_name">家庭住址:</span>
+        <span class="show_table_content"><%= enterprise_personnel.family_address %></span>
+      </td>
+    </tr>
+    <!--
+    <tr>
+      <th>仓库负责人:</th>
+      <td><%= enterprise_personnel.person_in_charge %></td>
+    </tr>
+
+    <tr>
+      <th>联系电话:</th>
+      <td><%= enterprise_personnel.person_in_charge_tel %></td>
+    </tr>
+
+    <tr>
+      <th>企业地址:</th>
+      <td><%= enterprise_personnel.enterprise_address %></td>
+    </tr>
+
+    <tr>
+      <th>物资种类:</th>
+      <td><%= enterprise_personnel.material_type %></td>
+    </tr>
+
+    <tr>
+      <th>仓库地址:</th>
+      <td><%= enterprise_personnel.warehouse_address %></td>
+    </tr>
+
+    <tr>
+      <th>仓库类型:</th>
+      <td><%= enterprise_personnel.warehoues_type %></td>
+    </tr>
+
+    <tr>
+      <th>库存量:</th>
+      <td><%= enterprise_personnel.inventory_quantity %></td>
+    </tr>
+
+    <tr>
+      <th>仓库负责人:</th>
+      <td><%= enterprise_personnel.warehouse_manager %></td>
+    </tr>
+
+    <tr>
+      <th>仓库负责人电话:</th>
+      <td><%= enterprise_personnel.warehouse_manager_tel %></td>
+    </tr>
+    -->
+
+  </table>
+</div>
+<style>
+.show_table_name {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  margin-left: 10px;
+  color: rgba(0,0,0,0.4);
+  line-height: 22px;
+}
+.show_table_content {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  margin-left: 10px;
+  color: rgba(0,0,0,0.9);
+  line-height: 22px;
+}
+</style>

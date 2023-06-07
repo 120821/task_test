@@ -1,0 +1,23 @@
+<div style="position: absolute;background: #fff; width: 1192px;">
+
+  <div class="new_enterprise_title">创建保供企业</div>
+    <% if params[:number].present? %>
+      <%= render 'enterprises/title' %>
+    <% else %>
+      <div style="height: 80px;"></div>
+    <% end %>
+    <%= render 'form', enterprise: @enterprise %>
+  </div>
+</div>
+<style>
+.new_enterprise_title {
+  font-size: 22px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #1D2129;
+  margin-left: 38px;
+  margin-top: 40px;
+  line-height: 30px;
+  position: absolute;
+}
+</style>

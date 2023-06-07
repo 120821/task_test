@@ -1,0 +1,886 @@
+<div class="data_div" id="myDiv" onclick="toggleDiv()">
+  <%= render 'goods/data_small' %>
+</div>
+
+<div class="data_div_two" id="myDiv2" style="display:none;" onclick="toggleDiv()">
+  <%= image_tag 'title.png', style: 'width: 1440px; position: absolute;' %>
+  <span class="data_time_two"><%= @time %></span>
+  <span class="data_day_two"><%= @day %></span>
+  <span class="data_week_two"><%= @today_weekday %></span>
+
+  <div class="div_some_two">
+    <div class="left_list_two" style="">
+      <div class="left_list_title_two">
+        <em>进销存情况</em>
+      </div>
+      <div class="div_data_two">
+        <div>
+          <%= image_tag 'icon1.png' %>
+          <span class="text_title_two">总进货量(吨)</span>
+          <br/>
+          <span class="text_number">1000</span>
+        </div>
+        <div class="data_date_div_two">
+          <span class="text_date_two"> 较昨日</span>
+          <span class="text_data_number_two" style="color: #d84644">12家</span>
+          <%= image_tag 'rate_up.png', style: 'margin-top: -5px;' %>
+          <br/>
+          <span class="text_date_two">较上周</span>
+          <span class="text_data_number_two">8家</span>
+          <%= image_tag 'rate_down.png', style:"margin-top: -5px;" %>
+        </div>
+      </div>
+
+      <div class="div_data_two">
+        <div>
+          <%= image_tag 'icon2.png', style: 'margin-left: -10px;' %>
+          <span class="text_title_two" style="margin-left: -10px;">总销售量(吨)</span>
+          <br/>
+          <span class="text_number" style="margin-top: -20px;position: absolute;">1000</span>
+        </div>
+        <div class="data_date_div_two">
+          <span class="text_date_two"> 较昨日</span>
+          <span class="text_data_number_two" style="color: #d84644">12家</span>
+          <%= image_tag 'rate_up.png', style: 'margin-top: -5px;' %>
+          <br/>
+          <span class="text_date_two">较上周</span>
+          <span class="text_data_number_two">8家</span>
+          <%= image_tag 'rate_down.png', style:"margin-top: -5px;" %>
+        </div>
+      </div>
+
+      <div class="div_data_two">
+        <div>
+          <%= image_tag 'icon3.png' %>
+          <span class="text_title_two">总库存量(吨)</span>
+          <br/>
+          <span class="text_number">1000</span>
+        </div>
+        <div class="data_date_div_two">
+          <span class="text_date_two"> 较昨日</span>
+          <span class="text_data_number_two" style="color: #d84644">12家</span>
+          <%= image_tag 'rate_up.png', style: 'margin-top: -5px;' %>
+          <br/>
+          <span class="text_date_two">较上周</span>
+          <span class="text_data_number_two">8家</span>
+          <%= image_tag 'rate_down.png', style:"margin-top: -5px;" %>
+        </div>
+      </div>
+      <div class="region_each_two">
+        <span>乌鲁木齐</span><br/>
+        <p class="region_rate_two">进
+          <span style="margin-left: 5px;">
+            <%= image_tag 'save_blue.png', style: 'margin-left: -34px; width: 75px' %>
+            <%= image_tag 'save_blue.png', style: 'margin-left: -57px; width: 75px;' %>
+            <%= image_tag 'save_blue.png', style: 'margin-left: -58px; width: 75px;' %>
+            <%= image_tag 'save_gray.png', style: 'margin-left: -30px; width: 20px;'%>
+            <% (1..5).each do |i| %>
+              <%= image_tag 'save_gray.png', style: 'width: 20px;'%>
+            <% end %>
+          </span>
+          <span class="region_rate_number_two">1024</span>
+        </p><br/>
+        <p class="region_rate_two" style="margin-top: -78px;">销
+          <span style="margin-left: 5px;">
+            <%= image_tag 'save_blue.png', style: 'margin-left: -34px; width: 75px' %>
+            <%= image_tag 'save_blue.png', style: 'margin-left: -57px; width: 75px;' %>
+            <%= image_tag 'save_blue.png', style: 'margin-left: -58px; width: 75px;' %>
+            <%= image_tag 'save_gray.png', style: 'margin-left: -30px; width: 20px;'%>
+            <% (1..5).each do |i| %>
+              <%= image_tag 'save_gray.png', style: 'width: 20px;'%>
+            <% end %>
+          </span>
+          <span class="region_rate_number_two">1024</span>
+        </p><br/>
+        <p class="region_rate_two" style="margin-top: -78px;">存
+          <span style="margin-left: 5px;">
+            <%= image_tag 'save_blue.png', style: 'margin-left: -34px; width: 75px' %>
+            <%= image_tag 'save_blue.png', style: 'margin-left: -57px; width: 75px;' %>
+            <%= image_tag 'save_blue.png', style: 'margin-left: -58px; width: 75px;' %>
+            <%= image_tag 'save_gray.png', style: 'margin-left: -30px; width: 20px;'%>
+            <% (1..5).each do |i| %>
+              <%= image_tag 'save_gray.png', style: 'width: 20px;'%>
+            <% end %>
+          </span>
+          <span class="region_rate_number_two">1024</span>
+        </p>
+      </div>
+
+      <div class="region_each_two" style="margin-top: -20px;">
+        <span>伊犁州</span><br/>
+        <p class="region_rate_two">进
+          <span style="margin-left: 5px;">
+            <%= image_tag 'save_blue.png', style: 'margin-left: -34px; width: 75px' %>
+            <%= image_tag 'save_blue.png', style: 'margin-left: -57px; width: 75px;' %>
+            <%= image_tag 'save_blue.png', style: 'margin-left: -58px; width: 75px;' %>
+            <%= image_tag 'save_gray.png', style: 'margin-left: -30px; width: 20px;'%>
+            <% (1..5).each do |i| %>
+              <%= image_tag 'save_gray.png', style: 'width: 20px;'%>
+            <% end %>
+          </span>
+          <span class="region_rate_number_two">1024</span>
+        </p><br/>
+        <p class="region_rate_two" style="margin-top: -78px;">销
+          <span style="margin-left: 5px;">
+            <%= image_tag 'save_blue.png', style: 'margin-left: -34px; width: 75px' %>
+            <%= image_tag 'save_blue.png', style: 'margin-left: -57px; width: 75px;' %>
+            <%= image_tag 'save_blue.png', style: 'margin-left: -58px; width: 75px;' %>
+            <%= image_tag 'save_gray.png', style: 'margin-left: -30px; width: 20px;'%>
+            <% (1..5).each do |i| %>
+              <%= image_tag 'save_gray.png', style: 'width: 20px;'%>
+            <% end %>
+          </span>
+          <span class="region_rate_number_two">1024</span>
+        </p><br/>
+        <p class="region_rate_two" style="margin-top: -78px;">存
+          <span style="margin-left: 5px;">
+            <%= image_tag 'save_blue.png', style: 'margin-left: -34px; width: 75px' %>
+            <%= image_tag 'save_blue.png', style: 'margin-left: -57px; width: 75px;' %>
+            <%= image_tag 'save_blue.png', style: 'margin-left: -58px; width: 75px;' %>
+            <%= image_tag 'save_gray.png', style: 'margin-left: -30px; width: 20px;'%>
+            <% (1..5).each do |i| %>
+              <%= image_tag 'save_gray.png', style: 'width: 20px;'%>
+            <% end %>
+          </span>
+          <span class="region_rate_number_two">1024</span>
+        </p>
+      </div>
+    </div>
+    <div>
+      <div class="title_center" style="margin-top: 45px;">
+        <div class="title_center_each_two" style="margin-left: 5px;">
+          <div style="display: flex; margin-top: 10px;">
+            <div style="">
+              <%= image_tag 'icon_each1.png' %>
+            </div>
+            <div>
+              <span class="text_title_center_two" style="">保供企业</span></br>
+              <span class="text_number_center">900</span>
+            </div>
+          </div>
+          <span class="text_date2_two">较上周</span>
+          <span class="text_data_number_two" style="color: #d84644">12家</span>
+          <%= image_tag 'rate_up.png', style: 'margin-top: -5px;' %>
+          <span class="text_date2_two" style"margin-left: 15px;">较上月</span>
+          <span class="text_data_number_two">8家</span>
+          <%= image_tag 'rate_down.png', style:"margin-top: -5px;" %>
+        </div>
+        <div class="title_center_each_two" style="margin-left: 10px;">
+          <div style="display: flex; margin-top: 10px;">
+            <div style="">
+              <%= image_tag 'icon_each2.png' %>
+            </div>
+            <div>
+              <span class="text_title_center_two">全区重点商超</span>
+              <span class="text_number_center">234</span>
+            </div>
+          </div>
+          <span class="text_date2_two">较上周</span>
+          <span class="text_data_number_two" style="color: #d84644">12家</span>
+          <%= image_tag 'rate_up.png', style: 'margin-top: -5px;' %>
+          <span class="text_date2_two" style="margin-left: 15px;">较上月</span>
+          <span class="text_data_number_two">8家</span>
+          <%= image_tag 'rate_down.png', style:"margin-top: -5px;" %>
+        </div>
+        <div class="title_center_each_two" style="margin-left: 10px;">
+          <div style="display: flex; margin-top: 10px;">
+            <div style="">
+              <%= image_tag 'icon_each3.png' %>
+            </div>
+            <div>
+              <span class="text_title_center_two">蔬菜交易市场监控</span>
+              <span class="text_number_center">234</span>
+            </div>
+          </div>
+          <span class="text_date2_two">较上周</span>
+          <span class="text_data_number_two" style="color: #d84644">12家</span>
+          <%= image_tag 'rate_up.png', style: 'margin-top: -5px;' %>
+          <span class="text_date2_two" style="margin-left: 15px;">较上月</span>
+          <span class="text_data_number_two">8家</span>
+          <%= image_tag 'rate_down.png', style:"margin-top: -5px;" %>
+        </div>
+      </div>
+      <div class="div_bottom">
+        <%= image_tag 'center_bottom_background.png', style: 'width: 300px;position: absolute;' %>
+        <span class="bottom_center_title">新疆新联农产品有限公司001号储备仓</span>
+        <div class="bottom_center_content" style="font-size: 15px;">
+
+          <p class="bottom_center_content_text">物资名称：面粉</p>
+          <p class="bottom_center_content_text">储备数量：3000吨</p>
+          <p class="bottom_center_content_text">联系人：周利民</p>
+
+          <p class="bottom_center_content_text">联系电话：13682509276</p>
+
+          <p class="bottom_center_content_text">企业类型：生产加工企业</p>
+
+          <%= image_tag 'link_to.png', style: 'margin-left: 30px; margin-top: 10px;width: 200px;' %>
+          <span class="link_to_text"><%= link_to '点击查看物资报表', @material_reserf, style: 'color: #01c2ff; text-decoration:none;' %></span>
+        </div>
+        <%= image_tag 'map_icon_list.png', class: 'map_icon1' %>
+
+      </div>
+    </div>
+    <div class="div_some_two" style="margin-top: 0px;">
+      <div class="left_list_two">
+        <div class="left_list_title_two">
+          <em>库存情况</em>
+        </div>
+        <div class="div_data_two">
+          <div style="padding-top: 10px;">
+            <span class="text_title_two" style="margin-left: 10px;">销售量监控</span>
+            <br/>
+            <span class="text_number">28<span>个品类</span></span>
+          </div>
+          <div class="data_date_div_two">
+            <span class="text_date_two">较上周</span>
+            <span class="text_data_number_two" style="color: #d84644">12家</span>
+            <%= image_tag 'rate_up.png', style: 'margin-top: -5px;' %>
+            <br/>
+            <span class="text_date_two">较上月</span>
+            <span class="text_data_number_two">8家</span>
+            <%= image_tag 'rate_down.png', style:"margin-top: -5px;" %>
+          </div>
+        </div>
+
+        <div class="div_data_list">
+          <div class="list_danger_two">
+            <%= image_tag 'danger.png', style: 'margin: 20px;' %>
+            <br/>
+            <span class="list_danger_title_two">17种商品中</span>
+            <br/>
+            <span class="text_danger_number">2<span class="text_danger">个品类预警</span></span>
+            <br/>
+            <span class="text_date_two">较上周</span>
+            <span class="text_data_number_two" style="color: #d84644">12家</span>
+            <%= image_tag 'rate_up.png', style: 'margin-top: -5px;' %>
+            <br/>
+            <span class="text_date_two">较上月</span>
+            <span class="text_data_number_two">8家</span>
+            <%= image_tag 'rate_down.png', style:"margin-top: -5px;" %>
+          </div>
+          <div class="list_danger" style="margin-left: 10px">
+            <%= image_tag 'warn.png', style: 'margin: 20px;' %>
+            <br/>
+            <span class="list_warn_title_two">17种商品中</span>
+            <br/>
+            <span class="text_warn_number">2<span class="text_warn">个品类不足</span></span>
+            <br/>
+            <span class="text_date_two">较上周</span>
+            <span class="text_data_number_two" style="color: #d84644">12家</span>
+            <%= image_tag 'rate_up.png', style: 'margin-top: -5px;' %>
+            <br/>
+            <span class="text_date_two">较上月</span>
+            <span class="text_data_number_two">8家</span>
+            <%= image_tag 'rate_down.png', style:"margin-top: -5px;" %>
+          </div>
+        </div>
+
+        <div>
+          <% (1..2).each do |i| %>
+            <%= image_tag 'charts.png', style: 'width: 290px; margin: 20px;' %>
+            <div style="margin-top: -10px;">
+              <span class="charts_text_warn_two">预警</span>
+              <span class="charts_text_simple_two">充足</span>
+              <span class="charts_text_danger_two">不足</span></br>
+              <span class="charts_text_bottom_two">牛奶库存</span>
+              <span class="charts_text_bottom_two" style="margin-left: 40px;">蔬菜库存</span>
+              <span class="charts_text_bottom_two" style="margin-left: 28px;">方便面库存</span>
+            </div>
+          <% end %>
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>
+</div>
+<style>
+#myDiv2 {
+ display: block;
+ width: 1440px;
+ margin-left: -225px;
+ margin-top: 0px;
+}
+
+.data_div_two {
+  background: #CCCCCC;
+  width: 1192px;
+  background: url("<%= asset_path 'data.png' %>");
+  position: absolute;
+  height: 900px;
+}
+.data_div {
+  width: 1920px;
+  height: 1036px;
+  background: #CCCCCC;
+  width: 1192px;
+  height: 789px;
+  background: url("<%= asset_path 'data.png' %>");
+  position: absolute;
+}
+
+.background {
+  width: 1192px;
+  height: 789px;
+
+}
+
+.left_list_two{
+  margin-top: 30px;
+  width: 332px;
+  height: 725px;
+  background: #00000A;
+  box-shadow: inset 0px 0px 80px 0px rgba(1,194,255,0.4);
+  border: 2px solid #0E9CFF;
+}
+
+.left_list {
+  width: 290px;
+  height: 933px;
+  height: 672px;
+  background: #00000A;
+  box-shadow: inset 0px 0px 80px 0px rgba(1,194,255,0.4);
+  border: 2px solid #0E9CFF;
+
+}
+
+.left_list_title_two {
+  background: url("<%= asset_path 'background1.png' %>");
+  width: auto;
+  color: white;
+  font-size: 18px;
+  text-align: center;
+  font-weight: 900;
+}
+.left_list_title {
+  background: url("<%= asset_path 'background1.png' %>");
+  width: 300px;
+  color: white;
+  font-size: 12px;
+  text-align: center;
+  font-weight: 900;
+}
+.div_data_two {
+  display: flex;
+  width: 270px;
+  height: 112px;
+  width: 294px;
+  margin: 16px 20px;
+  background: rgba(38,117,214,0.24);
+}
+.div_data {
+  display: flex;
+  width: 270px;
+  height: 112px;
+  width: 250px;
+  margin: 16px 20px;
+  background: rgba(38,117,214,0.24);
+}
+.text_title_two {
+  font-size: 15px;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: rgba(214,240,255,0.8);
+  line-height: 12px;
+}
+
+.text_title {
+  font-size: 12px;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: rgba(214,240,255,0.8);
+  line-height: 12px;
+}
+.text_data_number_two {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #F53F3F;
+  line-height: 12px;
+}
+.text_data_number {
+  font-size: 12px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #F53F3F;
+  line-height: 12px;
+}
+.text_number{
+  font-size: 28px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #00A5FF;
+  line-height: 50px;
+  /*  background: linear-gradient(180deg, #FFFFFF 0%, #00A5FF 100%);*/
+  margin-left: 12px;
+}
+.text_data_number_two {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #00B42A;
+  line-height: 12px;
+}
+.text_date_two {
+  font-size: 14px;
+  margin-left: 20px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #11E4FF;
+  line-height: 12px;
+}
+.text_date {
+  font-size: 12px;
+  margin-left: 20px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #11E4FF;
+  line-height: 12px;
+}
+.text_date2_two {
+  font-size: 14px;
+  margin-left: 2px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #11E4FF;
+  line-height: 12px;
+}
+.text_date2 {
+  font-size: 12px;
+  margin-left: 2px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #11E4FF;
+  line-height: 12px;
+}
+.data_date_div_two {
+  margin-top: 33px;
+  margin-left: 16px;
+}
+.data_date_div {
+  margin-top: 33px;
+  margin-left: 12px;
+}
+.title_center {
+  margin-top: 20px;
+  display: flex;
+  margin-left: 10px;
+}
+.title_center_each_two {
+  width: 220px;
+  height: 120px;
+  background: #00000A;
+  box-shadow: inset 0px 0px 80px 0px rgba(1,194,255,0.4);
+  border: 1px solid #0E9CFF;
+
+}
+.title_center_each {
+  width: 172px;
+  height: 120px;
+  background: #00000A;
+  box-shadow: inset 0px 0px 80px 0px rgba(1,194,255,0.4);
+  border: 1px solid #0E9CFF;
+
+}
+.div_some_two {
+  display: flex;
+  margin: 80px 27px;
+}
+.div_some {
+  display: flex;
+  margin: 80px 20px;
+}
+.text_number_center {
+  font-size: 30px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #000000;
+  line-height: 56px;
+  margin-left: 10px;
+  color: #00A5FF;
+}
+.text_title_center_two {
+  margin-left: 10px;
+  font-size: 14px;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: rgba(214,240,255,0.8);
+  line-height: 12px;
+}
+.text_title_center {
+  margin-left: 10px;
+  font-size: 12px;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: rgba(214,240,255,0.8);
+  line-height: 12px;
+}
+
+.list_danger_two {
+  height: 208px;
+  background: rgba(38,117,214,0.24);
+  width: 130px;
+
+}
+.list_danger {
+  height: 208px;
+  background: rgba(38,117,214,0.24);
+  width: 120px;
+
+}
+.div_data_list {
+  display: flex;
+  width: 273px;
+  margin: 12px 25px;
+
+}
+.text_date_two {
+  font-size: 14px;
+  margin-left: 20px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #11E4FF;
+  line-height: 12px;
+}
+.list_danger_title_two {
+  margin-left: 20px;
+  font-size: 16px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #FFFFFF;
+  line-height: 12px;
+}
+.list_danger_two {
+  height: 208px;
+  background: rgba(38,117,214,0.24);
+  width: 138px;
+
+}
+
+.list_danger_title {
+  margin-left: 20px;
+  font-size: 12px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #FFFFFF;
+  line-height: 12px;
+}
+.text_danger_number {
+  line-height: 45px;
+  margin-left: 20px;
+  font-size: 28px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #FF6057;
+
+}
+.text_danger {
+  line-height: 45px;
+  font-size: 14px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #FF6057;
+
+}
+.list_warn_title_two {
+  font-size: 16px;
+  margin-left: 20px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #FFFFFF;
+  line-height: 12px;
+}
+.list_warn_title {
+  font-size: 16px;
+  margin-left: 20px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #FFFFFF;
+  line-height: 12px;
+}
+.list_warn_title {
+  font-size: 12px;
+  margin-left: 20px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #FFFFFF;
+  line-height: 12px;
+}
+.text_warn_number {
+  line-height: 45px;
+  font-size: 28px;
+  margin-left: 20px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #FF9817;
+
+}
+.text_warn {
+  line-height: 45px;
+  font-size: 14px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #FF9817;
+
+}
+.div_bottom {
+  width: 300px;
+  margin-top: 200px;
+  margin-left: 100px;
+}
+.bottom_center_title {
+  margin: 20px;
+  z-index:1;
+  font-size: 16px;
+  position: absolute;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #00FFF4;
+  line-height: 29px;
+
+}
+.bottom_center_content {
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #A8D6FF;
+  line-height: 20px;
+  margin-left: 20px;
+  font-size: 14px;
+  position: absolute;
+  margin-top: 60px;
+}
+.bottom_center_content_text {
+  line-height: 0.6;
+}
+.link_to_text {
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #01C2FF;
+  line-height: 30px;
+  font-size: 17px;
+  margin-left: -173px;
+  margin-top: 19px;
+  position: absolute;
+  width: 150px;
+}
+.map_icon1 {
+  position: absolute;
+  margin-top: 285px;
+  margin-left: 118px;
+  height: 56px;
+}
+.data_time_two {
+  position: absolute;
+  font-size: 20px;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #FFFFFF;
+  line-height: 34px;
+  font-size: 16px;
+  margin-left: 1223px;
+  font-size: 21px;
+  top: 25px;
+}
+.data_time {
+  position: absolute;
+  font-size: 20px;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #FFFFFF;
+  line-height: 34px;
+  top: 17px;
+  margin-left: 1010px;
+  font-size: 16px;
+}
+.data_day_two {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #FFFFFF;
+  line-height: 20px;
+  position: absolute;
+  margin-left: 1096px;
+  margin-top: 45px;
+  font-size: 16px;
+  margin-left: 1326px;
+}
+.data_day_two {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #FFFFFF;
+  line-height: 20px;
+  position: absolute;
+  margin-left: 1096px;
+  margin-top: 45px;
+  font-size: 16px;
+  margin-left: 1326px;
+}
+.data_day {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #FFFFFF;
+  line-height: 20px;
+  position: absolute;
+  margin-left: 1096px;
+  margin-top: 45px;
+}
+.data_week_two {
+  font-size: 16px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #FFFFFF;
+  position: absolute;
+  margin-top: 22px;
+  margin-left: 1096px;
+  line-height: 20px;
+  margin-left: 1326px;
+}
+
+.data_week {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #FFFFFF;
+  position: absolute;
+  margin-top: 22px;
+  margin-left: 1096px;
+  line-height: 20px;
+}
+
+.region_each_two {
+  font-size: 16px;
+  margin: 0 20px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #11E4FF;
+  line-height: 22px;
+
+}
+.region_each {
+  font-size: 14px;
+  margin: 0 20px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #11E4FF;
+  line-height: 22px;
+
+}
+.region_rate_two {
+  margin-top: -10px;
+  font-size: 16px;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: rgba(216,240,255,0.8);
+  line-height: 16px;
+}
+.region_rate {
+  font-size: 14px;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: rgba(216,240,255,0.8);
+  line-height: 16px;
+}
+.region_rate_number_two {
+  font-size: 16px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #00A5FF;
+  line-height: 50px;
+  margin-left: 5px;
+}
+.region_rate_number {
+  font-size: 12px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #00A5FF;
+  line-height: 50px;
+  margin-left: 5px;
+}
+.charts_text_bottom {
+  font-size: 14px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #66FFFF;
+  line-height: 20px;
+  margin-left: 30px;
+}
+.charts_text_bottom_two {
+  font-size: 14px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #66FFFF;
+  line-height: 20px;
+  margin-left: 46px;
+}
+.charts_text_warn_two {
+  font-size: 16px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #FF6057;
+  line-height: 20px;
+  margin-left: 56px;
+}
+.charts_text_warn {
+  font-size: 16px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #FF6057;
+  line-height: 20px;
+  margin-left: 45px;
+}
+.charts_text_simple_two {
+  font-size: 16px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #66FFFF;
+  line-height: 20px;
+  margin-left: 61px;
+
+}
+.charts_text_simple{
+  font-size: 16px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #66FFFF;
+  line-height: 20px;
+  margin-left: 45px;
+
+}
+.charts_text_danger_two {
+  font-size: 16px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #FD9E2F;
+  line-height: 20px;
+  margin-left: 62px;
+}
+.charts_text_danger {
+  font-size: 16px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #FD9E2F;
+  line-height: 20px;
+  margin-left: 45px;
+}
+
+  </style>
+
+
+
+<script>
+  var div = document.getElementById("myDiv");
+  var div2 = document.getElementById("myDiv2");
+
+  div.addEventListener("dblclick", function() {
+      div.style.display = "none";
+      div2.style.display = "block";
+    });
+
+  div2.addEventListener("dblclick", function() {
+      div2.style.display = "none";
+      div.style.display = "block";
+    });
+</script>

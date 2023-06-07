@@ -1,0 +1,61 @@
+<%
+    url = ''
+    method = ''
+    if @manager.id.present?
+      url = "/managers/#{@manager.id}"
+      method = :put
+    else
+      url = "/managers/insert_manager"
+      method = :post
+    end
+%>
+<div style="background: #fff; width: 1192px;">
+  <div style="margin: 0 180px;">
+    <h3>
+      <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" color="#0d6efd" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+        <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+        <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+      </svg>
+      基本信息
+    </h3>
+    <%= form_for @manager, url: url, method: method do |form| %>
+      <table class='table table-bordered'>
+        <tr>
+          <th style="width: 200px;">账号</th>
+          <td><%= text_field_tag :email, {}, class: 'form-control', placeholder: 'baogon@email.com' %></td>
+        </tr>
+
+        <tr>
+          <th>密码</th>
+          <td><%= password_field_tag :password, {}, class: 'form-control', placeholder: '请输入密码' %></td>
+        </tr>
+        <tr>
+          <th>姓名/备注</th>
+          <td><%= text_field_tag :name, {}, class: 'form-control', placeholder: '王发财' %></td>
+        </tr>
+
+        <tr>
+          <th>角色</th>
+          <td><%= text_field_tag :category, {}, class: 'form-control', placeholder: '企业' %></td>
+        </tr>
+
+        <tr>
+          <th>账号归属</th>
+          <td><%= text_field_tag :owner, {}, class: 'form-control', placeholder: '新疆广宏食品集团有限公司' %></td>
+        </tr>
+
+        <tr>
+          <th>状态</th>
+          <td><%= text_field_tag :status, {}, class: 'form-control' %></td>
+        </tr>
+
+      </table>
+
+      <div style="margin-bottom: 200px; margion: 0 auto; margin-top: 100px;">
+        <%= link_to '返回', managers_path, class: 'btn btn-primary', style: 'width: 200px; margin-left: 100px;' %>
+        <%= submit_tag "确定", class: 'btn btn-primary', style: 'width: 200px;; margin-right: 50px; float:right;'%>
+      </div>
+      <br/>
+    <% end %>
+  </div>
+</div>

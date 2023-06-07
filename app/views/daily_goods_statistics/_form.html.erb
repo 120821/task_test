@@ -1,0 +1,212 @@
+<%= form_with(model: daily_goods_statistic) do |form| %>
+  <div class= "table_div">
+    <table class='table_new_material' style="">
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          地州</th>
+        <td>
+          <%= form.select :region, options_for_select(REGIONS), {}, class: 'form-control', style: 'margin-left: 10px;' %>
+        </td>
+      </tr>
+
+      <!--
+        <tr>
+        <th style="width: 200px;">企业</th>
+        <td>
+        <%= form.select :enterprise_id, options_from_collection_for_select(current_manager.enterprises.all, :id, :name), {}, class:'form-control', style: 'margin-left: 10px;' %>
+        </td>
+        </tr>
+      -->
+
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          销售库存情况</th>
+        <td><%= form.select :sales_inventory_situation, options_for_select(["销售量", "库存量", "进货量"]), {}, class: 'form-control', style: 'margin-left: 10px;' %></td>
+      </tr>
+
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          日期</th>
+        <td><%= text_field_tag :daily_goods_date, params[:daily_goods_date], id: 'datepicker', placeholder: '例如 20230402', class: 'form-control', style: 'margin-left: 10px;' %></td>
+      </tr>
+
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          大米（吨）</th>
+        <td><%= form.text_field :rice, class: 'form-control', placeholder: '例如 20', style: 'margin-left: 10px;' %></td>
+      </tr>
+
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          面粉（吨）</th>
+        </th>
+        <td><%= form.text_field :flour, class: 'form-control', placeholder: '例如 20', style: 'margin-left: 10px;' %></td>
+      </tr>
+
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          食用油（吨）</th>
+        <td><%= form.text_field :oil, class: 'form-control', placeholder: '例如 20', style: 'margin-left: 10px;' %></td>
+      </tr>
+
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          蔬菜（吨）</th>
+        <td><%= form.text_field :vegetables, class: 'form-control', placeholder: '例如 20', style: 'margin-left: 10px;' %></td>
+      </tr>
+
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          猪肉（吨）</th>
+        <td><%= form.text_field :pork, class: 'form-control', placeholder: '例如 20', style: 'margin-left: 10px;' %></td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          牛肉（吨）</th>
+        <td><%= form.text_field :beef, class: 'form-control', placeholder: '例如 20', style: 'margin-left: 10px;' %></td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          羊肉（吨）</th>
+        <td><%= form.text_field :lamb, class: 'form-control', placeholder: '例如 20', style: 'margin-left: 10px;' %></td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          禽肉（吨）</th>
+        <td><%= form.text_field :poultry, class: 'form-control', placeholder: '例如 20', style: 'margin-left: 10px;' %></td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          鸡蛋（吨）</th>
+        <td><%= form.text_field :egg, class: 'form-control', placeholder: '例如 20', style: 'margin-left: 10px;' %></td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          牛奶（吨）</th>
+        <td><%= form.text_field :milk, class: 'form-control', placeholder: '例如 20', style: 'margin-left: 10px;' %></td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          水果（吨）</th>
+        <td><%= form.text_field :fruit, class: 'form-control', placeholder: '例如 20', style: 'margin-left: 10px;' %></td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          方便食品（吨）</th>
+        <td><%= form.text_field :convenient_food, class: 'form-control', placeholder: '例如 20', style: 'margin-left: 10px;' %></td>
+      </tr>
+    </table>
+  </div>
+  </style>
+  <div style="margin-bottom: 200px; margion: 0 auto; margin-top: 100px; text-align: center;">
+    <%= link_to '返回', daily_goods_statistics_path, class: 'btn btn-primary', style: 'width: 200px; background-color: white; color: #0d6efd;' %>
+    <%= form.submit "确定", class: 'btn btn-primary', style: 'width: 200px; margin-left: 200px;' %>
+  </div>
+  <div class= "table_div">
+  <% end %>
+  <style>
+.from{
+  margin: 0 180px;
+}
+.upload-box {
+  width: 200px;
+  height: 100px;
+  position: relative;
+  border: 1px dashed #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  text-align: center;
+}
+.upload-box:hover {
+  background-color: #f9f9f9;
+}
+.upload-box span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: #ccc;
+}
+.table_div{
+  margin: 0 auto;
+}
+.table_name {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.9);
+  line-height: 22px;
+  margin-right: 10px;
+}
+.table_new_material{
+  width: 630px;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  margin-left: 50px;
+  text-align: right;
+
+}
+.form_new_control{
+  width: 200px;
+  margin-left: 10px;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: var(--bs-border-radius);
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+</style>

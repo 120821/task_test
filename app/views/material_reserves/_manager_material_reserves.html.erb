@@ -1,0 +1,428 @@
+<div style="display: flex; width: 1200px;">
+  <div class="daily_table">
+    <p style="margin: 20px;">
+      <svg xmlns="http://www.w3.org/2000/svg" color="#0066ff" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+        <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+      </svg>
+      <span style="margin-left: 10px;font-weight: 600; font-size: 18px;">物资储备列表<span>
+    </p>
+    <%= form_tag '', method: :get do %>
+      <p class="form_row">
+        <span class="query_submissions" >地州: <%= select_tag :region, options_for_select(@regions, params[:region]), class: 'select_region', style: 'width: 200px;' %></span>
+        <span class="query_submissions" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;物资: <%= select_tag :goods_name, options_for_select(CATEGORY_ARRAY, params[:goods_name]), class: 'select_region', style: 'width: 200px;' %></span>
+        <span class="query_submissions" style="margin-left: 6px;">&nbsp;&nbsp;&nbsp;&nbsp;企业名称:&nbsp;&nbsp;&nbsp;&nbsp; <%= text_field_tag :enterprise_name, params[:enterprise_name], placeholder: '请输入企业名称', class: 'select_region', style: 'width: 200px;' %></span>
+        <!--
+        <span class="query_submissions" style="margin-left: 6px;">&nbsp;&nbsp;&nbsp;&nbsp;日期:&nbsp;&nbsp;&nbsp;&nbsp; <%= text_field_tag :daily_goods_date, params[:daily_goods_date], id: 'datepicker', placeholder: '例如 20230402', class: 'select_region', style: 'width: 200px;' %></span>
+        -->
+        &nbsp;&nbsp;&nbsp;&nbsp;<%= submit_tag "查询", class: "form_submit", class: 'btn btn-primary', style: 'width: 65px; font-size: 14px; height: 32px; line-height: 14px; background: #006DF1; opacity: 1' %>
+      </p>
+    <% end %>
+    <p class="links_status" style="margin: 30px 0;">
+      &nbsp;&nbsp;&nbsp;&nbsp;<%= link_to '物资日统计表', daily_goods_statistics_path %>
+      <%= link_to '物资储备名录', material_reserves_path, style: 'margin-left: 26px;', class: 'active-link'  %>
+      <%= link_to '物资数据报送', goods_data_submissions_path, style: 'margin-left: 26px;' %>
+    </p>
+
+    <table class='table' style='border-left: 1px solid #dcdcdc; border: 1px solid #dcdcdc; border-right: 1px solid #dcdcdc; background: snow;'>
+      <tr class="table_title" class="">
+        <td class="table_td_title"  style="margin-top: 16px; display: ;color: snow;">所属地州</td>
+        <td class="table_td_title"  style="margin-top: 16px; display: ;color: snow;">企业名称</td>
+        <!--
+        <td class="table_td_title"  style="color: snow;">企业分类</td>
+        <td class="table_td_title"  style="color: snow;">最大储备容量</td>
+        <td class="table_td_title"  style="color: snow;">仓库经纬度</td>
+        -->
+        <td class="table_td_title"  style="color: snow;">储备库点</td>
+        <td class="table_td_title"  style="color: snow;">储备类型</td>
+        <td class="table_td_title"  style="color: snow;">物资类型</td>
+        <td class="table_td_title"  style="color: snow;">仓库所在城市</td>
+        <td class="table_td_title"  style="color: snow;">数量（件/吨）</td>
+        <td class="table_td_title"  style="color: snow; width: 50px;">负责人</td>
+        <td class="table_td_title"  style="color: snow;">联系电话</td>
+        <td class="table_td_title"  style="color: snow; width: 150px; text-align: center;">状态</td>
+      </tr>
+      <% @material_reserves.each do |material_reserf| %>
+        <tr class="" class="border-bottom" style="border: 1px solid #dcdcdc;background: #ffffff87;">
+          <td class="table_text_submission"><%= material_reserf.region %></td>
+          <td class="table_text_submission"><%= material_reserf.enterprise.try(:name)%></td>
+          <!--
+          <td class="table_text_submission"><%= material_reserf.enterprise.try(:enterprise_category)%></td>
+          <td class="table_text_submission"><%= material_reserf.longitude %>/ <%= material_reserf.latitude %></td>
+          <td class="table_text_submission"><%= material_reserf.max_store %></td>
+          -->
+          <td class="table_text_submission"><%= material_reserf.warehouse_location %></td>
+          <td class="table_text_submission">
+            <%= material_reserf.enterprise_category %>
+          </td>
+          <td class="table_text_submission">
+            <%= material_reserf.goods_type %>
+          </td>
+          <td class="table_text_submission"><%= material_reserf.city %></td>
+          <td class="table_text_submission"><%= material_reserf.storage_apacity %></td>
+          <td class="table_text_submission"><%= material_reserf.person_in_charge %></td>
+          <td class="table_text_submission"><%= link_to material_reserf.tel, material_reserf, style: 'text-decoration: none; color: #000;' %></td>
+          <td style="display: flex; margin-top: 10px; justify-content: space-around;">
+            <%= link_to "查看", material_reserf, style: 'text-decoration: none;' %>
+            <span style="color: #b2b2b2;">|</span>
+            <%= link_to '修改', edit_material_reserf_path(material_reserf), style: 'color: #68c0fb; text-decoration: none;' %>
+            <span style="color: #b2b2b2;">|</span>
+            <%= button_to '删除', material_reserf, method: :delete, form: { data: { turbo_confirm: '确定删除?' } }, class: "btn btn-danger btn-sm", style: 'float: left; margin-top: -3px;' %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+
+    <div style="display: flex; float: right;">
+
+      <% start_index = @material_reserves.offset_value + 1 %>
+      <% end_index = start_index + @material_reserves.length - 1 %>
+
+      <p class="page_text">
+        <span> 第 <%= start_index %> - <%= end_index %> 条/总共 <%= @material_reserves.total_count %> 条
+          <% if @material_reserves.total_pages > 1 %>
+
+            <% first_page = [1, @material_reserves.current_page - 3].max %>
+            <% last_page = [first_page + 6, @material_reserves.total_pages].min %>
+            <% page_links = (first_page..last_page).map do |page|
+              if page == @material_reserves.current_page
+                content_tag :span, page, class: 'current'
+              else
+                link_to page, { page: page }, class: 'page_link'
+              end
+            end %>
+            <%= content_tag :div, page_links.join.html_safe, class: 'paging_links', style: 'display: flex;' %>
+            <span class="page_text">
+              <%= form_tag '', method: :get do %>
+                &nbsp;&nbsp;<span class="page_text">每页 <%= select_tag :per_page, options_for_select([10, 20, 50], params[:per_page]), onchange: "$('#filter_form').submit()" %> 条</span>
+                &nbsp;&nbsp;跳至:&nbsp;&nbsp; <%= text_field_tag :page, params[:page], class: 'page_skip', onchange: "$('#filter_form').submit()"%>&nbsp;&nbsp;页
+                &nbsp;&nbsp;<%= submit_tag "跳转", class: "page_skip", class: 'btn btn-primary btn-sm', style: 'width: 55px; font-size: 14px; height: 32px; background: #006DF1; opacity: 1' %>
+            <% end %>
+            </span>
+          <% end %>
+        </span>
+      </p>
+    </div>
+  </div>
+
+</div>
+
+</div>
+
+
+<style>
+.code {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.list {
+  background: #f8f9fa;
+  padding: 10px;
+}
+.each-row {
+  border-radius: 5px;
+  margin: 50px 180px;
+  background: white;
+  padding: 10px;
+}
+.input_enterprise {
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: var(--bs-border-radius);
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  border: 1px solid blue;
+  width: 300px;
+}
+.input_tel {
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: var(--bs-border-radius);
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  border: 1px solid blue;
+  width: 200px;
+}
+.current {
+  background: #2381f3;
+  color: white;
+  border: 1px solid blue;
+  border: 1px solid #1890FF;
+  width: 32px;
+  height: 32px;
+  border-radius: 2px 2px 2px 2px;
+  opacity: 1;
+  display: block;
+  text-align: center;
+  line-height: 32px;
+  font-weight: 400;
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+.page_link {
+  margin: 0 8px;
+  width: 32px;
+  height: 32px;
+  background: #FFFFFF;
+  border-radius: 2px 2px 2px 2px;
+  opacity: 1;
+  border: 1px solid rgba(0,0,0,0.15);
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  line-height: 32px;
+  font-size: 14px;
+  color: #000000;
+  font-weight: 400;
+}
+
+
+.page_text{
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  line-height: 32px;
+}
+
+.page_skip{
+  width: 48px;
+  height: 32px;
+  line-height: 28px;
+  background: #FFFFFF;
+  border-radius: 2px 2px 2px 2px;
+  opacity: 1;
+  border: 1px solid rgba(0,0,0,0.15);
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  line-height: 22px;
+}
+.links_status{
+  margin-left: 19px;
+}
+.links_status a {
+  letter-spacing: 1px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 400;
+  color: #666666;
+  line-height: 24px;
+}
+
+/* 激活链接样式 */
+.links_status a.active-link {
+  font-size: 16px;
+  font-weight: 500;
+  color: #3F73F6;
+  line-height: 24px;
+  font-weight: bold; /* 加粗 */
+  text-decoration: underline; /* 下划线 */
+  text-underline-position: under; /* 下划线位置 */
+  text-decoration-color: #006DF1;
+}
+.select_region {
+  height: 32px;
+  background: #FFFFFF;
+  border-radius: 3px 3px 3px 3px;
+  opacity: 1;
+  margin-left: 12px;
+  border: 1px solid #DCDCDC;
+}
+.select_store {
+  height: 32px;
+  background: #FFFFFF;
+  border-radius: 3px 3px 3px 3px;
+  opacity: 1;
+  margin-left: 12px;
+  border: 1px solid #DCDCDC;
+}
+.daily_status_border {
+  height: 54px;
+  border-radius: 1px;
+  width: 144px;
+  border-left: 2px solid #DDD;
+  margin-left: 37px;
+  margin-top: 3px;
+
+}
+.daily_status_date_success {
+  font-size: 14px;
+  margin-left: 45px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.45);
+  line-height: 22px;
+}
+
+.daily_status_date_error {
+  font-size: 14px;
+  margin-left: 78px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.45);
+  line-height: 22px;
+}
+
+.daily_status_date {
+  font-size: 14px;
+  margin-left: 80px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.45);
+  line-height: 22px;
+}
+.daily_status {
+  margin-left: 10px;
+  font-size: 16px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: rgba(0,0,0,0.9);
+  line-height: 24px;
+}
+.daily_status_text {
+  margin-left: 20px;
+}
+.daily_card_enterprise_status_title {
+  font-size: 16px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #1D2129;
+  line-height: 22px;
+
+  margin-left: 20px;
+}
+.daily_card_enterprise_status {
+  height: 1200px;
+  background: #FFFFFF;
+  width: 269px;
+  margin-top: 33px;
+  padding-top: 33px;
+  margin-left: 20px;
+
+}
+.daily_card_enterprise_content {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  margin-left: 15px;
+  margin-top: 30px;
+  color: #FFFFFF;
+  line-height: 28px;
+}
+.daily_card_enterprise_title {
+  font-size: 14px;
+  margin-top: 30px;
+  margin-left: 15px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #FFFFFF;
+  line-height: 28px;
+}
+.daily_card_enterprise {
+  width: 289px;
+  height: 170px;
+  background: url('<%= asset_path "enterprise_background.png" %>');
+}
+.daily_table {
+  padding: 10px;
+  height: 1200px;
+  width: 1192px;
+  background: #FFFFFF;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+.daily_card_index {
+  width: 274px;
+  height: 134px;
+  background: #F7F8FA;
+  margin-top: 20px;
+  margin-left: 16px;
+  border-radius: 6px;
+
+}
+.daily_card_div {
+  width: 1192px;
+  height: 170px;
+  background: #FFFFFF;
+  display: flex;
+
+}
+.daily_enterprise_name {
+  font-size: 15px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #FFFFFF;
+  line-height: 24px;
+  margin-left: 15px;
+}
+.daily_data_time {
+  font-size: 12px;
+  font-weight: 400;
+  color: #4E5969;
+  line-height: 20px;
+  margin-left: 19px;
+  margin-bottom: 18px;
+}
+</style>
+<style>
+.table {
+  max-width: 1150px;
+  margin: 10px;
+  text-align: center;
+}
+table {
+  background-color: transparent;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.table thead tr{
+  background-color: #0d6efd;
+  color: white;
+}
+*, :after, :before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.table-bordered,
+.table-bordered>tbody>tr>td,
+.table-bordered>tbody>tr>th,
+.table-bordered>tfoot>tr>td,
+.table-bordered>tfoot>tr>th,
+.table-bordered>thead>tr>td,
+.table-bordered>thead>tr>th {
+    border: 1px solid #ddd;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+  padding: 3px;
+  vertical-align: middle;
+  border: none;
+}
+.table-hover>tbody>tr:hover>td {
+  background-color: #ecf3f8;
+}
+/* .table-striped>tbody>tr:nth-child(odd)>td {
+   background-color: #f9f9f9;
+}*/
+.table-striped tr:nth-child(even)>td {
+  background-color: #f9f9f9;
+}
+</style>

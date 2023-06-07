@@ -1,0 +1,119 @@
+<li class="nav-item">
+  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#materials-collapse" aria-expanded="false" aria-controls="materials-collapse">
+    <span class="menu_button">
+      <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" color="#006DF1" fill="currentColor" class="bi bi-file-bar-graph-fill" viewBox="0 0 16 16">
+        <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-2 11.5v-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-2.5.5a.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1zm-3 0a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-1z"/>
+      </svg>
+      物资统计
+      <span class="menu_icon">
+        ^
+      </span>
+    </span>
+  </button>
+</li>
+<div id="" class="" aria-labelledby="materials-heading" data-bs-parent="#sidebar-menu">
+  <div class="accordion-body">
+    <ul class="list-unstyled">
+      <li class="active">
+        <% if params[:controller] == 'daily_goods_statistics' %>
+          <div class="menu_link_clicked">
+            <a href="<%= daily_goods_statistics_path  %>" class="menu_sub_link">
+              <span class="" style="margin-left: 40px; line-height: 44px;">物资日统计表</span>
+            </a>
+          </div>
+        <% else %>
+          <div class="menu_link">
+            <a href="<%= daily_goods_statistics_path %>" class="menu_sub_link">
+              <span style="margin-left: 40px; line-height: 44px;">物资日统计表</span>
+            </a>
+          </div>
+        <% end %>
+      </li>
+      <li class="active">
+        <% if params[:controller] == 'enterprises' %>
+          <div class="menu_link_clicked">
+            <a href="<%= enterprises_path %>" class="menu_sub_link">
+              <span style="margin-left: 40px; line-height: 44px;">企业信息</span>
+            </a>
+          </div>
+        <% else %>
+          <div class="menu_link">
+            <a href="<%= enterprises_path %>" class="menu_sub_link">
+              <span style="margin-left: 40px; line-height: 44px;">企业信息</span>
+            </a>
+          </div>
+        <% end %>
+      </li>
+      <li class="active">
+        <% if params[:controller] == 'goods_data_submissions' %>
+          <div class="menu_link_clicked">
+            <a href="<%= goods_data_submissions_path %>" class="menu_sub_link">
+              <span style="margin-left: 40px; line-height: 44px;">物资数据报送</span>
+            </a>
+          </div>
+        <% else %>
+          <div class="menu_link">
+            <a href="<%= goods_data_submissions_path %>" class="menu_sub_link">
+              <span style="margin-left: 40px; line-height: 44px;">物资数据报送</span>
+            </a>
+          </div>
+        <% end %>
+      </li>
+      <li class="active">
+        <% if params[:controller] == 'material_reserves' %>
+          <div class="menu_link_clicked">
+            <a href="<%= material_reserves_path %>" class="menu_sub_link">
+              <span style="margin-left: 40px; line-height: 44px;">仓库信息</span>
+            </a>
+          </div>
+        <% else %>
+          <div class="menu_link">
+            <a href="<%= material_reserves_path %>" class="menu_sub_link">
+              <span style="margin-left: 40px; line-height: 44px;">仓库信息</span>
+            </a>
+          </div>
+        <% end %>
+      </li>
+      <li class="active">
+        <% if params[:controller] == 'goods' %>
+          <div class="menu_link_clicked">
+            <a href="<%= goods_path %>" class="menu_sub_link">
+              <span style="margin-left: 40px; line-height: 44px;">物资信息</span>
+            </a>
+          </div>
+        <% else %>
+          <div class="menu_link">
+            <a href="<%= goods_path %>" class="menu_sub_link">
+              <span style="margin-left: 40px; line-height: 44px;">物资信息</span>
+            </a>
+          </div>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</div>
+<style>
+.menu_link_clicked {
+  width: 168px;
+  height: 44px;
+  background: #E5EDFB;
+  border-radius: 4px 4px 4px 4px;
+  opacity: 1;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 400;
+  display: block;
+  color: #4E5969;
+  line-height: 23px;
+  margin-top: 10px;
+}
+
+.menu li.active {
+  color: #fff;
+  background-color: #007bff;
+}
+
+#accordionExample > div:nth-child(1) {
+  border: none;
+}
+</style>

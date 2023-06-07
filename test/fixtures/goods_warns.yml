@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  goods_category: MyString
+  goods_name: MyString
+  Adequate_warning_value: MyString
+  Insufficient_warning_value: MyString
+  Below_warning_value: MyString
+  remark: MyString
+
+two:
+  goods_category: MyString
+  goods_name: MyString
+  Adequate_warning_value: MyString
+  Insufficient_warning_value: MyString
+  Below_warning_value: MyString
+  remark: MyString

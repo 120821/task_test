@@ -1,0 +1,204 @@
+<%= form_with(model: warn) do |form| %>
+
+  <div class= "table_div">
+    <table class='table_new_material' style="">
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          所属地州:
+        </th>
+        <td>
+          <%= form.select :region_id, options_for_select(Region.all.collect {|p| [ p.name, p.id ] }, params[:region_id]), {}, class: 'form-control', style: 'width: 775px;margin-left:10px;' %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          所属企业:
+        </th>
+        <td>
+          <%= form.select :enterprise_id, options_for_select(Enterprise.all.collect {|p| [ p.name, p.id ] }, params[:region_id]), {}, class: 'form-control', style: 'width: 775px;margin-left:10px;' %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          所属储备库:
+        </th>
+        <td>
+          <%= form.select :material_reserf_id, options_for_select(MaterialReserf.all.collect {|p| [ p.warehouse_location, p.id ] }, params[:region_id]), {}, class: 'form-control', style: 'width: 775px;margin-left:10px;' %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          企业分类:
+        </th>
+        <td>
+          <%= form.text_field :enterprise_category, class: 'form-control', placeholder: '企业分类', style: 'width: 775px;margin-left:10px;' %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          物资分类:
+        </th>
+        <td>
+          <%= form.text_field :goods_category, class: 'form-control', placeholder: '物资分类', style: 'width: 775px;margin-left:10px;' %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          仓库编号:
+        </th>
+        <td>
+          <%= form.text_field :material_reserf_number, class: 'form-control', placeholder: 'BZ148358', style: 'width: 775px;margin-left: 10px;' %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          单位:
+        </th>
+        <td>
+          <%= form.text_field :unit, class: 'form-control', placeholder: '吨', style: 'width: 775px;margin-left: 10px;' %>
+          <%#= form.number_field :material_reserf_id %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          最高预警值:
+        </th>
+        <td>
+          <%= form.text_field :max_warn, class: 'form-control', placeholder: '多少吨？', style: 'width: 775px;margin-left: 10px;' %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          最低预警值:
+        </th>
+        <td>
+          <%= form.text_field :min_warn, class: 'form-control', placeholder: '多少吨？', style: 'width: 775px;margin-left: 10px;' %>
+        </td>
+      </tr>
+      <tr>
+        <th class="table_name">
+          <svg xmlns="http://www.w3.org/2000/svg" color="#E34D59" width="8" height="8" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
+            <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
+          </svg>&nbsp;&nbsp;
+          预警结果:
+        </th>
+        <td>
+          <%= form.text_field :warn_result, class: 'form-control', placeholder: '预警结果', style: 'width: 775px;margin-left: 10px;' %>
+        </td>
+      </tr>
+    </table>
+
+    <div style="margin-top: 50px;">
+      <%= link_to '返回', warns_path, class: 'btn btn-light', style: 'width: 150px; margin-left: 300px;border: 1px solid #0d6efd;' %>
+      <%= form.submit "确定", class: 'btn btn-primary', style: 'width: 150px; margin-left: 150px;'%>
+    </div>
+  </div>
+
+<% end %>
+<style>
+.from{
+  margin: 0 180px;
+}
+.upload-box {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  border: 1px dashed #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  text-align: center;
+}
+.upload-box:hover {
+  background-color: #f9f9f9;
+}
+.upload-box span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: #ccc;
+}
+.table_div{
+  height: 1000px;
+}
+.table_name {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.9);
+  line-height: 22px;
+  margin-right: 10px;
+}
+.table_new_material{
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  text-align: right;
+
+}
+.form_new_control{
+  width: 200px;
+  margin-left: 10px;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: var(--bs-border-radius);
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+#preview-images img {
+  max-width: 200px;
+  max-height: 200px;
+  margin-right: 5px;
+}
+#preview-container > img:nth-child(1) {
+ width: 200px;
+ margin-left: -98px;
+}
+
+#preview-container > img:nth-child(2) {
+ width: 200px;
+ margin-left: 135px;
+}
+
+#preview-container > img:nth-child(3) {
+  width: 200px;
+  margin-left: 145px;
+}
+
+</style>

@@ -1,0 +1,60 @@
+<div class="login">
+  <div class="login_left" style="text-align: center;">
+      <h1 style="margin-top: 140px;">新疆维吾尔自治区商务厅</h1>
+      <br/>
+      <span style="font-size: 30px; font-weight: 400; color: #616161; line-height: 50px; letter-spacing: 2px;">
+        应急物资保供监测平台
+      </span>
+      <%= image_tag 'login.png', style: 'width: 548px; height: 548px; margin-top: 57px' %>
+  </div>
+  <div class="login_right">
+    <h2 style="margin-top: 143px; margin-left: 172px;">
+      欢迎登录
+      <span style="font-size: 24px; margin-left: 40px; font-weight: 400; color: #525252; line-height: 30px; letter-spacing: 1px;">保供平台
+      </span>
+    </h2>
+    <div class="login_form">
+      <p class="links" style="display: flex; justify-content: space-between;">
+      <% if params[:manager] == 'enterprise' %>
+        <%= link_to "管理员", new_manager_session_path %>
+        <%= link_to "保供企业", new_manager_session_path(manager: 'enterprise'), class: 'clicked' %>
+        <%= link_to "地州商务局", new_manager_session_path(manager: 'region') %>
+      <% elsif params[:manager] == 'region' %>
+        <%= link_to "管理员", new_manager_session_path %>
+        <%= link_to "保供企业", new_manager_session_path(manager: 'enterprise') %>
+        <%= link_to "地州商务局", new_manager_session_path(manager: 'region'), class: 'clicked' %>
+      <% else %>
+        <%= link_to "管理员", new_manager_session_path(manager: 'admin'), class: "clicked" %>
+        <%= link_to "保供企业", new_manager_session_path(manager: 'enterprise') %>
+        <%= link_to "地州商务局", new_manager_session_path(manager: 'region') %>
+      <% end %>
+      <p>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {class: "devise-form"}) do |f| %>
+        <div class="form-group">
+          <input type="text" name="manager[email]" class="form-control" style="background: #EAEAEA; border-radius: 6px 6px 6px 6px; opacity: 0.4; margin-top: 30px; height: 56px;" placeholder="请输入账号" required="true"/>
+        </div>
+        <div class="form-group" style="margin-top: 20px;">
+          <input type="password" name="manager[password]" class="form-control" style="height: 56px; background: #EAEAEA; border-radius: 6px 6px 6px 6px; opacity: 0.4; margin-top: 30px;" placeholder="请输入密码" required="true"/>
+        </div>
+        <% if flash[:warning] %>
+          <p class="text-warning text-center"><small><%= flash[:warning] %></small></p>
+        <% end %>
+        <div style="margin-top: 50px;">
+          <%= submit_tag "登录", class: "login_btn", style: 'letter-spacing: 15px; border: #5b86e5;' %>
+          <p style="text-align: center;"><%= link_to "注册用户", new_registration_path(resource_name), class: 'sign_up' %><br /><p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<style>
+.clicked {
+  font-size: 24px !important;
+  font-weight: bold;
+  color: black !important;
+  text-decoration: underline !important;
+  text-decoration-color: currentcolor;
+  text-underline-position: under;
+  text-decoration-color: #006DF1 !important;
+}
+</style>

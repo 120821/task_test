@@ -1,0 +1,167 @@
+<div class="list">
+  <span class="show_title">
+  <span style="margin-right: 5px;">
+    <!--
+      <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+      <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+      <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+      </svg>
+    -->
+    <%= image_tag "enterprise.png" %>
+    基本信息
+  </span>
+  <div style="display: flex;">
+    <table class='' style="margin-top: 35px;">
+      <tr>
+        <td>
+          <span class="show_table_name">所属地州:</span>
+          <span class="show_table_content"><%= @goods_data_submission.region %></span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="show_table_name">企业名称:</span>
+          <span class="show_table_content"><%= @goods_data_submission.enterprise.try(:name) %></span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="show_table_name">企业分类:</span>
+          <span class="show_table_content"><%= @goods_data_submission.enterprise_category %></td>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="show_table_name">物资分类:</span>
+          <span class="show_table_content"><%= @goods_data_submission.goods_category %></span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="show_table_name">上次上报时间:</span>
+          <span class="show_table_content"><%= @goods_data_submission.last_reported_time.strftime('%Y-%m-%d') %></span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="show_table_name">上报数据:</span>
+          <span class="show_table_content"><%= @goods_data_submission.reported_data %></span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="show_table_name">上报人:</span>
+          <span class="show_table_content"><%= @goods_data_submission.report_person %></span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="show_table_name">联系电话:</span>
+          <span class="show_table_content"><%= @goods_data_submission.report_person_tel %></span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+        <span class="show_table_name">进入上报状态:</span>
+          <span class="show_table_content"><%#= @goods_data_submission.report_status_today ? '已上报' : '未上报' %></span>
+          <% if @goods_data_submission.report_status_today? %>
+            <span class="show_table_content" style="color: green;">已报送</span>
+          <% else %>
+            <span class="show_table_content" style="color: red;">未报送</span>
+          <% end %>
+        </td>
+      </tr>
+
+      <!--
+      <tr>
+        <th>操作:</th>
+        <td><%= @goods_data_submission.operations %></td>
+      </tr>
+      -->
+  </table>
+  </div>
+  <div style="display: flex; margin: 40px 100px;">
+    <%= link_to '返回', goods_data_submissions_path, class: 'btn btn-primary', style: 'width: 150px; marign-left: 50px; background-color: white; color: #0d6efd;' %>
+    <% if current_manager.email.include? 'user' %>
+      <%= link_to '修改', edit_goods_data_submission_path(@goods_data_submission), class: 'btn btn-primary', style: 'width: 200px; float: left; margin-left: 300px;' %>
+    <% end %>
+  </div>
+</div>
+
+<style>
+.list {
+  background: #ffffff;
+  padding: 20px;
+  height: 700px;
+}
+.each-row {
+  border-radius: 5px;
+  margin: 50px 180px;
+  background: #ffffff;
+  padding: 10px;
+}
+.show_title {
+  font-size: 20px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.9);
+  line-height: 28px;
+}
+.show_table_name_two {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.4);
+  margin-left: 216px;
+  line-height: 22px;
+}
+.show_table_content_two {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  margin-left: 10px;
+  color: rgba(0,0,0,0.9);
+  line-height: 22px;
+}
+.show_table_name {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  margin-left: 10px;
+  color: rgba(0,0,0,0.4);
+  line-height: 22px;
+}
+.show_table_content {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  margin-left: 10px;
+  color: rgba(0,0,0,0.9);
+  line-height: 22px;
+}
+.show {
+  width: 1194px;
+  padding: 31px 24px;
+  height: auto;
+  background: #FFFFFF;
+  border-radius: 6px;
+
+}
+.show_table_image_name{
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  margin-top: 20px;
+  margin-left: 20px;
+  font-weight: 400;
+  color: rgba(0,0,0,0.9);
+  line-height: 22px;
+}
+</style>

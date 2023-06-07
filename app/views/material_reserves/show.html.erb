@@ -1,0 +1,201 @@
+<div class="list">
+  <span class="show_title">
+    <span style="margin-right: 5px;">
+      <!--
+        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+        <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+        <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+        </svg>
+      -->
+      <%= image_tag "enterprise.png" %>
+    </span>
+    基本信息
+  </span>
+  <div style="display: flex;">
+    <table class='' style="margin-top: 35px;">
+      <tr>
+        <td>
+          <span class="show_table_name">所属地州:&nbsp;</span>
+          <span class="show_table_content"><%= @material_reserf.region %></span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="show_table_name">企业名称:&nbsp;</span>
+          <span class="show_table_content"><%= @material_reserf.enterprise.try(:name) %></span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="show_table_name">企业分类:&nbsp;</span>
+          <span class="show_tabler_content"><%= @material_reserf.enterprise_category %></span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="show_table_name">物资分类:&nbsp;</span>
+          <span class="show_table_content"><%= @material_reserf.goods_type %></span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="show_table_name">负责人:&nbsp;</span>
+          <span class="show_table_content"><%= @material_reserf.person_in_charge %></span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="show_table_name">联系电话:&nbsp;</span>
+          <span class="show_table_content"><%= @material_reserf.tel %></span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="show_table_name">仓库分布地址1:&nbsp;</span>
+          <span class="show_table_content"><%= @material_reserf.warehouse_location %></span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="show_table_name">经纬度:&nbsp;</span>
+          <span class="show_table__content"><%= @material_reserf.longitude %>,<%= @material_reserf.latitude %></span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="show_table_name">仓库分布地址2:&nbsp;</span>
+          <span class="show_table_content"><%= @material_reserf.warehouse_location_two %></span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="show_table_name">经纬度:&nbsp;</span>
+          <span class="show_table__content"><%= @material_reserf.longitude_two %>,<%= @material_reserf.latitude_two %></span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="show_table_name">仓库所在城市:&nbsp;</span>
+          <span class="show_table_content"><%= @material_reserf.city %></span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="show_table_name">最大储备容量:&nbsp;</span>
+          <span class="show_table_content"><%= @material_reserf.max_store %></span>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <hr style="margin: 25px 0;"/>
+  <span class="show_title">
+    <span style="margin-right: 5px;">
+      <%= image_tag "image_two.png" %>
+    </span>
+    仓库照片</br></br>
+      <span class="show_table_content">
+        <% if @material_reserf.image_one? %>
+          <%= link_to (image_tag @material_reserf.image_one.url, style: 'width: 200px; height: 200px;'), @material_reserf.image_one.url %>
+        <% end %>
+      </span>
+      <span class="show_table_content">
+        <% if @material_reserf.image_two? %>
+          <%= link_to (image_tag @material_reserf.image_two.url, style: 'width: 200px; height: 200px;'), @material_reserf.image_two.url %>
+        <% end %>
+      </span>
+      <span class="show_table_content">
+        <% if @material_reserf.image_three? %>
+          <%= link_to (image_tag @material_reserf.image_three.url, style: 'width: 200px; height: 200px;'), @material_reserf.image_three.url %>
+        <% end %>
+      </span>
+  </span>
+
+  <div style="margin-top: 100px; text-align: right; margin: 50px 400px 190px 180px;">
+    <%= link_to '返回', material_reserves_url, class: 'btn btn-primary', style: 'width: 150px; float: left; background-color: white; color: #0d6efd;' %>
+    <%= button_to '删除', @material_reserf, method: :delete, form: { data: { turbo_confirm: '确定删除?' } }, class: 'btn btn-danger', style: 'width: 150px; float: right;' %>
+    <% if current_manager.email.include?('enterprise') || current_manager.email.include?('user')%>
+      <%= link_to '修改', edit_material_reserf_path, class: 'btn btn-primary', style: 'width: 150px; float: right;' %>
+    <% end %>
+  </div>
+</div>
+<style>
+.list {
+  background: #ffffff;
+  padding: 20px;
+  height: auto;
+}
+.each-row {
+  border-radius: 5px;
+  margin: 50px 180px;
+  background: white;
+  padding: 10px;
+}
+.show_title {
+  font-size: 20px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.9);
+  line-height: 28px;
+}
+.show_table_name_two {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.4);
+  margin-left: 216px;
+  line-height: 22px;
+}
+.show_table_content_two {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  margin-left: 10px;
+  color: rgba(0,0,0,0.9);
+  line-height: 22px;
+}
+.show_table_name {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  margin-left: 10px;
+  color: rgba(0,0,0,0.4);
+  line-height: 22px;
+}
+.show_table_content {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  margin-left: 30px;
+  color: rgba(0,0,0,0.9);
+  line-height: 22px;
+}
+.show {
+  width: 1194px;
+  padding: 31px 24px;
+  height: auto;
+  background: #FFFFFF;
+  border-radius: 6px;
+
+}
+.show_table_image_name{
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  margin-top: 20px;
+  margin-left: 20px;
+  font-weight: 400;
+  color: rgba(0,0,0,0.9);
+  line-height: 22px;
+}
+</style>

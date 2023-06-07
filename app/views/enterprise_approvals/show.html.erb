@@ -1,0 +1,30 @@
+<h1 style="text-align: center;">待审批企业详情</h1>
+<div class="list">
+  <h3 style="margin-left: 180px; margin-top: 50px;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+      <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+      <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+    </svg>
+     基本信息
+  </h3>
+  <div class="each-row">
+    <%= render @enterprise_approval %>
+    <% if current_manager.email.include?('enterprise') || current_manager.email.include?('admin')%>
+      <%#= link_to '编辑', edit_enterprise_approval_path(@enterprise_approval), class: 'btn btn-primary', style: 'width: 200px; margin-right: 500px; float: right; margin-left: 50px;' %>
+      <%= button_to "删除", @enterprise_approval, method: :delete, method: :delete, form: { data: { turbo_confirm: '确定删除?' } }, class: "btn btn-danger", style: 'width: 200px; float: right; margin-right: 100px;' %>
+    <% end %>
+    <%= link_to '返回', enterprise_approvals_path, style: 'text-decoration: none;' %>
+  </div>
+</div>
+<style>
+  .list {
+    background: #f8f9fa;
+    padding: 10px;
+  }
+  .each-row {
+    border-radius: 5px;
+    margin: 50px 180px;
+    background: white;
+    padding: 10px;
+  }
+</style>

@@ -1,0 +1,94 @@
+<div class="box">
+  <div class="column">
+    <div class="item">
+      <h3>保供企业</h3>
+      <h1 style="color: green;"><%#= @enterprise_count %>8家</h1>
+    </div>
+    <div class="item">
+      <h3>重点商超供应</h3>
+      <h1 style="color: orange;"><%#= @enterprise_shangchao_count %>12家</h1>
+    </div>
+    <div class="item">
+      <h3>重点监控物资</h3>
+      <h1 style="color: darkblue;">12类</h1>
+    </div>
+  </div>
+</div>
+<div class="box" style="margin-top: 20px;">
+  <div class="column">
+    <div class="item">
+      <h3>总进货量</h3>
+      <h1>289吨</h1>
+    </div>
+    <div class="item">
+      <h3>总销售量</h3>
+      <h1>89吨</h1>
+    </div>
+    <div class="item">
+      <h3>总库存量</h3>
+      <h1>102吨</h1>
+    </div>
+  </div>
+</div>
+
+<div class="home_center_title">
+  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" color="white" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+  </svg>
+  待报送企业提醒
+</div>
+
+<div class="box">
+  <div class="column">
+    <div class="daily_enterprise">
+      <div>
+        <h3>今日未报送企业数量</h3>
+        <h1><%= @goods_data_submission_count_false %></h1>
+        <h5>
+          较昨日&nbsp;&nbsp;12%&nbsp;&nbsp;<span style="color: red;">▲</span>&nbsp;&nbsp;较上周&nbsp;&nbsp;10%&nbsp;<span style="color: green;">▼</span>
+          <span style="float: right;">
+            <%= link_to raw('查看&nbsp;>'), goods_data_submissions_path(report_status_today: false), style: 'text-decoration: none; color: black;' %>
+          </span>
+        <h5>
+      </div>
+    </div>
+    <div class="daily_enterprise">
+      <div>
+        <h3>今日已报送企业数量</h3>
+        <h1><%= @goods_data_submission_count_true %></h1>
+        <h5>
+          较昨日&nbsp;&nbsp;15%&nbsp;&nbsp;<span style="color: red;">▲</span>&nbsp;&nbsp;较上周&nbsp;15% &nbsp;<span style="color: green;">▼</span>
+          <span style="float: right;">
+            <%= link_to raw('查看&nbsp;>'), goods_data_submissions_path(report_status_today: true), style: 'text-decoration: none; color: black;' %>
+          </span>
+        </h5>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<style>
+
+  .daily_enterprise {
+    border: 1px solid #80808054;
+    height: 200px;
+    width: 400px;
+    padding: 30px 20px;
+   }
+
+  .home_center_title {
+    border: 1px solid darkblue;
+    background: darkblue;
+    margin: 50px auto 0px auto;
+    width: 80%;
+    color: snow;
+    border-radius: 5px;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    font-size: 30px;
+  }
+</style>
+
+

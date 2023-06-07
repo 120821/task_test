@@ -1,0 +1,557 @@
+<script src="https://code.highcharts.com/highcharts.js"></script>
+
+<div class="cards_supply">
+  <div class="card_supply" style="width: 387px;">
+    <p class="card_supply_title" style="width: 387px;">蔬菜交易市场监控</p>
+    <p><span class="card_integer">268</span><span style="margin-left: 6px;">家</span></p>
+    <p class="data_time">
+      较昨日<span class="data_up" style="color: #d84644; margin-left: 6px; ">12家</span>
+      <%= image_tag 'rate_up.png', style: 'margin-top: -10px;' %>
+      <span style="margin-left: 47px;">较上周</span><span class="data_down" style="color: #5fb136;">6家</span>
+      <%= image_tag 'rate_down.png', style:"margin-top: -10px;" %>
+    <p>
+
+  </div>
+  <div class="card_supply" style="width: 387px; margin-left: 20px;">
+    <p class="card_supply_title">免收进场费（总额）</p>
+    <p><span class="card_integer">30.10</span><span style="margin-left: 6px;">万元</span></p>
+
+    <p class="data_time">
+      较昨日<span class="data_up" style="color: #d84644;margin-left: 6px; ">1.2万元</span>
+      <%= image_tag 'rate_up.png', style: 'margin-top: -10px;' %>
+      <span style="margin-left: 47px;">较上周</span><span class="data_down" style="color: #5fb136;">1.0万元</span>
+      <%= image_tag 'rate_down.png', style:"margin-top: -10px;" %>
+    <p>
+  </div>
+  <div class="card_supply" style="margin-left: 20px;width: 387px;">
+    <p class="card_supply_title">免收出场费（总额）</p>
+    <p><span class="card_integer">300</span><span style="margin-left: 6px;">万元</span></p>
+    <p class="data_time">
+      较昨日<span class="data_up" style="color: #d84644;margin-left: 6px; ">1.2万元</span>
+      <%= image_tag 'rate_up.png', style: 'margin-top: -10px;' %>
+      <span style="margin-left: 47px;">较上周</span><span class="data_down" style="color: #5fb136;">1.0万元</span>
+      <%= image_tag 'rate_down.png', style:"margin-top: -10px;" %>
+    <p>
+  </div>
+</div>
+<div class="select_supply">
+  <p class="supply_select_title">日交易量及进出场费用</p>
+  <%= form_tag '' do %>
+    <!--
+    地州: <%= select_tag :region, options_for_select(REGIONS_WITH_NIL, params[:region]), class: 'select_new' %>
+    品类: <%= select_tag :sales_inventory_situation, options_for_select(CATEGORY_ARRAY, params[:sales_inventory_situation]), class: 'select_new' %>
+    -->
+    <%= text_field_tag :daily_goods_date, params[:daily_goods_date], id: 'datepicker', placeholder: '请选择日期' %>
+    <%= submit_tag "查询", class: "form_submit", class: 'btn btn-primary btn-sm', style: 'margin-left: 20px;' %>
+  <% end %>
+</div>
+
+<div class="charts_supply">
+  <div style="margin-top: 18px;">
+    <p style="position: absolute; margin-top: 18px; margin-left: 20px;color: #1D2129; line-height: 24px;font-weight: 500; font-size: 16px;">新疆新联农
+      <span><%= link_to '下载excel', dwonload_trade_csv_goods_url(enterprise: 'xinlian'), class: 'btn btn-primary', style: ' height: 32px; background: #006DF1; opacity: 1; margin-left: 370px;' %>
+      </span>
+    </p>
+    <div class="chart_supply">
+      <div id="chart_supply_index" class="chart_supply_css" style="margin-top: 67px;"></div>
+      <div id="chart_supply_index1" class="chart_supply_css" style="margin-top: 67px;"></div>
+    </div>
+  </div>
+  <div style="width: 18px;">
+  </div>
+  <div style="margin-top: 18px;">
+    <p style="position: absolute; margin-top: 18px; margin-left: 20px;color: #1D2129; line-height: 24px; font-weight: 500; font-size: 16px;">新疆九鼎
+      <span><%= link_to '下载excel', dwonload_trade_csv_goods_url(enterprise: 'jiuding'), class: 'btn btn-primary', style: ' height: 32px; background: #006DF1; opacity: 1; margin-left: 370px;' %>
+      </span>
+    </p>
+    <div class="chart_supply">
+      <div class="chart_supply">
+        <div id="chart_supply_index3" class="chart_supply_css" style="margin-top: 67px;"></div>
+        <div id="chart_supply_index4" class="chart_supply_css" style="margin-top: 67px;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="charts_supply">
+  <div style="margin-top: 18px;">
+    <p style="position: absolute; margin-top: 18px; margin-left: 20px;color: #1D2129; line-height: 24px;font-weight: 500; font-size: 16px;">新疆农产品
+      <span><%= link_to '下载excel', dwonload_trade_csv_goods_url(enterprise: 'xinlian'), class: 'btn btn-primary', style: ' height: 32px; background: #006DF1; opacity: 1; margin-left: 370px;' %>
+      </span>
+    </p>
+    <div class="chart_supply">
+      <div id="chart_supply_index_one" class="chart_supply_css" style="margin-top: 67px;"></div>
+      <div id="chart_supply_index_two" class="chart_supply_css" style="margin-top: 67px;"></div>
+    </div>
+  </div>
+  <div style="width: 18px;">
+  </div>
+  <div style="margin-top: 18px;">
+    <p style="position: absolute; margin-top: 18px; margin-left: 20px;color: #1D2129; line-height: 24px; font-weight: 500; font-size: 16px;">新疆昌吉
+      <span><%= link_to '下载excel', dwonload_trade_csv_goods_url(enterprise: 'jiuding'), class: 'btn btn-primary', style: ' height: 32px; background: #006DF1; opacity: 1; margin-left: 370px;' %>
+      </span>
+    </p>
+    <div class="chart_supply">
+      <div class="chart_supply">
+        <div id="chart_supply_index_three" class="chart_supply_css" style="margin-top: 67px;"></div>
+        <div id="chart_supply_index_four" class="chart_supply_css" style="margin-top: 67px;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // 用于填充柱状图的数据
+  var data = [
+    { name: '进场蔬菜总量', y: 50 },
+    { name: '出场蔬菜总量', y: 70 }
+  ];
+
+  // 创建柱状图
+  var chart = Highcharts.chart('chart_supply_index', {
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: null //''
+    },
+    exporting: {
+      enabled: false // 设置为false表示禁用导出功能
+    },
+    xAxis: {
+      categories: ['进场蔬菜总量', '出场蔬菜总量']
+    },
+    yAxis: {
+      title: {
+        text: '单位：吨'
+      },
+      plotLines: [{ // 添加数量提示
+        color: '#ccc',
+        dashStyle: 'dot',
+        width: 1,
+        value: 60, // 数量提示值
+        zIndex: 3
+      }]
+    },
+    tooltip: { // 添加悬浮提示
+      formatter: function() {
+        return '<b>' + this.point.name + '</b><br/>' + this.y + ' 吨';
+      }
+    },
+    series: [{
+      data: data,
+      name: '总量',// 添加名字
+      color: '#165DFF', // 添加背景色
+      dataLabels: {
+        enabled: true,
+        inside: true,
+        color: '#fff',
+        verticalAlign: 'top',
+        formatter: function() {
+          return this.y;
+        }
+      }
+    }]
+  });
+</script>
+<script>
+  // 用于填充柱状图的数据
+  var data = [
+    { name: '免收进场费总额', y: 50 },
+    { name: '免收出场费总额', y: 70 }
+  ];
+
+  // 创建柱状图
+  var chart = Highcharts.chart('chart_supply_index1', {
+    chart: {
+      type: 'column'
+    },
+    exporting: {
+      enabled: false // 设置为false表示禁用导出功能
+    },
+    title: {
+      text: ''
+    },
+    xAxis: {
+      categories: ['免收进场费总额', '免收出场费总额']
+    },
+    yAxis: {
+      title: {
+        text: '单位：万元'
+      },
+      plotLines: [{ // 添加数量提示
+        color: '#ccc',
+        dashStyle: 'dot',
+        width: 1,
+        value: 60, // 数量提示值
+        zIndex: 3
+      }]
+    },
+    tooltip: { // 添加悬浮提示
+      formatter: function() {
+        return '<b>' + this.point.name + '</b><br/>' + this.y + '万元';
+      }
+    },
+    series: [{
+      data: data,
+      name: '总额', // 添加名字
+      color: '#6dc8c8', // 添加背景色
+      dataLabels: {
+        enabled: true,
+        inside: true,
+        color: '#fff',
+        verticalAlign: 'top',
+        formatter: function() {
+          return this.y;
+        }
+      }
+    }]
+  });
+</script>
+<script>
+  // 用于填充柱状图的数据
+  var data = [
+    { name: '进场蔬菜总量', y: 840.20},
+    { name: '出场蔬菜总量', y: 760 }
+  ];
+
+  // 创建柱状图
+  var chart = Highcharts.chart('chart_supply_index3', {
+    chart: {
+      type: 'column'
+    },
+    exporting: {
+      enabled: false // 设置为false表示禁用导出功能
+    },
+    title: {
+      text: ''
+    },
+    xAxis: {
+      categories: ['进场蔬菜总量', '出场蔬菜总量']
+    },
+    yAxis: {
+      title: {
+        text: '单位：吨'
+      },
+      plotLines: [{ // 添加数量提示
+        color: '#ccc',
+        dashStyle: 'dot',
+        width: 1,
+        value: 60, // 数量提示值
+        zIndex: 3
+      }]
+    },
+    tooltip: { // 添加悬浮提示
+      formatter: function() {
+        return '<b>' + this.point.name + '</b><br/>' + this.y + ' 吨';
+      }
+    },
+    series: [{
+      data: data,
+      name: '总量', // 添加名字
+      color: '#165DFF', // 添加背景色
+      dataLabels: {
+        enabled: true,
+        inside: true,
+        color: '#fff',
+        verticalAlign: 'top',
+        formatter: function() {
+          return this.y;
+        }
+      }
+    }]
+  });
+</script>
+<script>
+  // 用于填充柱状图的数据
+  var data = [
+    { name: '免收进场费总额', y: 7 },
+    { name: '免收出场费总额', y: 2.8 }
+  ];
+
+  // 创建柱状图
+  var chart = Highcharts.chart('chart_supply_index4', {
+    chart: {
+      type: 'column'
+    },
+    exporting: {
+      enabled: false // 设置为false表示禁用导出功能
+    },
+    title: {
+      text: ''
+    },
+    xAxis: {
+      categories: ['免收进场费总额', '免收出场费总额']
+    },
+    yAxis: {
+      title: {
+        text: '单位：万元'
+      },
+      plotLines: [{ // 添加数量提示
+        color: '#ccc',
+        dashStyle: 'dot',
+        width: 1,
+        value: 60, // 数量提示值
+        zIndex: 3
+      }]
+    },
+    tooltip: { // 添加悬浮提示
+      formatter: function() {
+        return '<b>' + this.point.name + '</b><br/>' + this.y + '万元';
+      }
+    },
+    series: [{
+      data: data,
+      name: '总额', // 添加名字
+      color: '#6dc8c8', // 添加背景色
+      dataLabels: {
+        enabled: true,
+        inside: true,
+        color: '#fff',
+        verticalAlign: 'top',
+        formatter: function() {
+          return this.y;
+        }
+      }
+    }]
+  });
+</script>
+<script>
+  // 用于填充柱状图的数据
+  var data = [
+    { name: '进场蔬菜总量', y: 50 },
+    { name: '出场蔬菜总量', y: 70 }
+  ];
+
+  // 创建柱状图
+  var chart = Highcharts.chart('chart_supply_index_one', {
+    chart: {
+      type: 'column'
+    },
+    exporting: {
+      enabled: false // 设置为false表示禁用导出功能
+    },
+    title: {
+      text: ''
+    },
+    xAxis: {
+      categories: ['进场蔬菜总量', '出场蔬菜总量']
+    },
+    yAxis: {
+      title: {
+        text: '单位：吨'
+      },
+      plotLines: [{ // 添加数量提示
+        color: '#ccc',
+        dashStyle: 'dot',
+        width: 1,
+        value: 60, // 数量提示值
+        zIndex: 3
+      }]
+    },
+    tooltip: { // 添加悬浮提示
+      formatter: function() {
+        return '<b>' + this.point.name + '</b><br/>' + this.y + ' 吨';
+      }
+    },
+    series: [{
+      data: data,
+      name: '总量', // 添加名字
+      color: '#165DFF', // 添加背景色
+      dataLabels: {
+        enabled: true,
+        inside: true,
+        color: '#fff',
+        verticalAlign: 'top',
+        formatter: function() {
+          return this.y;
+        }
+      }
+    }]
+  });
+</script>
+<script>
+  // 用于填充柱状图的数据
+  var data = [
+    { name: '免收进场费总额', y: 50 },
+    { name: '免收出场费总额', y: 70 }
+  ];
+
+  // 创建柱状图
+  var chart = Highcharts.chart('chart_supply_index_two', {
+    chart: {
+      type: 'column'
+    },
+    exporting: {
+      enabled: false // 设置为false表示禁用导出功能
+    },
+    title: {
+      text: ''
+    },
+    xAxis: {
+      categories: ['免收进场费总额', '免收出场费总额']
+    },
+    yAxis: {
+      title: {
+        text: '单位：万元'
+      },
+      plotLines: [{ // 添加数量提示
+        color: '#ccc',
+        dashStyle: 'dot',
+        width: 1,
+        value: 60, // 数量提示值
+        zIndex: 3
+      }]
+    },
+    tooltip: { // 添加悬浮提示
+      formatter: function() {
+        return '<b>' + this.point.name + '</b><br/>' + this.y + '万元';
+      }
+    },
+    series: [{
+      data: data,
+      name: '总额', // 添加名字
+      color: '#496acc', // 添加背景色
+      dataLabels: {
+        enabled: true,
+        inside: true,
+        color: '#fff',
+        verticalAlign: 'top',
+        formatter: function() {
+          return this.y;
+        }
+      }
+    }]
+  });
+</script>
+<script>
+  // 用于填充柱状图的数据
+  var data = [
+    { name: '进场蔬菜总量', y: 50 },
+    { name: '出场蔬菜总量', y: 70 }
+  ];
+
+  // 创建柱状图
+  var chart = Highcharts.chart('chart_supply_index_three', {
+    chart: {
+      type: 'column'
+    },
+    exporting: {
+      enabled: false // 设置为false表示禁用导出功能
+    },
+    title: {
+      text: ''
+    },
+    xAxis: {
+      categories: ['进场蔬菜总量', '出场蔬菜总量']
+    },
+    yAxis: {
+      title: {
+        text: '单位：吨'
+      },
+      plotLines: [{ // 添加数量提示
+        color: '#ccc',
+        dashStyle: 'dot',
+        width: 1,
+        value: 60, // 数量提示值
+        zIndex: 3
+      }]
+    },
+    tooltip: { // 添加悬浮提示
+      formatter: function() {
+        return '<b>' + this.point.name + '</b><br/>' + this.y + ' 吨';
+      }
+    },
+    series: [{
+      data: data,
+      name: '总量', // 添加名字
+      color: '#165DFF', // 添加背景色
+      dataLabels: {
+        enabled: true,
+        inside: true,
+        color: '#fff',
+        verticalAlign: 'top',
+        formatter: function() {
+          return this.y;
+        }
+      }
+    }]
+  });
+</script>
+<script>
+  // 用于填充柱状图的数据
+  var data = [
+    { name: '免收进场费总额', y: 50 },
+    { name: '免收出场费总额', y: 70 }
+  ];
+
+  // 创建柱状图
+  var chart = Highcharts.chart('chart_supply_index_four', {
+    chart: {
+      type: 'column'
+    },
+    exporting: {
+      enabled: false // 设置为false表示禁用导出功能
+    },
+    title: {
+      text: ''
+    },
+    xAxis: {
+      categories: ['免收进场费总额', '免收出场费总额']
+    },
+    yAxis: {
+      title: {
+        text: '单位：万元'
+      },
+      plotLines: [{ // 添加数量提示
+        color: '#ccc',
+        dashStyle: 'dot',
+        width: 1,
+        value: 60, // 数量提示值
+        zIndex: 3
+      }]
+    },
+    tooltip: { // 添加悬浮提示
+      formatter: function() {
+        return '<b>' + this.point.name + '</b><br/>' + this.y + '万元';
+      }
+    },
+    series: [{
+      data: data,
+      name: '总额', // 添加名字
+      color: '#496acc', // 添加背景色
+      dataLabels: {
+        enabled: true,
+        inside: true,
+        color: '#fff',
+        verticalAlign: 'top',
+        formatter: function() {
+          return this.y;
+        }
+      }
+    }]
+  });
+</script>
+
+<div id="allmap"></div>
+<script type="text/javascript">
+  // GL版命名空间为BMapGL
+  // 按住鼠标右键，修改倾斜角和角度
+	var map = new BMapGL.Map("allmap");    // 创建Map实例
+	map.centerAndZoom(new BMapGL.Point(116.404, 39.915), 11);  // 初始化地图,设置中心点坐标和地图级别
+	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+</script>
+<style>
+#datepicker {
+  width: 328px;
+  height: 32px;
+  background: #FFFFFF;
+  border-radius: 2px;
+  border: 1px solid rgba(0,0,0,0.15);
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.25);
+  line-height: 22px;
+}
+
+</style>

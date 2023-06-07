@@ -1,0 +1,248 @@
+<%= render 'warn_settings/cards' %>
+
+<div style="margin-top: 30px; margin-right: 20px; background: #fff;width: 1190px; padding: 25px;">
+  <div style="margin: 10px 0 20px 0;">
+    <%= form_tag '', method: :get do %>
+      <!--
+      &nbsp;&nbsp;&nbsp;&nbsp;仓库编号:&nbsp;&nbsp; <%= select_tag :material_reserf_id, options_for_select(MaterialReserf.all.collect {|p| [ p.warehouse_location, p.id ] }, params[:material_reserf_id]), class: 'select_enterprise', style: 'margin-left: 10px;' %>
+      &nbsp;&nbsp;&nbsp;&nbsp;仓库编号:&nbsp;&nbsp; <%= select_tag :material_reserf_number, options_for_select(MaterialReserf.all.collect {|p| [ p.warehouse_location, p.id ] }, params[:material_reserf_id]), class: 'select_enterprise', style: 'margin-left: 10px;' %>
+      -->
+      &nbsp;&nbsp;&nbsp;&nbsp;仓库编号:&nbsp;&nbsp; <%= select_tag :material_reserf_number, options_for_select(@numbers, params[:material_reserf_number]), class: 'select_enterprise', style: 'margin-left: 10px;' %>
+      &nbsp;&nbsp;&nbsp;&nbsp;物资分类:&nbsp;&nbsp; <%= select_tag :goods_category, options_for_select(@categories, params[:goods_category]), class: 'select_enterprise', style: 'margin-left: 10px;' %>
+      &nbsp;&nbsp;&nbsp;&nbsp;预警状态:&nbsp;&nbsp; <%= select_tag :warn_result, options_for_select(["不足", "充足", "预警"], params[:warn_result]), class: 'select_enterprise', style: 'margin-left: 10px;' %>
+      &nbsp;&nbsp;&nbsp;&nbsp;<%= submit_tag "查询", class: "form_submit", class: 'btn btn-primary btn-sm', style: 'width: 60px; height: 35px; margin-top: -5px; margin-left: 10px; font-size: 16px' %>
+      <br/>
+    <% end %>
+  </div>
+  <div style="width: 800px;">
+    <%= render 'goods/warn_chart' %>
+    <%= render 'goods/warn_chart_bottom' %>
+  </div>
+  <%= link_to '下载excel', download_csv_warns_path, class: 'btn btn-light', style: 'width: 120px;width: 140px;
+                  border: 1px solid #2e89f9;
+                  margin-top: 30px;
+                  margin-left: 900px;' %>
+  <p class="links_status" style="margin: 30px 0;">
+    &nbsp;&nbsp;&nbsp;&nbsp;<%= link_to '物资预警', warns_path, class: 'active-link', style: 'margin-left: 30px;' %>
+    <%= link_to '预警设置', warn_settings_path, style: 'margin-left: 26px;' %>
+    <%= link_to '添加预警', new_warn_setting_path, style: 'margin-left: 26px;' %>
+    <hr style="margin: -1.75rem 7px auto; height: 20px;"/>
+  </p>
+  <table class='table' style='border-left: 1px solid #dcdcdc;
+    border: 1px solid #dcdcdc;
+    border-right: 1px solid #dcdcdc;
+    background: snow;'>
+    <tr class="table_title" class="">
+      <td class="table_td_title" style="color: snow;">
+        <span class="table_td_title" style="color: snow;">所属地州</span>
+      </td>
+      <td class="table_td_title" style="color: snow;">
+        <span class="table_td_title" style="color: snow;">仓库编号</span>
+      </td>
+      <td class="table_td_title"  style="color: snow;">企业分类</td>
+      <td class="table_td_title"  style="color: snow;">物资类型</td>
+      <td class="table_td_title"  style="color: snow;">单位</td>
+      <td class="table_td_title"  style="color: snow;">最高预警量</td>
+      <td class="table_td_title"  style="color: snow;">最低预警量</td>
+      <td class="table_td_title"  style="color: snow;">数值结果</td>
+      <td class="table_td_title"  style="color: snow;">状态</td>
+    </tr>
+    <% @warns.each do |warn| %>
+      <tr class="" class="border-bottom" style="border: 1px solid #dcdcdc;background: #ffffff87;">
+        <td class="table_text_submission"><%= warn.region.try(:name)%></td>
+        <!--
+        <td class="table_text_submission"><%= warn.material_reserf_id %></td>
+        -->
+        <td class="table_text_submission"><%= warn.material_reserf_number %></td>
+        <td class="table_text_submission"><%= warn.enterprise.try(:enterprise_category)%></td>
+        <td class="table_text_submission"><%= warn.goods_category %></td>
+        <td class="table_text_submission"><%= warn.unit %></td>
+        <td class="table_text_submission"><%= warn.max_warn %></td>
+        <td class="table_text_submission"><%= warn.min_warn %></td>
+        <td class="table_text_submission">
+          <% if warn.warn_result == '充足' %>
+            <span style="color: green;">充足<span>
+          <% elsif warn.warn_result == '不足' %>
+            <span style="color: orange;">不足<span>
+          <% elsif warn.warn_result == '预警' %>
+            <span style="color: red;">预警<span>
+          <% end %>
+        </td>
+        <td style="display: flex; justify-content: start;">
+          <%= link_to '查看详情', warn, style: 'text-decoration: none;' %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+<div style="display: flex; float: right;">
+
+  <% start_index = @warns.offset_value + 1 %>
+  <% end_index = start_index + @warns.length - 1 %>
+
+  <p class="page_text">
+  <span> 第 <%= start_index %> - <%= end_index %> 条/总共 <%= @warns.total_count %> 条
+
+  <% if @warns.total_pages > 1 %>
+
+    <% first_page = [1, @warns.current_page - 3].max %>
+    <% last_page = [first_page + 6, @warns.total_pages].min %>
+    <% page_links = (first_page..last_page).map do |page|
+      if page == @warns.current_page
+        content_tag :span, page, class: 'current'
+      else
+        link_to page, { page: page }, class: 'page_link'
+      end
+    end %>
+    <%= content_tag :div, page_links.join.html_safe, class: 'paging_links', style: 'display: flex;' %>
+    <span class="page_text">
+      <%= form_tag '', method: :get do %>
+        &nbsp;&nbsp;<span class="page_text"><%#= @daily_goods_statistics.current_page %> 每页 <%= select_tag :per_page, options_for_select([10, 20, 50], params[:per_page]), onchange: "$('#filter_form').submit()" %> 条</span>
+        &nbsp;&nbsp;跳至:&nbsp;&nbsp; <%= text_field_tag :page, params[:page], class: 'page_skip', onchange: "$('#filter_form').submit()"%>&nbsp;&nbsp;页
+        &nbsp;&nbsp;<%= submit_tag "跳转", class: "page_skip", class: 'btn btn-primary btn-sm', style: 'width: 55px; font-size: 14px; height: 32px; background: #006DF1; opacity: 1; margin-right: 20px;' %>
+    <% end %>
+    </span>
+  <% end %>
+  </span>
+  </p>
+</div>
+
+<div style="height: 200px;"></div>
+</div>
+
+<style>
+.code {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.list {
+  background: #f8f9fa;
+  padding: 10px;
+}
+.each-row {
+  border-radius: 5px;
+  margin: 50px 180px;
+  background: white;
+  padding: 10px;
+}
+.input_enterprise {
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: var(--bs-border-radius);
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  border: 1px solid blue;
+  width: 300px;
+}
+.input_tel {
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: var(--bs-border-radius);
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  border: 1px solid blue;
+  width: 200px;
+}
+.current {
+  background: #2381f3;
+  color: white;
+  border: 1px solid blue;
+  border: 1px solid #1890FF;
+  width: 32px;
+  height: 32px;
+  border-radius: 2px 2px 2px 2px;
+  opacity: 1;
+  display: block;
+  text-align: center;
+  line-height: 32px;
+  font-weight: 400;
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+.page_link {
+  margin: 0 8px;
+  width: 32px;
+  height: 32px;
+  background: #FFFFFF;
+  border-radius: 2px 2px 2px 2px;
+  opacity: 1;
+  border: 1px solid rgba(0,0,0,0.15);
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  line-height: 32px;
+  font-size: 14px;
+  color: #000000;
+  font-weight: 400;
+}
+
+
+.page_text{
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  line-height: 32px;
+}
+
+.page_skip{
+  width: 48px;
+  height: 32px;
+  line-height: 28px;
+  background: #FFFFFF;
+  border-radius: 2px 2px 2px 2px;
+  opacity: 1;
+  border: 1px solid rgba(0,0,0,0.15);
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  line-height: 22px;
+}
+.select_enterprise {
+  width: 148px;
+  height: 32px;
+  background: #FFFFFF;
+  border-radius: 3px 3px 3px 3px;
+  opacity: 1;
+  border: 1px solid #DCDCDC;
+}
+/* 激活链接样式 */
+.links_status a.active-link {
+  font-size: 16px;
+  font-weight: 500;
+  color: #3F73F6;
+  line-height: 24px;
+  font-weight: bold; /* 加粗 */
+  text-decoration: underline; /* 下划线 */
+  text-underline-position: under; /* 下划线位置 */
+  text-decoration-color: #006DF1;
+}
+.links_status{
+  margin-left: 19px;
+}
+.links_status a {
+  letter-spacing: 1px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 400;
+  color: #666666;
+  line-height: 24px;
+}
+
+</style>

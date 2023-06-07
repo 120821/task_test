@@ -1,0 +1,7 @@
+zh-CN:
+  views:
+    pagination:
+      first: '&lt;&lt; 开始'
+      last: '末页 &gt;&gt;'
+      previous: '&lt; 前一页'
+      next: '后一页 &gt;'

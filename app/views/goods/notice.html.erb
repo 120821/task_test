@@ -1,0 +1,43 @@
+<div style="position: absolute;background: #fff; width: 1192px; height: 800px;">
+  <div class="new_enterprise_title"> 完成创建等待审核 </div>
+    <%= render 'enterprises/title' %>
+    <div class="check" style="width: 1192px;">
+      <!--
+      <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" color="#5069ec" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
+        <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/>
+        <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/>
+      </svg>
+      -->
+      <%= image_tag 'notice.png', style: 'width:  70px;' %>
+      <p class="success_notice_top" style="">提交成功，请等待审核结果</p>
+      <p class="success_notice_bottom">1~3个工作日内进行审核，审核结果会打电话通知</p>
+    </div>
+  </div>
+</div>
+<style>
+.new_enterprise_title {
+  font-size: 22px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #1D2129;
+  margin-left: 38px;
+  margin-top: 40px;
+  line-height: 30px;
+  position: absolute;
+}
+.success_notice_top {
+  font-size: 20px;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: rgba(0,0,0,0.9);
+  margin-top: 25px;
+  line-height: 28px;
+}
+.success_notice_bottom {
+  font-size: 16px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.6);
+  line-height: 22px;
+}
+</style>
